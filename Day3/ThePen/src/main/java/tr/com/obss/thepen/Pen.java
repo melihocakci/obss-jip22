@@ -1,4 +1,4 @@
-package tr.com.obss.pen;
+package tr.com.obss.thepen;
 
 public class Pen {
     public void drawRectangle(Rectangle r) {
