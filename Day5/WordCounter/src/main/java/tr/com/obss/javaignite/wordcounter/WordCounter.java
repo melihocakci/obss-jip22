@@ -24,17 +24,17 @@ public class WordCounter {
         }
     }
 
-    public static void incrementWord(TreeMap<String, Integer> treeMap, String word) {
-        Integer num = treeMap.get(word);
+    public static void incrementWord(Map<String, Integer> map, String word) {
+        Integer num = map.get(word);
         if (num == null) {
-            treeMap.put(word, 1);
+            map.put(word, 1);
         } else {
-            treeMap.put(word, num + 1);
+            map.put(word, num + 1);
         }
     }
 
-    public static void printMap(Map<String, Integer> treeMap) {
-        for (Map.Entry<String, Integer> entry : treeMap.entrySet()) {
+    public static void printMap(Map<String, Integer> map) {
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
             System.out.println(entry.getKey() + "->" + entry.getValue());
         }
     }
