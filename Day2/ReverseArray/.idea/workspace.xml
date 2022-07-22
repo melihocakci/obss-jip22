@@ -4,7 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e32261fd-583c-4fe9-9d05-771102a1f0db" name="Changes" comment="" />
+    <list default="true" id="e32261fd-583c-4fe9-9d05-771102a1f0db" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../Day5/WordCounter/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Day5/WordCounter/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Day5/WordCounter/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/src/main/java/tr/com/obss/helloworld/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/src/main/java/tr/com/obss/javaignite/helloworld/HelloWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AverageGrade/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AverageGrade/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AverageGrade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AverageGrade/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AverageGrade/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AverageGrade/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AverageGrade/src/main/java/tr/com/obss/averagegrade/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AverageGrade/src/main/java/tr/com/obss/javaignite/averagegrade/AverageGrade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/reversearray/ReverseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/reversearray/ReverseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../YoungOrOld/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../YoungOrOld/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../YoungOrOld/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../YoungOrOld/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../YoungOrOld/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../YoungOrOld/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/BusReservation/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/BusReservation/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/BusReservation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/BusReservation/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/BusReservation/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/BusReservation/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/ThePen/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/ThePen/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/ThePen/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/ThePen/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day4/ThePen2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day4/ThePen2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day4/ThePen2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day4/ThePen2/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,10 +43,10 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/java/tr/com/obss/reversearray/ReverseArray.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/reversearray/ReverseArray.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -36,8 +61,9 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
     "last_directory_selection": "C:/Users/melih/repos/obss/ReverseArray/src/main/java",
-    "last_opened_file_path": "C:/Users/melih/repos/obss/ReverseArray",
+    "last_opened_file_path": "C:/Users/melih/repos/java-ignite-2022/Day2/YoungOrOld",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -46,11 +72,11 @@
 }]]></component>
   <component name="RunManager">
     <configuration name="ReverseArray" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="tr.com.obss.reversearray.ReverseArray" />
+      <option name="MAIN_CLASS_NAME" value="tr.com.obss.javaignite.reversearray.ReverseArray" />
       <module name="ReverseArray" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="tr.com.obss.reversearray.*" />
+          <option name="PATTERN" value="tr.com.obss.javaignite.reversearray.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -72,8 +98,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1658226955672</updated>
+      <workItem from="1658471219716" duration="66000" />
+      <workItem from="1658496631276" duration="120000" />
+      <workItem from="1658496849151" duration="61000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>

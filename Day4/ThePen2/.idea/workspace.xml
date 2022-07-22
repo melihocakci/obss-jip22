@@ -5,22 +5,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f110702-ccd6-45ce-8153-4763492befd8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day2/AverageGrade/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day2/ReverseArray/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day2/YoungOrOld/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day3/BusReservation/.gitignore" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Day5/WordCounter/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Day5/WordCounter/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Day5/WordCounter/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/src/main/java/tr/com/obss/helloworld/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/src/main/java/tr/com/obss/javaignite/helloworld/HelloWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/AverageGrade/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/AverageGrade/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/AverageGrade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/AverageGrade/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/AverageGrade/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/AverageGrade/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/AverageGrade/src/main/java/tr/com/obss/averagegrade/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/AverageGrade/src/main/java/tr/com/obss/javaignite/averagegrade/AverageGrade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/ReverseArray/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/ReverseArray/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/ReverseArray/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/ReverseArray/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/ReverseArray/src/main/java/tr/com/obss/reversearray/ReverseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/ReverseArray/src/main/java/tr/com/obss/javaignite/reversearray/ReverseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/YoungOrOld/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/YoungOrOld/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/YoungOrOld/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/YoungOrOld/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/YoungOrOld/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/YoungOrOld/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/YoungOrOld/src/main/java/tr/com/obss/youngorold/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/YoungOrOld/src/main/java/tr/com/obss/javaignite/youngorold/YoungOrOld.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Day3/BusReservation/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/BusReservation/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Day3/BusReservation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/BusReservation/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day3/Pen/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day3/Pen/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day3/Pen/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day3/Pen/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day3/Pen/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day3/Pen/src/main/java/tr/com/obss/pen/Circle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day3/Pen/src/main/java/tr/com/obss/pen/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day3/Pen/src/main/java/tr/com/obss/pen/Pen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day3/Pen/src/main/java/tr/com/obss/pen/Rectangle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/BusReservation/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/BusReservation/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/BusReservation/src/main/java/tr/com/obss/busreservation/Bus.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/BusReservation/src/main/java/tr/com/obss/javaignite/busreservation/Bus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/BusReservation/src/main/java/tr/com/obss/busreservation/Destination.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/BusReservation/src/main/java/tr/com/obss/javaignite/busreservation/Destination.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/BusReservation/src/main/java/tr/com/obss/busreservation/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/BusReservation/src/main/java/tr/com/obss/javaignite/busreservation/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/BusReservation/src/main/java/tr/com/obss/busreservation/Passenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/BusReservation/src/main/java/tr/com/obss/javaignite/busreservation/Passenger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/ThePen/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/ThePen/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/ThePen/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/ThePen/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/ThePen/src/main/java/tr/com/obss/thepen/Circle.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/ThePen/src/main/java/tr/com/obss/javaignite/thepen/Circle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/ThePen/src/main/java/tr/com/obss/thepen/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/ThePen/src/main/java/tr/com/obss/javaignite/thepen/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/ThePen/src/main/java/tr/com/obss/thepen/Pen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/ThePen/src/main/java/tr/com/obss/javaignite/thepen/Pen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/ThePen/src/main/java/tr/com/obss/thepen/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/ThePen/src/main/java/tr/com/obss/javaignite/thepen/Rectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/thepen2/Circle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/thepen2/Circle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/thepen2/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/thepen2/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/thepen2/Pen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/thepen2/Pen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/thepen2/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/thepen2/Rectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/thepen2/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/thepen2/Shape.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +72,15 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/melih/repos/obss/Day4/ThePen2"
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/melih/repos/java-ignite-2022/Day5/WordCounter",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
   <component name="RunManager">
@@ -67,19 +97,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="ThePen2" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="ThePen2" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -89,8 +111,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1658388344277</updated>
+      <workItem from="1658415475366" duration="77000" />
+      <workItem from="1658415673573" duration="14000" />
+      <workItem from="1658470169164" duration="172000" />
+      <workItem from="1658470574777" duration="335000" />
+      <workItem from="1658497348238" duration="58000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

@@ -4,14 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd4b6278-cf09-4070-ac29-e5dc2703e3f4" name="Changes" comment="" />
+    <list default="true" id="fd4b6278-cf09-4070-ac29-e5dc2703e3f4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../Day5/WordCounter/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Day5/WordCounter/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Day5/WordCounter/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/src/main/java/tr/com/obss/helloworld/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/src/main/java/tr/com/obss/javaignite/helloworld/HelloWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/averagegrade/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/averagegrade/AverageGrade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ReverseArray/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ReverseArray/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ReverseArray/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ReverseArray/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ReverseArray/src/main/java/tr/com/obss/reversearray/ReverseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ReverseArray/src/main/java/tr/com/obss/javaignite/reversearray/ReverseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../YoungOrOld/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../YoungOrOld/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../YoungOrOld/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../YoungOrOld/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../YoungOrOld/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../YoungOrOld/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/BusReservation/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/BusReservation/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/BusReservation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/BusReservation/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/BusReservation/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/BusReservation/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/ThePen/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/ThePen/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day3/ThePen/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/ThePen/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day4/ThePen2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day4/ThePen2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day4/ThePen2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day4/ThePen2/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -22,20 +47,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/melih/repos/obss/YoungOrOld&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/melih/repos/java-ignite-2022/Day2/ReverseArray",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
-    <configuration name="Grade" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.obss.Grade" />
+    <configuration name="AverageGrade" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="tr.com.obss.javaignite.averagegrade.AverageGrade" />
       <module name="AverageGrade" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.obss.*" />
+          <option name="PATTERN" value="tr.com.obss.javaignite.averagegrade.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -45,7 +72,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Grade" />
+        <item itemvalue="Application.AverageGrade" />
       </list>
     </recent_temporary>
   </component>
@@ -57,8 +84,14 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1658229060797</updated>
+      <workItem from="1658471288300" duration="59000" />
+      <workItem from="1658496561339" duration="67000" />
+      <workItem from="1658496804763" duration="40000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -70,5 +103,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+    </ignored-roots>
   </component>
 </project>
