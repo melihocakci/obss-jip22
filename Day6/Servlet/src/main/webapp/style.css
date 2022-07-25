@@ -1,0 +1,10 @@
+body {
+    background: aqua;
+    color: black;
+    font-size: 24px;
+}
+
+table {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
