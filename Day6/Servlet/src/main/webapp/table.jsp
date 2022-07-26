@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<table>
+<table border = "2">
     <tr>
         <th>Company</th>
         <th>Contact</th>

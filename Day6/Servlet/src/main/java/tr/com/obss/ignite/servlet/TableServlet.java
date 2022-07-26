@@ -20,7 +20,7 @@ public class TableServlet extends HttpServlet {
                 "<link rel=\"stylesheet\" href=\"style.css\">\n" +
                 "</head>" +
                 "<body>" +
-                "<table> <tr>\n" +
+                "<table border=\"1\"> <tr>\n" +
                 "    <th>Company</th>\n" +
                 "    <th>Contact</th>\n" +
                 "    <th>Country</th>\n" +

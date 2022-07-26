@@ -9,11 +9,9 @@
 </head>
 <body>
 <form name="uname-form" action="hello.jsp">
-    <label>
-        Enter Username<br/>
-        <input type="text" name="uname"><br/>
-    </label>
-    <input type="submit">
+    <label for="uname">Enter Username</label><br/>
+    <input type="text" id="uname" name="uname"><br/>
+    <input type="submit" value="Submit">
 </form>
 </body>
 </html>

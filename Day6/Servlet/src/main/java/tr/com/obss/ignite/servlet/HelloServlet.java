@@ -9,8 +9,8 @@ import javax.servlet.annotation.*;
 public class HelloServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.setAttribute("uname", "melih");
-        request.getRequestDispatcher("hello.jsp").forward(request, response);
+        String uname = "OBSS";
+        response.sendRedirect(request.getContextPath() + "/hello.jsp?uname=" + uname);
     }
 
     @Override

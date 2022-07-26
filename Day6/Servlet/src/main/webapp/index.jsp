@@ -9,6 +9,7 @@
 <h1><%= "Main Page v" + Math.sqrt(1) %>
 </h1>
 <br/>
+<a href="hello">hello-servlet</a><br>
 <a href="uname.jsp">hello</a><br>
 <a href="table-servlet">table-servlet</a><br>
 <a href="table.jsp">table</a><br>
