@@ -6,9 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="a147acfd-3fba-47ff-9038-0d23b89e91a9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/helloworld/HelloWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/ignite/helloworld/HelloWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/AverageGrade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/AverageGrade/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/AverageGrade/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/AverageGrade/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/AverageGrade/src/main/java/tr/com/obss/javaignite/averagegrade/AverageGrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/AverageGrade/src/main/java/tr/com/obss/ignite/averagegrade/AverageGrade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Day2/ReverseArray/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/ReverseArray/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day3/ThePen/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/ThePen/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day3/ThePen/src/main/java/tr/com/obss/javaignite/thepen/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day3/ThePen/src/main/java/tr/com/obss/javaignite/thepen/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/ReverseArray/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/ReverseArray/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/ReverseArray/src/main/java/tr/com/obss/javaignite/reversearray/ReverseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/ReverseArray/src/main/java/tr/com/obss/ignite/reversearray/ReverseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/YoungOrOld/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/YoungOrOld/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/YoungOrOld/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/YoungOrOld/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day2/YoungOrOld/src/main/java/tr/com/obss/javaignite/youngorold/YoungOrOld.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/YoungOrOld/src/main/java/tr/com/obss/ignite/youngorold/YoungOrOld.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +27,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/helloworld/HelloWorld.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/tr/com/obss/ignite/helloworld/HelloWorld.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -43,11 +51,11 @@
 }</component>
   <component name="RunManager">
     <configuration name="HelloWorld" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="tr.com.obss.javaignite.helloworld.HelloWorld" />
+      <option name="MAIN_CLASS_NAME" value="tr.com.obss.ignite.helloworld.HelloWorld" />
       <module name="HelloWorld" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="tr.com.obss.javaignite.helloworld.*" />
+          <option name="PATTERN" value="tr.com.obss.ignite.helloworld.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -74,6 +82,8 @@
       <workItem from="1658496756091" duration="44000" />
       <workItem from="1658575069320" duration="297000" />
       <workItem from="1658577948714" duration="174000" />
+      <workItem from="1658820761098" duration="126000" />
+      <workItem from="1658821167114" duration="56000" />
     </task>
     <servers />
   </component>

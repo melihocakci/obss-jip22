@@ -14,6 +14,8 @@
 <a href="table-servlet">table-servlet</a><br>
 <a href="table.jsp">table</a><br>
 <a href="login.jsp">login</a><br>
+<a href="dynamic-table">dynamic-table</a><br>
+<a href="image.jsp">image</a><br>
 
 </body>
 </html>

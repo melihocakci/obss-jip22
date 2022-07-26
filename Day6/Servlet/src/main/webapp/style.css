@@ -8,11 +8,4 @@ table,
 th,
 td {
     border: 2px solid black;
-    width: 100%;
-    max-width: 400px;
-    height: 240px;
-    margin: 0 auto;
-    display: block;
-    overflow-x: auto;
-    border-spacing: 0;
 }
