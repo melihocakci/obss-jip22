@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+
+    <servlet>
+        <servlet-name>contactsServlet</servlet-name>
+        <servlet-class>tr.com.obss.javaignite.threadsafe.ContactsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>contactsServlet</servlet-name>
+        <url-pattern>/contacts-servlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>printServlet</servlet-name>
+        <servlet-class>tr.com.obss.javaignite.threadsafe.PrintServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>printServlet</servlet-name>
+        <url-pattern>/print-servlet/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>databaseServlet</servlet-name>
+        <servlet-class>tr.com.obss.javaignite.threadsafe.ContactsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>databaseServlet</servlet-name>
+        <url-pattern>/database-servlet/*</url-pattern>
+    </servlet-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/not-found.jsp</location>
+    </error-page>
+
+</web-app>
