@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>Cookie Practice</title>
 </head>
 <body>
 <h1>Cookie Practice
