@@ -7,16 +7,13 @@
     <list default="true" id="f30dada8-8f26-46e3-9ebd-a999d6c155a4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/src/main/java/tr/com/obss/javaignite/helloworld/HelloWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/src/main/java/tr/com/obss/ignite/helloworld/HelloWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/src/main/java/tr/com/obss/ignite/helloworld/HelloWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/src/main/java/tr/com/obss/javaignite/helloworld/HelloWorld.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../AverageGrade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AverageGrade/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../AverageGrade/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AverageGrade/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AverageGrade/src/main/java/tr/com/obss/javaignite/averagegrade/AverageGrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AverageGrade/src/main/java/tr/com/obss/ignite/averagegrade/AverageGrade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ReverseArray/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ReverseArray/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ReverseArray/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ReverseArray/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ReverseArray/src/main/java/tr/com/obss/javaignite/reversearray/ReverseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ReverseArray/src/main/java/tr/com/obss/ignite/reversearray/ReverseArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AverageGrade/src/main/java/tr/com/obss/ignite/averagegrade/AverageGrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AverageGrade/src/main/java/tr/com/obss/javaignite/averagegrade/AverageGrade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/youngorold/YoungOrOld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/ignite/youngorold/YoungOrOld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/ignite/youngorold/YoungOrOld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/youngorold/YoungOrOld.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,12 +50,12 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration name="YoungOrOld" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="tr.com.obss.ignite.youngorold.YoungOrOld" />
+    <configuration name="YoungOrOld" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="tr.com.obss.javaignite.youngorold.YoungOrOld" />
       <module name="YoungOrOld" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="tr.com.obss.youngorold.*" />
+          <option name="PATTERN" value="tr.com.obss.javaignite.youngorold.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -83,6 +80,7 @@
       <workItem from="1658471174780" duration="43000" />
       <workItem from="1658496912913" duration="198000" />
       <workItem from="1658821068408" duration="96000" />
+      <workItem from="1659003753039" duration="35000" />
     </task>
     <servers />
   </component>

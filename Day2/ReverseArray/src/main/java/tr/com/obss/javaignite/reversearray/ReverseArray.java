@@ -1,4 +1,4 @@
-package tr.com.obss.ignite.reversearray;
+package tr.com.obss.javaignite.reversearray;
 
 import java.util.Random;
 

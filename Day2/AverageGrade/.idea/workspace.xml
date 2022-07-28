@@ -7,10 +7,10 @@
     <list default="true" id="fd4b6278-cf09-4070-ac29-e5dc2703e3f4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/src/main/java/tr/com/obss/javaignite/helloworld/HelloWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/src/main/java/tr/com/obss/ignite/helloworld/HelloWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/src/main/java/tr/com/obss/ignite/helloworld/HelloWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/src/main/java/tr/com/obss/javaignite/helloworld/HelloWorld.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/averagegrade/AverageGrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/ignite/averagegrade/AverageGrade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/ignite/averagegrade/AverageGrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/averagegrade/AverageGrade.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +39,8 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration name="AverageGrade" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="tr.com.obss.ignite.averagegrade.AverageGrade" />
+    <configuration name="AverageGrade" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="tr.com.obss.javaignite.averagegrade.AverageGrade" />
       <module name="AverageGrade" />
       <extension name="coverage">
         <pattern>
@@ -70,6 +70,7 @@
       <workItem from="1658496561339" duration="67000" />
       <workItem from="1658496804763" duration="40000" />
       <workItem from="1658820916856" duration="109000" />
+      <workItem from="1659003709987" duration="40000" />
     </task>
     <servers />
   </component>

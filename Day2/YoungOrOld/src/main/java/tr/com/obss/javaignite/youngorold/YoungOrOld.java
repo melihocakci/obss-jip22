@@ -1,4 +1,4 @@
-package tr.com.obss.ignite.youngorold;
+package tr.com.obss.javaignite.youngorold;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package tr.com.obss.ignite.busreservation;
+package tr.com.obss.javaignite.busreservation;
 
 public class Bus {
     private Passenger[] passengers;

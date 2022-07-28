@@ -1,4 +1,4 @@
-package tr.com.obss.ignite.averagegrade;
+package tr.com.obss.javaignite.averagegrade;
 
 import java.util.Scanner;
 

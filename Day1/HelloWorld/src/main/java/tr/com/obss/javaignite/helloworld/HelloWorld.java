@@ -1,4 +1,4 @@
-package tr.com.obss.ignite.helloworld;
+package tr.com.obss.javaignite.helloworld;
 
 public class HelloWorld {
     public static void main(String[] args) {
