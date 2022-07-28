@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
-    <artifactId>demo1</artifactId>
+    <groupId>tr.com.obss.javaignite</groupId>
+    <artifactId>cookie</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>demo1</name>
+    <name>cookie</name>
     <packaging>war</packaging>
 
     <properties>

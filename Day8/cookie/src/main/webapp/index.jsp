@@ -5,9 +5,10 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-<h1><%= "Hello World!" %>
+<h1>Cookie Practice
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
+<a href="set-cookie?value=amogus">Set Cookie</a><br>
+<a href="get-cookie">Get Cookie</a><br>
 </body>
 </html>
