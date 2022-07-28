@@ -10,14 +10,7 @@
 <head>
     <title>Home</title>
 </head>
-<%
-    Boolean loggedIn = (Boolean) session.getAttribute("isUserLoggedIn");
-    if (loggedIn == null || !loggedIn) {
-        response.sendRedirect(request.getContextPath() + "/public/login.jsp");
-    }
-%>
 <body>
 <h1>Home</h1>
-<a href="dashboard.jsp">Dashboard</a><br>
 </body>
 </html>

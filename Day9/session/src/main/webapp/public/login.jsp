@@ -12,7 +12,8 @@
 </head>
 <body>
 <h1>Login</h1>
-<form action="<%=request.getContextPath()%>/session-servlet" method="post">
+<form action="<%=request.getContextPath()%>/login-servlet?redirect=<%=request.getParameter("redirect")%>"
+      method="post">
     <label for="username">Username</label><br>
     <input type="text" id="username" name="username"><br>
 

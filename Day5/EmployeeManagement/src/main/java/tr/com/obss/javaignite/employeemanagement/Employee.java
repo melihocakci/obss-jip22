@@ -1,4 +1,4 @@
-package tr.com.obss.javaignite;
+package tr.com.obss.javaignite.employeemanagement;
 
 public class Employee {
     private final int id;

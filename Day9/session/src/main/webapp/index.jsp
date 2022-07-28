@@ -9,7 +9,8 @@
 </h1>
 <br/>
 <a href="private/home.jsp">Home</a><br>
+<a href="private/dashboard.jsp">Dashboard</a><br>
 <a href="public/login.jsp">Login</a><br>
-<a href="session-servlet">Logout</a><br>
+<a href="login-servlet">Logout</a><br>
 </body>
 </html>

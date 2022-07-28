@@ -1,4 +1,4 @@
-package tr.com.obss.javaignite;
+package tr.com.obss.javaignite.employeemanagement;
 
 import java.sql.*;
 import java.util.ArrayList;

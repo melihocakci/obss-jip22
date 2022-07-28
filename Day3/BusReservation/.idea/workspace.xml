@@ -5,23 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="705a3e3e-b1d5-40cd-91d8-a6de70a139bf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/src/main/java/tr/com/obss/ignite/helloworld/HelloWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/src/main/java/tr/com/obss/javaignite/helloworld/HelloWorld.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day2/AverageGrade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/AverageGrade/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day2/AverageGrade/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/AverageGrade/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day2/AverageGrade/src/main/java/tr/com/obss/ignite/averagegrade/AverageGrade.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/AverageGrade/src/main/java/tr/com/obss/javaignite/averagegrade/AverageGrade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day2/ReverseArray/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/ReverseArray/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day2/ReverseArray/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/ReverseArray/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day2/ReverseArray/src/main/java/tr/com/obss/ignite/reversearray/ReverseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/ReverseArray/src/main/java/tr/com/obss/javaignite/reversearray/ReverseArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day2/YoungOrOld/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/YoungOrOld/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day2/YoungOrOld/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/YoungOrOld/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day2/YoungOrOld/src/main/java/tr/com/obss/ignite/youngorold/YoungOrOld.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/YoungOrOld/src/main/java/tr/com/obss/javaignite/youngorold/YoungOrOld.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/ignite/busreservation/Bus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/busreservation/Bus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/ignite/busreservation/Destination.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/busreservation/Destination.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/ignite/busreservation/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/busreservation/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/ignite/busreservation/Passenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/busreservation/Passenger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +42,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
 }</component>
@@ -94,7 +79,8 @@
       <workItem from="1658475040063" duration="105000" />
       <workItem from="1658497115423" duration="176000" />
       <workItem from="1658821296669" duration="566000" />
-      <workItem from="1659003830375" duration="23000" />
+      <workItem from="1659003830375" duration="241000" />
+      <workItem from="1659004267882" duration="30000" />
     </task>
     <servers />
   </component>
