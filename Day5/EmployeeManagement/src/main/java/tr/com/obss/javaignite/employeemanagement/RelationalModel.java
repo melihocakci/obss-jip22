@@ -34,21 +34,10 @@ public class RelationalModel {
     }
 
     public List<Employee> getEmployees(OrderField of) {
-        String order = null;
-
-        switch (of) {
-            case NAME:
-                order = "name";
-            case SURNAME:
-                order = "surname";
-            case BIRTHYEAR:
-                order = "birthyear";
-        }
-
         ArrayList<Employee> employees = new ArrayList<>();
         try {
             PreparedStatement st = conn.prepareStatement("SELECT * FROM employees ORDER BY ?");
-            st.setString(1, order);
+            st.setString(1, of.getString());
             ResultSet rs = st.executeQuery();
 
             while (rs.next()) {
