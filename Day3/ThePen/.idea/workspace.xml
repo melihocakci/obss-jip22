@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="845e2836-9f26-458d-aff6-21535e8aa8db" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day1/HelloWorld/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day2/ReverseArray/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day2/ReverseArray/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BusReservation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../BusReservation/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/thepen/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/thepen/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day4/ThePen2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day4/ThePen2/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +86,8 @@
       <workItem from="1658497295417" duration="50000" />
       <workItem from="1658575786587" duration="1735000" />
       <workItem from="1658578606557" duration="43000" />
+      <workItem from="1659079190386" duration="23000" />
+      <workItem from="1659203701105" duration="31000" />
     </task>
     <servers />
   </component>

@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a147acfd-3fba-47ff-9038-0d23b89e91a9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tr/com/obss/ignite/helloworld/HelloWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tr/com/obss/javaignite/helloworld/HelloWorld.java" afterDir="false" />
-    </list>
+    <list default="true" id="a147acfd-3fba-47ff-9038-0d23b89e91a9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,6 +72,7 @@
       <workItem from="1658820761098" duration="126000" />
       <workItem from="1658821167114" duration="56000" />
       <workItem from="1659003654455" duration="53000" />
+      <workItem from="1659079037266" duration="40000" />
     </task>
     <servers />
   </component>
