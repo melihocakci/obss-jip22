@@ -2,7 +2,7 @@ package tr.com.obss.jip.bookportal.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import tr.com.obss.jip.bookportal.RoleType;
+import tr.com.obss.jip.bookportal.mapper.RoleType;
 import tr.com.obss.jip.bookportal.model.Role;
 import tr.com.obss.jip.bookportal.repository.RoleRepository;
 
