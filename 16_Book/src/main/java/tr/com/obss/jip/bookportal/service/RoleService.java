@@ -1,6 +1,6 @@
 package tr.com.obss.jip.bookportal.service;
 
-import tr.com.obss.jip.bookportal.mapper.RoleType;
+import tr.com.obss.jip.bookportal.other.RoleType;
 import tr.com.obss.jip.bookportal.model.Role;
 
 import java.util.List;

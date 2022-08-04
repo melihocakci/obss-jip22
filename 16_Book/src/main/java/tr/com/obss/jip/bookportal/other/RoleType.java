@@ -1,4 +1,4 @@
-package tr.com.obss.jip.bookportal.mapper;
+package tr.com.obss.jip.bookportal.other;
 
 public enum RoleType {
     ROLE_USER("ROLE_USER"),

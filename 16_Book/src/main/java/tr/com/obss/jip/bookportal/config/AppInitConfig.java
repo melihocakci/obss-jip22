@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import tr.com.obss.jip.bookportal.mapper.RoleType;
+import tr.com.obss.jip.bookportal.other.RoleType;
 import tr.com.obss.jip.bookportal.model.Role;
 import tr.com.obss.jip.bookportal.model.User;
 import tr.com.obss.jip.bookportal.service.RoleService;

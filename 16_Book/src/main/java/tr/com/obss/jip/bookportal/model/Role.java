@@ -2,7 +2,7 @@ package tr.com.obss.jip.bookportal.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import tr.com.obss.jip.bookportal.mapper.RoleType;
+import tr.com.obss.jip.bookportal.other.RoleType;
 
 import javax.persistence.*;
 

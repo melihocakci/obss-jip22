@@ -20,7 +20,7 @@ public class BookServiceImpl implements BookService{
     private final MyMapper mapper = new MyMapperImpl();
 
     @Override
-    public List<BookDto> getAll() {
+    public List<BookDto> getBooks() {
         List<Book> books = (List<Book>) bookRepository.findAll();
 
         List<BookDto> bookDtos = new ArrayList<>();
@@ -33,9 +33,31 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public Boolean createBook(CreateBookDto createBookDto) {
+    public void createBook(CreateBookDto createBookDto) {
         Book book = mapper.toBook(createBookDto);
         bookRepository.save(book);
-        return true;
+    }
+
+    @Override
+    public void deleteBook(Long id) {
+        bookRepository.deleteBookById(id);
+    }
+
+    @Override
+    public BookDto getBook(Long id) {
+        Book book = bookRepository.findBookById(id);
+        return mapper.toBookDto(book);
+    }
+
+    @Override
+    public void updateBook(Long id, CreateBookDto newBook) {
+        Book book = mapper.toBook(newBook);
+        book.setId(id);
+        bookRepository.save(book);
+    }
+
+    @Override
+    public List<Book> findBooksByName(String name) {
+        return bookRepository.findBooksByName(name);
     }
 }

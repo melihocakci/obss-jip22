@@ -3,7 +3,7 @@ package tr.com.obss.jip.bookportal.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import tr.com.obss.jip.bookportal.mapper.RoleType;
+import tr.com.obss.jip.bookportal.other.RoleType;
 import tr.com.obss.jip.bookportal.dto.CreateUserDto;
 import tr.com.obss.jip.bookportal.dto.UserDto;
 import tr.com.obss.jip.bookportal.mapper.MyMapper;
@@ -49,11 +49,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean createUser(CreateUserDto createUserDto) {
+    public void updateUser(Long id, CreateUserDto newUser) {
+        User user = userRepository.findUserById(id);
+        user.setId(id);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+
+    }
+
+    @Override
+    public User getUser(Long id) {
+        return userRepository.findUserById(id);
+    }
+
+    @Override
+    public void createUser(CreateUserDto createUserDto) {
         User user = mapper.toUser(createUserDto);
         user.setRole(roleService.findByName(RoleType.ROLE_USER));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        return Boolean.TRUE;
     }
 }
