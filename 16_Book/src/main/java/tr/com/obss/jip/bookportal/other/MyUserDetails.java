@@ -26,7 +26,7 @@ public class MyUserDetails implements UserDetails {
     public MyUserDetails(String username, String password, List<String> roles) {
         this.username = username;
         this.password = password;
-        this.authorities = roles.stream().map(SimpleGrantedAuthority::new).toList();;
+        this.authorities = roles.stream().map(SimpleGrantedAuthority::new).toList();
     }
 
     @Override

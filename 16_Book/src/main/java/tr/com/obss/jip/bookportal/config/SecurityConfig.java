@@ -28,24 +28,59 @@ public class SecurityConfig {
         return http
                 .cors()
                 .and()
+
                 .csrf()
                 .disable()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .and()
+
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/api/user").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/user/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/book/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/book/**").hasRole("ADMIN")
+                .antMatchers("/api/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
+                .and()
+
+                .formLogin()
+                //.loginPage("/login")
+                .permitAll()
+                .and()
+
+                .logout()
+                .permitAll()
+                .and()
+
+                .httpBasic()
+                .and()
+
+                .authenticationProvider(daoAuthenticationProvider)
+                .build();
+        /*
+        return http
+                .cors()
+                .and()
+                .csrf()
+                .disable()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/user/")
+                /*.antMatchers(HttpMethod.POST, "/api/user/")
                 .permitAll()
                 .antMatchers("/api/user/**")
                 .hasRole("USER")
                 //.anyRequest()
-                .antMatchers("/api/admin/**", "/api/book/**")
+                //.antMatchers("/api/admin/**", "/api/book/**")
+                .antMatchers("/**")
                 .hasRole("ADMIN")
                 .and()
                 .httpBasic()
                 .and()
                 .authenticationProvider(daoAuthenticationProvider)
-                .build();
+                .build();*/
     }
 
     @Bean

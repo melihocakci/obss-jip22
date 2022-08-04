@@ -57,7 +57,14 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public List<Book> findBooksByName(String name) {
-        return bookRepository.findBooksByName(name);
+    public List<BookDto> findBooksByName(String name) {
+        List<Book> books = bookRepository.findBooksByName(name);
+        List<BookDto> bookDtoList = new ArrayList<>();
+
+        for(Book book : books) {
+            bookDtoList.add(mapper.toBookDto(book));
+        }
+
+        return bookDtoList;
     }
 }

@@ -17,5 +17,5 @@ public interface BookService {
 
     void updateBook(Long id, CreateBookDto book);
 
-    List<Book> findBooksByName(String name);
+    List<BookDto> findBooksByName(String name);
 }

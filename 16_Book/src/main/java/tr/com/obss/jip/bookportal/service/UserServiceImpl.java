@@ -57,12 +57,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long id) {
-
+        userRepository.deleteUserById(id);
     }
 
     @Override
-    public User getUser(Long id) {
-        return userRepository.findUserById(id);
+    public UserDto getUser(Long id) {
+        User user = userRepository.findUserById(id);
+        return mapper.toUserDto(user);
     }
 
     @Override

@@ -17,7 +17,7 @@ public class BookController {
 
     private final BookService bookService;
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseDto getBooks() {
         return new ResponseDto(true, null, bookService.getBooks());
     }
@@ -30,5 +30,26 @@ public class BookController {
     @GetMapping("/search")
     public ResponseDto findBookByName(@RequestParam(name = "name") String name) {
         return new ResponseDto(true, null, bookService.findBooksByName(name));
+    }
+
+    @PostMapping("/")
+    public ResponseDto createBook(@RequestBody @Valid CreateBookDto createBookDto) {
+        bookService.createBook(createBookDto);
+        return new ResponseDto(true, "Book created successfully", null);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseDto deleteBook(@PathVariable(name = "id") Long id) {
+        bookService.deleteBook(id);
+
+        return new ResponseDto(true, "Book deleted successfully", null);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseDto updateBook(@PathVariable(name = "id") Long id,
+                                  @RequestBody @Valid CreateBookDto newBook) {
+        bookService.updateBook(id, newBook);
+
+        return new ResponseDto(true, "Book updated successfully", null);
     }
 }
