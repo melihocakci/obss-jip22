@@ -36,12 +36,16 @@ public class SecurityConfig {
                 .and()
 
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/user").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/user/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/api/book/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT, "/api/book/**").hasRole("ADMIN")
-                .antMatchers("/api/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
+                .antMatchers(HttpMethod.GET, "/api/user/*").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/user/*").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/user/*").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/user/*").hasRole("ADMIN")
+
+                .antMatchers(HttpMethod.GET, "/api/book/*").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/book/*").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/book/*").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/book/*").hasRole("ADMIN")
+                .anyRequest().permitAll()
                 .and()
 
                 .formLogin()
