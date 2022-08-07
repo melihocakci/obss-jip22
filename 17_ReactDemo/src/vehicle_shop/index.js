@@ -1,13 +1,13 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom";
-import ShoppingApp from "./ShoppingApp";
+import VehicleShop from "./VehicleShop";
 
 function shopping() {
     const root = document.getElementById("root");
 
     ReactDOM.render(
         <StrictMode>
-            <ShoppingApp />
+            <VehicleShop />
         </StrictMode>,
         root
     );

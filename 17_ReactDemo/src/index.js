@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 /*
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,12 +17,15 @@ root.render(
 reportWebVitals();
 */
 
-import stock from "./stock"
-import component from "./component"
-import Shopping from "./shopping/index"
+import stock from "./stock";
+import component from "./component";
+import Shopping from "./shopping";
+import vehicleshop from "./vehicle_shop";
 
 //stock();
 
 //component();
 
-Shopping();
+//Shopping();
+
+vehicleshop();
