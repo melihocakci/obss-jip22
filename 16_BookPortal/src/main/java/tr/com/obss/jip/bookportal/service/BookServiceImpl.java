@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tr.com.obss.jip.bookportal.dto.BookDto;
 import tr.com.obss.jip.bookportal.dto.CreateBookDto;
+import tr.com.obss.jip.bookportal.dto.UpdateBookDto;
 import tr.com.obss.jip.bookportal.mapper.MyMapper;
 import tr.com.obss.jip.bookportal.mapper.MyMapperImpl;
 import tr.com.obss.jip.bookportal.model.Book;
@@ -50,9 +51,17 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public void updateBook(Long id, CreateBookDto newBook) {
-        Book book = mapper.toBook(newBook);
-        book.setId(id);
+    public void updateBook(Long id, UpdateBookDto updateBookDto) {
+        Book book = bookRepository.findBookById(id);
+
+        if (updateBookDto.getName() != null) {
+            book.setName(updateBookDto.getName());
+        }
+
+        if (updateBookDto.getAuthor() != null) {
+            book.setAuthor(updateBookDto.getAuthor());
+        }
+
         bookRepository.save(book);
     }
 

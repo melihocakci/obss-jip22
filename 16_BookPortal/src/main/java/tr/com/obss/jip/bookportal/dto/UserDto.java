@@ -3,8 +3,13 @@ package tr.com.obss.jip.bookportal.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import tr.com.obss.jip.bookportal.model.Book;
 
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,4 +20,8 @@ public class UserDto {
 
     @NotNull
     private String username;
+
+    private List<BookDto> read_list;
+
+    private List<BookDto> favorite_list;
 }

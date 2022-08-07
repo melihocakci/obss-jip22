@@ -1,11 +1,10 @@
 package tr.com.obss.jip.bookportal.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.Parameter;
 import org.springframework.web.bind.annotation.*;
-import tr.com.obss.jip.bookportal.dto.BookDto;
 import tr.com.obss.jip.bookportal.dto.CreateBookDto;
 import tr.com.obss.jip.bookportal.dto.ResponseDto;
+import tr.com.obss.jip.bookportal.dto.UpdateBookDto;
 import tr.com.obss.jip.bookportal.service.BookService;
 
 import javax.validation.Valid;
@@ -47,8 +46,8 @@ public class BookController {
 
     @PutMapping("/{id}")
     public ResponseDto updateBook(@PathVariable(name = "id") Long id,
-                                  @RequestBody @Valid CreateBookDto newBook) {
-        bookService.updateBook(id, newBook);
+                                  @RequestBody @Valid UpdateBookDto updateBookDto) {
+        bookService.updateBook(id, updateBookDto);
 
         return new ResponseDto(true, "Book updated successfully", null);
     }

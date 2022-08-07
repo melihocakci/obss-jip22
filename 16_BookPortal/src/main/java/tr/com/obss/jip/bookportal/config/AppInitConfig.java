@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import tr.com.obss.jip.bookportal.dto.CreateUserDto;
 import tr.com.obss.jip.bookportal.other.RoleType;
 import tr.com.obss.jip.bookportal.model.Role;
 import tr.com.obss.jip.bookportal.model.User;
@@ -32,18 +33,14 @@ public class AppInitConfig {
                 roleService.createNewRole(role);
             });
 
-            User adminUser = userService.findByUsername("admin");
+            User adminUser = userService.getUser("admin");
 
             if (adminUser != null) {
                 return;
             }
 
-            adminUser = new User();
-
-            adminUser.setUsername("admin");
-            adminUser.setPassword("admin123");
-            adminUser.setRole(roleService.findByName(RoleType.ROLE_ADMIN));
-            userService.saveUser(adminUser);
+            CreateUserDto newAdmin = new CreateUserDto("admin", "admin123");
+            userService.createUser(newAdmin, RoleType.ROLE_ADMIN);
 
         };
     }

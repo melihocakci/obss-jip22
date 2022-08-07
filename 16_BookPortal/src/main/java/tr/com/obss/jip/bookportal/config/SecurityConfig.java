@@ -36,24 +36,26 @@ public class SecurityConfig {
                 .and()
 
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/user/*").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/api/user/*").permitAll()
-                .antMatchers(HttpMethod.PUT, "/api/user/*").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/api/user/*").hasRole("ADMIN")
+                //.antMatchers(HttpMethod.GET, "/api/user/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/user/read/**", "api/user/favorite/**").hasRole("USER")
+                .antMatchers(HttpMethod.POST, "/api/user", "api/user/").not().authenticated()
+                .antMatchers(HttpMethod.PUT, "/api/user/{\\d+}/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/user/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/api/user/{\\d+}/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/user/**").authenticated()
 
-                .antMatchers(HttpMethod.GET, "/api/book/*").authenticated()
-                .antMatchers(HttpMethod.POST, "/api/book/*").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT, "/api/book/*").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/api/book/*").hasRole("ADMIN")
+                //.antMatchers(HttpMethod.GET, "/api/book/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/book/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/book/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/book/**").hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and()
 
                 .formLogin()
-                //.loginPage("/login")
                 .permitAll()
                 .and()
 
-                .logout()
+                .logout().deleteCookies().clearAuthentication(true)
                 .permitAll()
                 .and()
 
@@ -62,29 +64,6 @@ public class SecurityConfig {
 
                 .authenticationProvider(daoAuthenticationProvider)
                 .build();
-        /*
-        return http
-                .cors()
-                .and()
-                .csrf()
-                .disable()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .and()
-                .authorizeRequests()
-                /*.antMatchers(HttpMethod.POST, "/api/user/")
-                .permitAll()
-                .antMatchers("/api/user/**")
-                .hasRole("USER")
-                //.anyRequest()
-                //.antMatchers("/api/admin/**", "/api/book/**")
-                .antMatchers("/**")
-                .hasRole("ADMIN")
-                .and()
-                .httpBasic()
-                .and()
-                .authenticationProvider(daoAuthenticationProvider)
-                .build();*/
     }
 
     @Bean
@@ -98,7 +77,7 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> {
-            final User user = userService.findByUsername(username);
+            final User user = userService.getUser(username);
             List<String> role = List.of(user.getRole().getName().toString());
             return new MyUserDetails(user.getUsername(), user.getPassword(), role);
         };
