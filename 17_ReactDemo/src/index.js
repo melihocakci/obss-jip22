@@ -23,6 +23,11 @@ import Shopping from "./shopping";
 import vehicleshop from "./vehicle_shop";
 import state from "./state";
 import stateCounter from "./state_counter";
+import parentChild from "./parent_child";
+import clickHandler from "./click_handler";
+import buttons from "./active_button";
+import should_update from "./should_update";
+import forms from "./checked_forms";
 
 //stock();
 
@@ -34,4 +39,14 @@ import stateCounter from "./state_counter";
 
 //state();
 
-stateCounter();
+//stateCounter();
+
+//parentChild();
+
+//clickHandler();
+
+//buttons();
+
+//should_update();
+
+forms();
