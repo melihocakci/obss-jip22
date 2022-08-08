@@ -21,6 +21,8 @@ import stock from "./stock";
 import component from "./component";
 import Shopping from "./shopping";
 import vehicleshop from "./vehicle_shop";
+import state from "./state";
+import stateCounter from "./state_counter";
 
 //stock();
 
@@ -28,4 +30,8 @@ import vehicleshop from "./vehicle_shop";
 
 //Shopping();
 
-vehicleshop();
+//vehicleshop();
+
+//state();
+
+stateCounter();

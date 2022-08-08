@@ -2,13 +2,14 @@ import Title from "./Title";
 import VehicleList from "./VehicleList";
 import CheckBox from "./CheckBox";
 import DropDown from "./Dropdown";
+import RenderOptions from "./RenderOptions";
 
 export default (props) => {
     const shop = {
         categories: [
             {
                 name: "Cars",
-                items: [
+                vehicles: [
                     {
                         year: 2013,
                         model: "A",
@@ -28,7 +29,7 @@ export default (props) => {
             },
             {
                 name: "Trucks",
-                items: [
+                vehicles: [
                     {
                         year: 2014,
                         model: "D",
@@ -44,20 +45,15 @@ export default (props) => {
         ],
     };
 
-    let itemNumber = 0;
-    let categoryList = [];
-
-    shop.categories.forEach((category) => {
-        categoryList.push(<VehicleList key={category} header={category.name} items={category.items} />);
-    });
-
     return (
         <div>
             <Title title="Welcome to React Transportation" subTitle="The best place to buy vehicles online" />
-            <p className="title">Choose Options</p>
-            <CheckBox title="Choose Options" boxlabel="New Only" />
-            <DropDown dropdownLabel="Select Type" />
-            {categoryList}
+
+            <RenderOptions />
+
+            {shop.categories.map((category) => {
+                return <VehicleList key={category} header={category.name} vehicles={category.vehicles} />;
+            })}
         </div>
     );
 };
