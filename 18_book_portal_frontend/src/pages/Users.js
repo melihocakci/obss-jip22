@@ -5,20 +5,10 @@ import UserService from "../service/UserService";
 
 const columns = [
     {
-        title: "Name",
-        dataIndex: "name",
+        title: "Username",
+        dataIndex: "username",
         sorter: true,
         width: "20%",
-    },
-    {
-        title: "Surname",
-        dataIndex: "surname",
-        sorter: true,
-        width: "20%",
-    },
-    {
-        title: "Email",
-        dataIndex: "email",
     },
 ];
 

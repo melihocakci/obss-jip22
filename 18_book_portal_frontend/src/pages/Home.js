@@ -13,7 +13,7 @@ const Home = () => {
 
         const response = await AuthService.signin(credentials);
         if (response) {
-            navigate.push("/users");
+            navigate("/users");
         }
 
         //UserService.delete();

@@ -6,7 +6,7 @@ const AuthService = (function () {
         let token = null;
 
         try {
-            const response = await axios.post("http://localhost:8080/api/auth/signin", credentials);
+            const response = await axios.post("http://localhost:8080/api/auth", credentials);
             if (response && response.data) {
                 token = response.data.token;
                 LocalStorageUtil.setToken(token);

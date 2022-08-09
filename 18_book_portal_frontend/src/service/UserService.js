@@ -3,7 +3,7 @@ import LocalStorageService from "../util/LocalStorageUtil";
 
 const UserService = (function () {
     const _fetchUsers = async (params) => {
-        const response = await axios.get("http://localhost:8080/api/users", {
+        const response = await axios.get("http://localhost:8080/api/user", {
             params: {
                 results: params.pagination.pageSize,
                 page: params.pagination.current,
@@ -18,7 +18,7 @@ const UserService = (function () {
             return;
         }
 
-        return response.data;
+        return response.data.body;
     };
 
     const _delete = async () => {
