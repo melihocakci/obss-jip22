@@ -36,6 +36,7 @@ public class SecurityConfig {
                 .and()
 
                 .authorizeRequests()
+                //.antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                 //.antMatchers(HttpMethod.GET, "/api/user/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/user/read/**", "api/user/favorite/**").hasRole("USER")
                 .antMatchers(HttpMethod.POST, "/api/user", "api/user/").not().authenticated()
@@ -51,9 +52,7 @@ public class SecurityConfig {
                 .anyRequest().permitAll()
                 .and()
 
-                .formLogin()
-                .permitAll()
-                .and()
+                .formLogin().loginProcessingUrl("/basicauth").permitAll().and()
 
                 .logout().deleteCookies().clearAuthentication(true)
                 .permitAll()

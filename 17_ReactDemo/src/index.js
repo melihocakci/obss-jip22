@@ -28,6 +28,8 @@ import clickHandler from "./click_handler";
 import buttons from "./active_button";
 import should_update from "./should_update";
 import forms from "./checked_forms";
+import fetch from "./fetch-example";
+import owo from "./owo";
 
 //stock();
 
@@ -49,4 +51,8 @@ import forms from "./checked_forms";
 
 //should_update();
 
-forms();
+//forms();
+
+fetch();
+
+//owo();
