@@ -108,6 +108,32 @@ const UserService = (function () {
         return response;
     };
 
+    const _removeUser = async (userId) => {
+        let response;
+        try {
+            response = await axios.delete("http://localhost:8080/api/user/" + userId);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+            return;
+        }
+
+        return response;
+    };
+
+    const _updateUser = async (userId, credentials) => {
+        let response;
+        try {
+            response = await axios.put("http://localhost:8080/api/user/" + userId, credentials);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+            return;
+        }
+
+        return response;
+    };
+
     const _delete = async () => {
         const response = await axios.delete("http://localhost:8080/api/user/admin", {});
 
@@ -124,6 +150,8 @@ const UserService = (function () {
         addFavorite: _addFavorite,
         removeRead: _removeRead,
         removeFavorite: _removeFavorite,
+        removeUser: _removeUser,
+        updateUser: _updateUser,
     };
 })();
 

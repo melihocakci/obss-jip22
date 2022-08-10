@@ -52,7 +52,7 @@ const Profile = (props) => {
                     );
                 })}
             </ul>
-            <UserActions />
+            <UserActions userId={id} />
         </div>
     );
 };

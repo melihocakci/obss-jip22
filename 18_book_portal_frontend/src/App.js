@@ -17,6 +17,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import AdminMenu from "./components/AdminMenu";
 import UpdateBook from "./pages/UpdateBook";
+import UpdateUser from "./pages/UpdateUser";
 
 const { Header, Content, Footer } = Layout;
 
@@ -65,6 +66,8 @@ export default function App() {
                             <Route path="/books/:id" element={<Book />} />
 
                             <Route path="/books" element={<Books />} />
+
+                            <Route path="/users/:id/update" element={<UpdateUser />} />
 
                             <Route path="/users/:id" element={<Profile />} />
 
