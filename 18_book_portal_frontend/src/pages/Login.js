@@ -4,7 +4,7 @@ import { useState } from "react";
 import AuthService from "../service/AuthService";
 import UserService from "../service/UserService";
 
-const Home = () => {
+const Login = () => {
     const navigate = useNavigate();
     const [credentials, setCredentials] = useState({});
 
@@ -13,7 +13,8 @@ const Home = () => {
 
         const response = await AuthService.signin(credentials);
         if (response) {
-            navigate("/users");
+            navigate("/");
+            window.location.reload();
         }
 
         //UserService.delete();
@@ -82,4 +83,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Login;

@@ -3,8 +3,12 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import "./index.css";
 import { Layout, Menu, Breadcrumb } from "antd";
-import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Books from "./pages/Books";
 import Users from "./pages/Users";
+import Account from "./pages/Account";
+import Profile from "./pages/Profile";
+import LoginOrProfile from "./components/LoginOrProfile";
 
 const { Header, Content, Footer } = Layout;
 
@@ -19,9 +23,15 @@ export default function App() {
                             <Link to="/">Home</Link>
                         </Menu.Item>
                         <Menu.Item key="2">
-                            <Link to="/users">Users</Link>
+                            <Link to="/books">Books</Link>
                         </Menu.Item>
                         <Menu.Item key="3">
+                            <Link to="/users">Users</Link>
+                        </Menu.Item>
+                        <Menu.Item key="4">
+                            <LoginOrProfile />
+                        </Menu.Item>
+                        <Menu.Item key="5">
                             <Link to="/about">About</Link>
                         </Menu.Item>
                     </Menu>
@@ -29,6 +39,7 @@ export default function App() {
                 <Content className="site-layout" style={{ padding: "0 50px", marginTop: 64 }}>
                     <Breadcrumb style={{ margin: "16px 0" }}>
                         <Breadcrumb.Item>Home</Breadcrumb.Item>
+                        <Breadcrumb.Item>Books</Breadcrumb.Item>
                         <Breadcrumb.Item>Users</Breadcrumb.Item>
                         <Breadcrumb.Item>About</Breadcrumb.Item>
                     </Breadcrumb>
@@ -36,9 +47,15 @@ export default function App() {
                         <Routes>
                             <Route path="/about" element={<About />} />
 
+                            <Route path="/books" element={<Books />} />
+
+                            <Route path="/users/:id" element={<Profile />} />
+
                             <Route path="/users" element={<Users />} />
 
-                            <Route path="/" element={<Home />} />
+                            <Route path="/account" element={<Account />} />
+
+                            <Route path="/login" element={<Login />} />
                         </Routes>
                     </div>
                 </Content>

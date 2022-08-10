@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import tr.com.obss.jip.bookportal.model.User;
+import tr.com.obss.jip.bookportal.service.UserService;
 
 @Component
 public class JwtTokenUtil implements Serializable {
@@ -20,6 +23,9 @@ public class JwtTokenUtil implements Serializable {
     private static final long serialVersionUID = -2550185165626007488L;
 
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+
+    @Autowired
+    public UserService userService;
 
     @Value("${jwt.secret}")
     private String secret;
@@ -52,6 +58,9 @@ public class JwtTokenUtil implements Serializable {
     //generate token for user
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        User user = userService.getUser(userDetails.getUsername());
+        claims.put("id", user.getId());
+        claims.put("role", user.getRole().getName().toString());
         return doGenerateToken(claims, userDetails.getUsername());
     }
 

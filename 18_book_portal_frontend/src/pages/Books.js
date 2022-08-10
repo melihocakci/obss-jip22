@@ -1,39 +1,34 @@
 import React from "react";
 import "antd/dist/antd.css";
 import { Table } from "antd";
-import UserService from "../service/UserService";
-import { Link } from "react-router-dom";
+import BookService from "../service/BookService";
 
 const columns = [
     {
-        title: "Username",
-        dataIndex: "username",
+        title: "Name",
+        dataIndex: "name",
         sorter: true,
         width: "20%",
     },
     {
-        title: "Read Books",
-        dataIndex: "read_list",
+        title: "Author",
+        dataIndex: "author",
         sorter: true,
-        render: (list) => list.length,
         width: "20%",
     },
     {
-        title: "Favorited Books",
-        dataIndex: "favorite_list",
-        sorter: true,
-        render: (list) => list.length,
-        width: "20%",
-    },
-    {
-        title: "Profile",
+        title: "Add to Read",
         dataIndex: "id",
-        render: (id) => <Link to={"/users/" + id}>See Profile</Link>,
+        width: "20%",
+    },
+    {
+        title: "Add to Favorites",
+        dataIndex: "id",
         width: "20%",
     },
 ];
 
-class PersonList extends React.Component {
+class BookList extends React.Component {
     state = {
         data: [],
         pagination: {
@@ -60,7 +55,7 @@ class PersonList extends React.Component {
     fetch = async (params = {}) => {
         this.setState({ loading: true });
 
-        const data = await UserService.fetchUsers(params);
+        const data = await BookService.fetchBooks(params);
 
         console.log(JSON.stringify(data));
 
@@ -89,4 +84,4 @@ class PersonList extends React.Component {
     }
 }
 
-export default PersonList;
+export default BookList;

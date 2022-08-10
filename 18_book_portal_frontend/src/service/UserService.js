@@ -12,7 +12,33 @@ const UserService = (function () {
         });
 
         if (!response) {
-            console.log("Bir hata oluştu");
+            console.log("An error occured");
+            //ToDo: Display error message to user not just log it
+            //Ex: https://www.npmjs.com/package/react-toastify
+            return;
+        }
+
+        return response.data.body;
+    };
+
+    const _fetchAuthUser = async (params) => {
+        const response = await axios.get("http://localhost:8080/api/user/profile");
+
+        if (!response) {
+            console.log("An error occured");
+            //ToDo: Display error message to user not just log it
+            //Ex: https://www.npmjs.com/package/react-toastify
+            return;
+        }
+
+        return response.data.body;
+    };
+
+    const _fetchUser = async (id) => {
+        const response = await axios.get("http://localhost:8080/api/user/" + id);
+
+        if (!response) {
+            console.log("An error occured");
             //ToDo: Display error message to user not just log it
             //Ex: https://www.npmjs.com/package/react-toastify
             return;
@@ -30,6 +56,8 @@ const UserService = (function () {
     return {
         fetchUsers: _fetchUsers,
         delete: _delete,
+        fetchAuthUser: _fetchAuthUser,
+        fetchUser: _fetchUser,
     };
 })();
 
