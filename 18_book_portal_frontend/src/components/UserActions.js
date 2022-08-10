@@ -16,11 +16,21 @@ const UserActions = ({ userId }) => {
         window.location.reload();
     };
 
-    const removeUser = () => {
-        const response = UserService.removeUser(userId);
+    const removeUser = async () => {
+        const response = await UserService.removeUser(userId);
         if (response) {
             navigate("/users");
             alert("User deleted");
+        }
+    };
+
+    const removeThisUser = async () => {
+        const response = await UserService.removeUser("");
+        if (response) {
+            AuthService.signout();
+            navigate("/");
+            alert("Account deleted");
+            window.location.reload();
         }
     };
 
@@ -37,6 +47,13 @@ const UserActions = ({ userId }) => {
             <div>
                 <h3>Actions:</h3>
                 <button onClick={signOut}>Sign out</button>
+                <button onClick={removeThisUser}>Delete Account</button>
+                <button
+                    onClick={() => {
+                        navigate("/users/" + userId + "/update");
+                    }}>
+                    Update Account
+                </button>
             </div>
         );
     } else if (user.role == "ROLE_ADMIN") {

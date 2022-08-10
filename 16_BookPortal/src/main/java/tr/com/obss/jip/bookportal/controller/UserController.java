@@ -41,6 +41,14 @@ public class UserController {
         return new ResponseDto(true, "User deleted successfully", null);
     }
 
+    @DeleteMapping
+    public ResponseDto deleteThisUser() {
+        final String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        userService.deleteUser(username);
+
+        return new ResponseDto(true, "User deleted successfully", null);
+    }
+
     @PutMapping("/{id}")
     public ResponseDto updateUser(@PathVariable(name = "id") Long id, @RequestBody @Valid UpdateUserDto updateUserDto) {
         userService.updateUser(id, updateUserDto);

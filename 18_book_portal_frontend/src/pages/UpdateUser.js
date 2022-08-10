@@ -2,6 +2,8 @@ import { Form, Input, Button, Spin } from "antd";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import UserService from "../service/UserService";
+import AuthService from "../service/AuthService";
+import ThisUser from "../other/ThisUser";
 
 const UpdateUser = () => {
     const navigate = useNavigate();
@@ -23,11 +25,19 @@ const UpdateUser = () => {
 
     const onFinish = async (values) => {
         console.log("Success:", values);
-
-        const response = await UserService.updateUser(id, credentials);
-        if (response) {
-            navigate("/users/" + id);
-            alert("User updated");
+        if (ThisUser.getId() == id) {
+            const response = await UserService.updateUser("", credentials);
+            if (response) {
+                AuthService.signout();
+                navigate("/login");
+                alert("Account updated");
+            }
+        } else {
+            const response = await UserService.updateUser(id, credentials);
+            if (response) {
+                navigate("/users/" + id);
+                alert("User updated");
+            }
         }
 
         //UserService.delete();
