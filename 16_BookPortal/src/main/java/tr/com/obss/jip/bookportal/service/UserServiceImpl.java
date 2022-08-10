@@ -84,6 +84,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long userId) {
+        User user = userRepository.findUserById(userId);
+        user.getReadBooks().clear();
+        user.getFavoriteBooks().clear();
+        userRepository.save(user);
+
         userRepository.deleteUserById(userId);
     }
 
@@ -96,10 +101,10 @@ public class UserServiceImpl implements UserService {
     public void removeFavoriteBook(String username, Long bookId) {
         User user = userRepository.findUserByUsername(username);
 
-        List<Book> readList = user.getFavorite_list();
-        for (int i = 0; i < readList.size(); i++) {
-            if (readList.get(i).getId() == bookId) {
-                readList.remove(i);
+        List<Book> favoriteBooks = user.getFavoriteBooks();
+        for (int i = 0; i < favoriteBooks.size(); i++) {
+            if (favoriteBooks.get(i).getId() == bookId) {
+                favoriteBooks.remove(i);
                 userRepository.save(user);
                 return;
             }
@@ -111,10 +116,10 @@ public class UserServiceImpl implements UserService {
     public void removeReadBook(String username, Long bookId) {
         User user = userRepository.findUserByUsername(username);
 
-        List<Book> readList = user.getRead_list();
-        for (int i = 0; i < readList.size(); i++) {
-            if (readList.get(i).getId() == bookId) {
-                readList.remove(i);
+        List<Book> readBooks = user.getReadBooks();
+        for (int i = 0; i < readBooks.size(); i++) {
+            if (readBooks.get(i).getId() == bookId) {
+                readBooks.remove(i);
                 userRepository.save(user);
                 return;
             }
@@ -138,13 +143,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addFavoriteBook(String username, Long bookId) {
         User user = userRepository.findUserByUsername(username);
-        Book book = bookRepository.findBookById(bookId);
 
-        if(user.getFavorite_list().contains(book)) {
-            return;
+        for (Book book : user.getFavoriteBooks()) {
+            if (book.getId() == bookId) {
+                return;
+            }
         }
 
-        user.getFavorite_list().add(book);
+        Book book = bookRepository.findBookById(bookId);
+
+        user.getFavoriteBooks().add(book);
 
         userRepository.save(user);
     }
@@ -152,13 +160,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addReadBook(String username, Long bookId) {
         User user = userRepository.findUserByUsername(username);
-        Book book = bookRepository.findBookById(bookId);
 
-        if(user.getRead_list().contains(book)) {
-            return;
+        for (Book book : user.getReadBooks()) {
+            if (book.getId() == bookId) {
+                return;
+            }
         }
 
-        user.getRead_list().add(book);
+        Book book = bookRepository.findBookById(bookId);
+
+        user.getReadBooks().add(book);
 
         userRepository.save(user);
     }

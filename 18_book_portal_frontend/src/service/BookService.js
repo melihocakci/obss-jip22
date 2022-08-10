@@ -47,10 +47,38 @@ const BookService = (function () {
         return response;
     };
 
+    const _updateBook = async (bookId, credentials) => {
+        const response = await axios.put("http://localhost:8080/api/book/" + bookId, credentials);
+
+        if (!response) {
+            console.log("An error occured");
+            //ToDo: Display error message to user not just log it
+            //Ex: https://www.npmjs.com/package/react-toastify
+            return;
+        }
+
+        return response;
+    };
+
+    const _removeBook = async (bookId) => {
+        const response = await axios.delete("http://localhost:8080/api/book/" + bookId);
+
+        if (!response) {
+            console.log("An error occured");
+            //ToDo: Display error message to user not just log it
+            //Ex: https://www.npmjs.com/package/react-toastify
+            return;
+        }
+
+        return response;
+    };
+
     return {
         fetchBooks: _fetchBooks,
         fetchBook: _fetchBook,
         createBook: _createBook,
+        removeBook: _removeBook,
+        updateBook: _updateBook,
     };
 })();
 

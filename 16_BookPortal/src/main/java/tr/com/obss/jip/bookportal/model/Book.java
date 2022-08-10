@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,4 +23,10 @@ public class Book {
 
     @Column(nullable = false)
     private String author;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "readBooks")
+    private List<User> readUsers = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "favoriteBooks")
+    private List<User> favoriteUsers = new ArrayList<>();
 }

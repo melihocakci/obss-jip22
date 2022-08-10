@@ -29,8 +29,16 @@ public class User {
     private Role role;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Book> read_list = new ArrayList<>();
+    @JoinTable(
+            name = "read_list",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private List<Book> readBooks = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Book> favorite_list = new ArrayList<>();
+    @JoinTable(
+            name = "favorite_list",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private List<Book> favoriteBooks = new ArrayList<>();
 }

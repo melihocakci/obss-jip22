@@ -1,21 +1,33 @@
-import { Form, Input, Button } from "antd";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import AuthService from "../service/AuthService";
-import UserService from "../service/UserService";
+import { Form, Input, Button, Spin } from "antd";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import BookService from "../service/BookService";
 
-const NewBook = () => {
+const UpdateBook = () => {
     const navigate = useNavigate();
+    const { id } = useParams();
+    const [loading, setLoading] = useState(true);
+    const [currentCredentials, setCurrentCredentials] = useState({});
     const [credentials, setCredentials] = useState({});
+
+    useEffect(() => {
+        fetch();
+    }, []);
+
+    const fetch = async () => {
+        setLoading(true);
+        const user = await BookService.fetchBook(id);
+        setCurrentCredentials(user);
+        setLoading(false);
+    };
 
     const onFinish = async (values) => {
         console.log("Success:", values);
 
-        const response = await BookService.createBook(credentials);
+        const response = await BookService.updateBook(id, credentials);
         if (response) {
-            navigate("/admin");
-            alert("Book added");
+            navigate("/books/" + id);
+            alert("Book updated");
         }
 
         //UserService.delete();
@@ -32,9 +44,13 @@ const NewBook = () => {
         });
     };
 
+    if (loading) {
+        return <Spin />;
+    }
+
     return (
         <div>
-            <h1>Create Book</h1>
+            <h1>Update Book</h1>
             <Form
                 name="basic"
                 labelCol={{
@@ -54,11 +70,16 @@ const NewBook = () => {
                     name="name"
                     rules={[
                         {
-                            required: true,
+                            required: false,
                             message: "Please input name!",
                         },
                     ]}>
-                    <Input onChange={handleChange} name="name" value={credentials.name} />
+                    <Input
+                        onChange={handleChange}
+                        name="name"
+                        value={credentials.name}
+                        placeholder={currentCredentials.name}
+                    />
                 </Form.Item>
 
                 <Form.Item
@@ -66,11 +87,16 @@ const NewBook = () => {
                     name="author"
                     rules={[
                         {
-                            required: true,
+                            required: false,
                             message: "Please input author!",
                         },
                     ]}>
-                    <Input onChange={handleChange} name="author" value={credentials.author} />
+                    <Input
+                        onChange={handleChange}
+                        name="author"
+                        value={credentials.author}
+                        placeholder={currentCredentials.author}
+                    />
                 </Form.Item>
 
                 <Form.Item
@@ -87,4 +113,4 @@ const NewBook = () => {
     );
 };
 
-export default NewBook;
+export default UpdateBook;

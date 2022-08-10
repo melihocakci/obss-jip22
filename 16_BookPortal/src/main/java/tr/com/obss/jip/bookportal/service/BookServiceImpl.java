@@ -8,6 +8,7 @@ import tr.com.obss.jip.bookportal.dto.UpdateBookDto;
 import tr.com.obss.jip.bookportal.mapper.MyMapper;
 import tr.com.obss.jip.bookportal.mapper.MyMapperImpl;
 import tr.com.obss.jip.bookportal.model.Book;
+import tr.com.obss.jip.bookportal.model.User;
 import tr.com.obss.jip.bookportal.repository.BookRepository;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.List;
 public class BookServiceImpl implements BookService{
 
     private final BookRepository bookRepository;
+    private final UserService userService;
     private final MyMapper mapper = new MyMapperImpl();
 
     @Override
@@ -41,6 +43,16 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public void deleteBook(Long id) {
+        Book book = bookRepository.findBookById(id);
+
+        for(User user : book.getReadUsers()){
+            userService.removeReadBook(user.getUsername(), book.getId());
+        }
+
+        for(User user : book.getReadUsers()){
+            userService.removeFavoriteBook(user.getUsername(), book.getId());
+        }
+
         bookRepository.deleteBookById(id);
     }
 

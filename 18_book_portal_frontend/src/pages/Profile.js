@@ -30,7 +30,7 @@ const Profile = (props) => {
             <h1>Username: {user.username}</h1>
             <h3>Read Books:</h3>
             <ul>
-                {user.read_list.map((book) => {
+                {user.readBooks.map((book) => {
                     return (
                         <li key={book.id}>
                             <Link to={"/books/" + book.id}>
@@ -42,7 +42,7 @@ const Profile = (props) => {
             </ul>
             <h3>Favorite Books:</h3>
             <ul>
-                {user.favorite_list.map((book) => {
+                {user.favoriteBooks.map((book) => {
                     return (
                         <li key={book.id}>
                             <Link to={"/books/" + book.id}>

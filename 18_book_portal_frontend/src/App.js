@@ -12,10 +12,11 @@ import Profile from "./pages/Profile";
 import LoginOrProfile from "./components/LoginOrProfile";
 import Register from "./pages/Register";
 import AdminPanel from "./pages/AdminPanel";
-import NewBook from "./pages/NewBook";
+import CreateBook from "./pages/CreateBook";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import AdminMenu from "./components/AdminMenu";
+import UpdateBook from "./pages/UpdateBook";
 
 const { Header, Content, Footer } = Layout;
 
@@ -53,11 +54,13 @@ export default function App() {
                     </Breadcrumb>
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
                         <Routes>
-                            <Route path="/admin/newbook" element={<NewBook />} />
+                            <Route path="/admin/create" element={<CreateBook />} />
 
                             <Route path="/admin" element={<AdminPanel />} />
 
                             <Route path="/about" element={<About />} />
+
+                            <Route path="/books/:id/update" element={<UpdateBook />} />
 
                             <Route path="/books/:id" element={<Book />} />
 

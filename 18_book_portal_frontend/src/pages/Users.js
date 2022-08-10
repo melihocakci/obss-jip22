@@ -13,14 +13,14 @@ const columns = [
     },
     {
         title: "Read Books",
-        dataIndex: "read_list",
+        dataIndex: "readBooks",
         sorter: true,
         render: (list) => list.length,
         width: "20%",
     },
     {
         title: "Favorited Books",
-        dataIndex: "favorite_list",
+        dataIndex: "favoriteBooks",
         sorter: true,
         render: (list) => list.length,
         width: "20%",

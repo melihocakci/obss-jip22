@@ -13,8 +13,8 @@ const UserActions = (props) => {
 
     const signOut = () => {
         AuthService.signout();
-        window.location.reload();
         navigate("/login");
+        window.location.reload();
     };
 
     const token = LocalStorageService.getToken();

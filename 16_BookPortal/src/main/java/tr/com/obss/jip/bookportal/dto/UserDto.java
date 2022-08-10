@@ -21,7 +21,7 @@ public class UserDto {
     @NotNull
     private String username;
 
-    private List<BookDto> read_list;
+    private List<BookDto> readBooks;
 
-    private List<BookDto> favorite_list;
+    private List<BookDto> favoriteBooks;
 }

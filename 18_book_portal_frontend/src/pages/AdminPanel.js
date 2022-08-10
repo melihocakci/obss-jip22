@@ -8,7 +8,7 @@ const AdminPanel = (props) => {
             <h1>Admin Panel</h1>
             <ul>
                 <li>
-                    <Link to="/admin/newbook">Create Book</Link>
+                    <Link to="/admin/create">Create Book</Link>
                 </li>
             </ul>
         </div>
