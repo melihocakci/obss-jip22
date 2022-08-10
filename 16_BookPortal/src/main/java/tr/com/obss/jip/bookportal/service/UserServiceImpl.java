@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 
         List<UserDto> userDtoList = new ArrayList<>();
 
-        for(User user : users) {
+        for (User user : users) {
             userDtoList.add(mapper.toUserDto(user));
         }
 
@@ -90,6 +90,35 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(String username) {
         userRepository.deleteUserByUsername(username);
+    }
+
+    @Override
+    public void removeFavoriteBook(String username, Long bookId) {
+        User user = userRepository.findUserByUsername(username);
+
+        List<Book> readList = user.getFavorite_list();
+        for (int i = 0; i < readList.size(); i++) {
+            if (readList.get(i).getId() == bookId) {
+                readList.remove(i);
+                userRepository.save(user);
+                return;
+            }
+        }
+
+    }
+
+    @Override
+    public void removeReadBook(String username, Long bookId) {
+        User user = userRepository.findUserByUsername(username);
+
+        List<Book> readList = user.getRead_list();
+        for (int i = 0; i < readList.size(); i++) {
+            if (readList.get(i).getId() == bookId) {
+                readList.remove(i);
+                userRepository.save(user);
+                return;
+            }
+        }
     }
 
     @Override

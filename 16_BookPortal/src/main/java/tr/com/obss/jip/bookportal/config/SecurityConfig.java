@@ -52,7 +52,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 //.antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                 //.antMatchers(HttpMethod.GET, "/api/user/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/api/user/read/**", "api/user/favorite/**").hasRole("USER")
+                .antMatchers("/api/user/read/**", "/api/user/favorite/**").authenticated()
                 .antMatchers(HttpMethod.POST, "/api/user", "api/user/").not().authenticated()
                 .antMatchers(HttpMethod.PUT, "/api/user/{\\d+}/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/user/**").authenticated()
@@ -126,7 +126,10 @@ public class SecurityConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:3000");
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:3000")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE");
+                ;
             }
         };
     }

@@ -1,19 +1,18 @@
 import { Form, Input, Button } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import AuthService from "../service/AuthService";
 import UserService from "../service/UserService";
 
-const Login = () => {
+const Register = () => {
     const navigate = useNavigate();
     const [credentials, setCredentials] = useState({});
 
     const onFinish = async (values) => {
         console.log("Success:", values);
 
-        const response = await AuthService.signin(credentials);
+        const response = await UserService.createUser(credentials);
         if (response) {
-            navigate("/");
+            navigate("/login");
             window.location.reload();
         }
 
@@ -33,7 +32,7 @@ const Login = () => {
 
     return (
         <div>
-            <h1>Log in</h1>
+            <h1>Register</h1>
             <Form
                 name="basic"
                 labelCol={{
@@ -82,9 +81,8 @@ const Login = () => {
                     </Button>
                 </Form.Item>
             </Form>
-            <Link to="/register">Register</Link>
         </div>
     );
 };
 
-export default Login;
+export default Register;

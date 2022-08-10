@@ -24,4 +24,7 @@ public interface UserService {
 
     void deleteUser(Long userId);
     void deleteUser(String username);
+
+    void removeFavoriteBook(String username, Long bookId);
+    void removeReadBook(String username, Long bookId);
 }

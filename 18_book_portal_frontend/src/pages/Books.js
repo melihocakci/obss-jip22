@@ -2,6 +2,7 @@ import React from "react";
 import "antd/dist/antd.css";
 import { Table } from "antd";
 import BookService from "../service/BookService";
+import { Link } from "react-router-dom";
 
 const columns = [
     {
@@ -17,13 +18,9 @@ const columns = [
         width: "20%",
     },
     {
-        title: "Add to Read",
+        title: "Details",
         dataIndex: "id",
-        width: "20%",
-    },
-    {
-        title: "Add to Favorites",
-        dataIndex: "id",
+        render: (id) => <Link to={"/books/" + id}>See Details</Link>,
         width: "20%",
     },
 ];

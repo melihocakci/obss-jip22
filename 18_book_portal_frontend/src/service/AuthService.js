@@ -18,8 +18,17 @@ const AuthService = (function () {
         return token;
     };
 
+    const _signout = async () => {
+        try {
+            LocalStorageUtil.clearToken();
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return {
         signin: _signin,
+        signout: _signout,
     };
 })();
 

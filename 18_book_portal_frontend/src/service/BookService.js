@@ -21,8 +21,22 @@ const BookService = (function () {
         return response.data.body;
     };
 
+    const _fetchBook = async (id) => {
+        const response = await axios.get("http://localhost:8080/api/book/" + id);
+
+        if (!response) {
+            console.log("An error occured");
+            //ToDo: Display error message to user not just log it
+            //Ex: https://www.npmjs.com/package/react-toastify
+            return;
+        }
+
+        return response.data.body;
+    };
+
     return {
         fetchBooks: _fetchBooks,
+        fetchBook: _fetchBook,
     };
 })();
 

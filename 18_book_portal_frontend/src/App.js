@@ -6,9 +6,11 @@ import { Layout, Menu, Breadcrumb } from "antd";
 import Login from "./pages/Login";
 import Books from "./pages/Books";
 import Users from "./pages/Users";
+import Book from "./pages/Book";
 import Account from "./pages/Account";
 import Profile from "./pages/Profile";
 import LoginOrProfile from "./components/LoginOrProfile";
+import Register from "./pages/Register";
 
 const { Header, Content, Footer } = Layout;
 
@@ -47,6 +49,8 @@ export default function App() {
                         <Routes>
                             <Route path="/about" element={<About />} />
 
+                            <Route path="/books/:id" element={<Book />} />
+
                             <Route path="/books" element={<Books />} />
 
                             <Route path="/users/:id" element={<Profile />} />
@@ -56,6 +60,8 @@ export default function App() {
                             <Route path="/account" element={<Account />} />
 
                             <Route path="/login" element={<Login />} />
+
+                            <Route path="/register" element={<Register />} />
                         </Routes>
                     </div>
                 </Content>

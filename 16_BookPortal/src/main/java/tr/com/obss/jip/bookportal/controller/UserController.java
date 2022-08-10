@@ -72,6 +72,22 @@ public class UserController {
         return new ResponseDto(true, "Read book added successfully", null);
     }
 
+    @DeleteMapping("/favorite/{bookId}")
+    public ResponseDto removeFavoriteBook(@PathVariable Long bookId) {
+        final String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        userService.removeFavoriteBook(username, bookId);
+
+        return new ResponseDto(true, "Favorite book removed successfully", null);
+    }
+
+    @DeleteMapping("/read/{bookId}")
+    public ResponseDto removeReadBook(@PathVariable Long bookId) {
+        final String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        userService.removeReadBook(username, bookId);
+
+        return new ResponseDto(true, "Read book removed successfully", null);
+    }
+
     @GetMapping("/profile")
     public ResponseDto getProfile() {
         final String username = SecurityContextHolder.getContext().getAuthentication().getName();
