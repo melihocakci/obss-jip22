@@ -22,8 +22,8 @@ const Book = (props) => {
 
     return (
         <div>
-            <h1>Name: {book.name}</h1>
-            <h1>Author: {book.author}</h1>
+            <h1>{book.name}</h1>
+            <h1>{book.author}</h1>
             <h3>Sypnosis</h3>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et

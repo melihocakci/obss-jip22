@@ -1,18 +1,21 @@
 import { Form, Input, Button } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import AuthService from "../service/AuthService";
 import UserService from "../service/UserService";
+import BookService from "../service/BookService";
 
-const Register = () => {
+const NewBook = () => {
     const navigate = useNavigate();
     const [credentials, setCredentials] = useState({});
 
     const onFinish = async (values) => {
         console.log("Success:", values);
 
-        const response = await UserService.createUser(credentials);
+        const response = await BookService.createBook(credentials);
         if (response) {
-            navigate("/login");
+            navigate("/admin");
+            alert("Book added");
         }
 
         //UserService.delete();
@@ -31,7 +34,7 @@ const Register = () => {
 
     return (
         <div>
-            <h1>Register</h1>
+            <h1>Create Book</h1>
             <Form
                 name="basic"
                 labelCol={{
@@ -47,27 +50,27 @@ const Register = () => {
                 onFinishFailed={onFinishFailed}
                 style={{ margin: "0 auto", width: 400 }}>
                 <Form.Item
-                    label="Username"
-                    name="username"
+                    label="Name"
+                    name="name"
                     rules={[
                         {
                             required: true,
-                            message: "Please input your username!",
+                            message: "Please input name!",
                         },
                     ]}>
-                    <Input onChange={handleChange} name="username" value={credentials.username} />
+                    <Input onChange={handleChange} name="name" value={credentials.name} />
                 </Form.Item>
 
                 <Form.Item
-                    label="Password"
-                    name="password"
+                    label="Author"
+                    name="author"
                     rules={[
                         {
                             required: true,
-                            message: "Please input your password!",
+                            message: "Please input author!",
                         },
                     ]}>
-                    <Input.Password onChange={handleChange} name="password" value={credentials.password} />
+                    <Input onChange={handleChange} name="author" value={credentials.author} />
                 </Form.Item>
 
                 <Form.Item
@@ -84,4 +87,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default NewBook;

@@ -11,6 +11,11 @@ import Account from "./pages/Account";
 import Profile from "./pages/Profile";
 import LoginOrProfile from "./components/LoginOrProfile";
 import Register from "./pages/Register";
+import AdminPanel from "./pages/AdminPanel";
+import NewBook from "./pages/NewBook";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import AdminMenu from "./components/AdminMenu";
 
 const { Header, Content, Footer } = Layout;
 
@@ -36,6 +41,7 @@ export default function App() {
                         <Menu.Item key="5">
                             <Link to="/about">About</Link>
                         </Menu.Item>
+                        <AdminMenu />
                     </Menu>
                 </Header>
                 <Content className="site-layout" style={{ padding: "0 50px", marginTop: 64 }}>
@@ -47,6 +53,10 @@ export default function App() {
                     </Breadcrumb>
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
                         <Routes>
+                            <Route path="/admin/newbook" element={<NewBook />} />
+
+                            <Route path="/admin" element={<AdminPanel />} />
+
                             <Route path="/about" element={<About />} />
 
                             <Route path="/books/:id" element={<Book />} />
@@ -62,6 +72,8 @@ export default function App() {
                             <Route path="/login" element={<Login />} />
 
                             <Route path="/register" element={<Register />} />
+
+                            <Route path="/" element={<Home />} />
                         </Routes>
                     </div>
                 </Content>
@@ -69,8 +81,4 @@ export default function App() {
             </Layout>
         </Router>
     );
-}
-
-function About() {
-    return <h2>About</h2>;
 }

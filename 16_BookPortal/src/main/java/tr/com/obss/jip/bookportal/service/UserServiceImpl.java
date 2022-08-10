@@ -140,6 +140,10 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findUserByUsername(username);
         Book book = bookRepository.findBookById(bookId);
 
+        if(user.getFavorite_list().contains(book)) {
+            return;
+        }
+
         user.getFavorite_list().add(book);
 
         userRepository.save(user);
@@ -149,6 +153,10 @@ public class UserServiceImpl implements UserService {
     public void addReadBook(String username, Long bookId) {
         User user = userRepository.findUserByUsername(username);
         Book book = bookRepository.findBookById(bookId);
+
+        if(user.getRead_list().contains(book)) {
+            return;
+        }
 
         user.getRead_list().add(book);
 
