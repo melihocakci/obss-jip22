@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import AuthService from "../service/AuthService";
 import { useNavigate } from "react-router-dom";
 import UserService from "../service/UserService";
-import { Button } from "antd";
+import { Button, Divider, Typography } from "antd";
+const { Title } = Typography;
 
 const UserActions = ({ userId }) => {
     const navigate = useNavigate();
@@ -46,7 +47,10 @@ const UserActions = ({ userId }) => {
     if (user.id == userId) {
         return (
             <div>
-                <h3>Actions:</h3>
+                <Divider orientation="left">
+                    <Title level={5}>Actions</Title>
+                </Divider>
+
                 <Button onClick={signOut}>Sign out</Button>
                 <Button onClick={removeThisUser}>Delete Account</Button>
                 <Button
@@ -60,6 +64,10 @@ const UserActions = ({ userId }) => {
     } else if (user.role == "ROLE_ADMIN") {
         return (
             <div>
+                <Divider orientation="left">
+                    <Title level={5}>Actions</Title>
+                </Divider>
+
                 <Button onClick={removeUser}>Delete User</Button>
                 <Button
                     onClick={() => {

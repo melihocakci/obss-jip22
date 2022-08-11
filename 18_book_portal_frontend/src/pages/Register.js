@@ -2,6 +2,8 @@ import { Form, Input, Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import UserService from "../service/UserService";
+import { Typography } from "antd";
+const { Title } = Typography;
 
 const Register = () => {
     const navigate = useNavigate();
@@ -31,7 +33,6 @@ const Register = () => {
 
     return (
         <div>
-            <h1>Register</h1>
             <Form
                 name="basic"
                 labelCol={{
@@ -46,6 +47,8 @@ const Register = () => {
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 style={{ margin: "0 auto", width: 400 }}>
+                <Title level={3}>Register</Title>
+
                 <Form.Item
                     label="Username"
                     name="username"

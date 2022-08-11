@@ -6,7 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import UserService from "../service/UserService";
 import BookService from "../service/BookService";
 import { useState } from "react";
-import { Spin, Button } from "antd";
+import { Typography, Spin, Divider, Button } from "antd";
+const { Title } = Typography;
 
 const BookActions = (props) => {
     const navigate = useNavigate();
@@ -62,7 +63,7 @@ const BookActions = (props) => {
     };
 
     const removeBook = async () => {
-        const response = BookService.removeBook(props.bookId);
+        const response = await BookService.removeBook(props.bookId);
 
         if (response) {
             navigate("/books");
@@ -79,7 +80,9 @@ const BookActions = (props) => {
     if (role == "ROLE_ADMIN") {
         return (
             <div>
-                <h3>Actions:</h3>
+                <Divider orientation="left">
+                    <Title level={5}>Actions</Title>
+                </Divider>
                 <Button onClick={removeBook}>Remove Book</Button>
                 <Button
                     onClick={() => {
@@ -96,7 +99,9 @@ const BookActions = (props) => {
 
         return (
             <div>
-                <h3>Actions:</h3>
+                <Divider orientation="left">
+                    <Title level={5}>Actions</Title>
+                </Divider>
                 <Button onClick={toggleRead}>{read ? "Remove from read list" : "Add to read list"}</Button>
                 <Button onClick={toggleFavorite}>
                     {favorite ? "Remove from favorite list" : "Add to favorite list"}

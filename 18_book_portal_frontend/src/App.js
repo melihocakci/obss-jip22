@@ -27,7 +27,7 @@ export default function App() {
         <Router>
             <Layout style={{ height: "100vh" }}>
                 <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-                    <div className="logo" />
+                    <img className="logo" src="/logo.png" />
                     <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
                         <Menu.Item key="1">
                             <Link to="/">Home</Link>
@@ -48,8 +48,9 @@ export default function App() {
                     </Menu>
                 </Header>
                 <Content className="site-layout" style={{ padding: "0 50px", marginTop: 64 }}>
-                    <MyBreadcumb />
-                    <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
+                    <div
+                        className="site-layout-background"
+                        style={{ padding: 35, minHeight: 580, marginTop: 40, marginBottom: 50 }}>
                         <Routes>
                             <Route path="/admin/create" element={<CreateBook />} />
 
@@ -79,7 +80,6 @@ export default function App() {
                         </Routes>
                     </div>
                 </Content>
-                <Footer style={{ textAlign: "center" }}>Ant Design ©2018 Created by Ant UED</Footer>
             </Layout>
         </Router>
     );

@@ -2,7 +2,8 @@ import { Form, Input, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AuthService from "../service/AuthService";
-import UserService from "../service/UserService";
+import { Typography } from "antd";
+const { Title } = Typography;
 
 const Login = () => {
     const navigate = useNavigate();
@@ -33,7 +34,6 @@ const Login = () => {
 
     return (
         <div>
-            <h1>Log in</h1>
             <Form
                 name="basic"
                 labelCol={{
@@ -48,6 +48,8 @@ const Login = () => {
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 style={{ margin: "0 auto", width: 400 }}>
+                <Title level={3}>Log in</Title>
+
                 <Form.Item
                     label="Username"
                     name="username"
@@ -81,8 +83,8 @@ const Login = () => {
                         Submit
                     </Button>
                 </Form.Item>
+                <Link to="/register">Register</Link>
             </Form>
-            <Link to="/register">Register</Link>
         </div>
     );
 };

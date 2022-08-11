@@ -53,7 +53,7 @@ public class SecurityConfig {
                 //.antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                 //.antMatchers(HttpMethod.GET, "/api/user/**").hasRole("ADMIN")
                 .antMatchers("/api/user/read/**", "/api/user/favorite/**").authenticated()
-                .antMatchers(HttpMethod.POST, "/api/user", "api/user/").not().authenticated()
+                .antMatchers(HttpMethod.POST, "/api/user", "api/user/").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/user/{\\d+}/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/user/**").authenticated()
                 .antMatchers(HttpMethod.DELETE, "/api/user/{\\d+}/**").hasRole("ADMIN")

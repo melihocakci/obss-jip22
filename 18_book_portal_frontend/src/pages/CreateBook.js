@@ -34,7 +34,6 @@ const CreateBook = () => {
 
     return (
         <div>
-            <h1>Create Book</h1>
             <Form
                 name="basic"
                 labelCol={{
@@ -49,6 +48,7 @@ const CreateBook = () => {
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 style={{ margin: "0 auto", width: 400 }}>
+                <h1>Create Book</h1>
                 <Form.Item
                     label="Name"
                     name="name"

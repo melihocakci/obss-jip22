@@ -1,4 +1,4 @@
-import LocalStorageService from "../util/LocalStorageUtil";
+import LocalStorageService from "./LocalStorageUtil";
 import jwt from "jwt-decode";
 
 const isAuthenticated = () => {

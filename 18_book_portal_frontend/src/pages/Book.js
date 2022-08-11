@@ -3,7 +3,8 @@ import "antd/dist/antd.css";
 import BookService from "../service/BookService";
 import BookActions from "../components/BookActions";
 import { useParams } from "react-router-dom";
-import { Spin } from "antd";
+import { Typography, Spin, Divider } from "antd";
+const { Title } = Typography;
 
 const Book = (props) => {
     const [book, setBook] = useState();
@@ -22,9 +23,18 @@ const Book = (props) => {
 
     return (
         <div>
-            <h1>{book.name}</h1>
-            <h1>by {book.author}</h1>
-            <h3>Sypnosis</h3>
+            <div style={{ display: "inline-block" }}>
+                <Title>{book.name}</Title>
+                <Title level={3}>by {book.author}</Title>
+            </div>
+            <div style={{ float: "right", display: "inline-block" }}>
+                <BookActions bookId={id} />
+            </div>
+
+            <Divider orientation="left" style={{ marginTop: 30 }}>
+                <Title level={5}>Sypnosis</Title>
+            </Divider>
+
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
@@ -32,7 +42,6 @@ const Book = (props) => {
                 fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
                 deserunt mollit anim id est laborum.
             </p>
-            <BookActions bookId={id} />
         </div>
     );
 };

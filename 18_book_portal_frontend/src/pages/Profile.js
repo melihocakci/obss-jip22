@@ -5,11 +5,14 @@ import AuthService from "../service/AuthService";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import UserActions from "../components/UserActions";
-import { Spin } from "antd";
 import ThisUser from "../util/ThisUser";
+import { Typography, List, Spin, Divider, Card } from "antd";
+const { Title } = Typography;
 
 const Profile = (props) => {
+    const navigate = useNavigate();
     const [user, setUser] = useState();
+    const [loading, setLoading] = useState(true);
 
     const { id } = useParams();
 
@@ -18,13 +21,11 @@ const Profile = (props) => {
     }, []);
 
     const fetch = async () => {
+        setLoading(true);
         const user = await UserService.fetchUser(id);
         setUser(user);
+        setLoading(false);
     };
-
-    if (!user) {
-        return <Spin />;
-    }
 
     const readBooks = () => {
         if (user.readBooks.length == 0) {
@@ -58,14 +59,74 @@ const Profile = (props) => {
         });
     };
 
+    if (loading) {
+        return <Spin />;
+    }
+
     return (
         <div>
-            <h1>{user.username}</h1>
-            <h3>Read Books:</h3>
-            <ul>{readBooks()}</ul>
-            <h3>Favorite Books:</h3>
-            <ul>{favoriteBooks()}</ul>
-            <UserActions userId={id} />
+            <div style={{ display: "inline-block" }}>
+                <Title>{user.username}</Title>
+            </div>
+            <div style={{ float: "right", display: "inline-block" }}>
+                <UserActions userId={id} />
+            </div>
+
+            <Divider orientation="left">
+                <Title level={5}>Read Books</Title>
+            </Divider>
+
+            <List
+                grid={{
+                    gutter: 16,
+                    xs: 1,
+                    sm: 2,
+                    md: 4,
+                    lg: 4,
+                    xl: 6,
+                    xxl: 3,
+                }}
+                dataSource={user.readBooks}
+                renderItem={(book) => (
+                    <List.Item>
+                        <Card
+                            title={book.name}
+                            onClick={() => {
+                                navigate("/books/" + book.id);
+                            }}>
+                            {book.author}
+                        </Card>
+                    </List.Item>
+                )}
+            />
+
+            <Divider orientation="left">
+                <Title level={5}>Favorite Books</Title>
+            </Divider>
+
+            <List
+                grid={{
+                    gutter: 16,
+                    xs: 1,
+                    sm: 2,
+                    md: 4,
+                    lg: 4,
+                    xl: 6,
+                    xxl: 3,
+                }}
+                dataSource={user.favoriteBooks}
+                renderItem={(book) => (
+                    <List.Item>
+                        <Card
+                            title={book.name}
+                            onClick={() => {
+                                navigate("/books/" + book.id);
+                            }}>
+                            {book.author}
+                        </Card>
+                    </List.Item>
+                )}
+            />
         </div>
     );
 };
