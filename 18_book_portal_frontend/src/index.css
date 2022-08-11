@@ -25,3 +25,7 @@ td {
 [data-theme="dark"] .site-layout .site-layout-background {
     background: #141414;
 }
+
+Button {
+    margin-right: 8px;
+}

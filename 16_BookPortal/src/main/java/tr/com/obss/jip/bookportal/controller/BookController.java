@@ -20,10 +20,11 @@ public class BookController {
     @GetMapping
     public ResponseDto getBooks(@RequestParam(defaultValue = "10") Integer size,
                                 @RequestParam(defaultValue = "1") Integer page,
-                                @RequestParam(required = false) String sortField,
-                                @RequestParam(required = false) String sortOrder) {
+                                @RequestParam(defaultValue = "") String sortField,
+                                @RequestParam(defaultValue = "") String sortOrder,
+                                @RequestParam(defaultValue = "") String name) {
 
-        FetchRequest fetchRequest = new FetchRequest(size, page, sortField, sortOrder);
+        FetchRequest fetchRequest = new FetchRequest(size, page, sortField, sortOrder, name);
         return new ResponseDto(true, null, bookService.getBooks(fetchRequest));
     }
 

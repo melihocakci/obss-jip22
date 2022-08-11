@@ -17,12 +17,13 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseDto getBooks(@RequestParam(defaultValue = "10") Integer size,
+    public ResponseDto getUsers(@RequestParam(defaultValue = "10") Integer size,
                                 @RequestParam(defaultValue = "1") Integer page,
-                                @RequestParam(required = false) String sortField,
-                                @RequestParam(required = false) String sortOrder) {
+                                @RequestParam(defaultValue = "") String sortField,
+                                @RequestParam(defaultValue = "") String sortOrder,
+                                @RequestParam(defaultValue = "") String username) {
 
-        FetchRequest fetchRequest = new FetchRequest(size, page, sortField, sortOrder);
+        FetchRequest fetchRequest = new FetchRequest(size, page, sortField, sortOrder, username);
         return new ResponseDto(true, null, userService.getUsers(fetchRequest));
     }
 

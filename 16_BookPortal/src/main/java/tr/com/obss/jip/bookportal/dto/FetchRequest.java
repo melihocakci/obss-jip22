@@ -15,4 +15,6 @@ public class FetchRequest {
     private String sortField;
 
     private String sortOrder;
+
+    private String search;
 }

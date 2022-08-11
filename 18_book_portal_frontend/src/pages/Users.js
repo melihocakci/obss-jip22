@@ -1,6 +1,6 @@
 import React from "react";
 import "antd/dist/antd.css";
-import { Table } from "antd";
+import { Table, Form, Input, Button } from "antd";
 import UserService from "../service/UserService";
 import { Link } from "react-router-dom";
 
@@ -31,7 +31,13 @@ const columns = [
     },
 ];
 
-class PersonList extends React.Component {
+class UserList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.fetch = this.fetch.bind(this);
+    }
+
     state = {
         data: [],
         pagination: {
@@ -39,53 +45,88 @@ class PersonList extends React.Component {
             pageSize: 10,
         },
         loading: false,
+        username: "",
+        sortField: "",
+        sortOrder: "",
     };
 
     componentDidMount() {
-        const { pagination } = this.state;
-        this.fetch({ pagination });
+        this.fetch();
     }
 
-    handleTableChange = (pagination, filters, sorter) => {
-        this.fetch({
-            sortField: sorter.field,
-            sortOrder: sorter.order,
-            pagination,
-            ...filters,
-        });
+    handleTableChange = async (pagination, filters, sorter) => {
+        await this.setState({ pagination: pagination, sortField: sorter.field, sortOrder: sorter.order });
+        this.fetch();
     };
 
-    fetch = async (params = {}) => {
+    fetch = async () => {
         this.setState({ loading: true });
 
-        const data = await UserService.fetchUsers(params);
-        const userCount = await UserService.fetchUserCount();
+        const { pagination, sortField, sortOrder, username } = this.state;
 
-        console.log(JSON.stringify(data));
+        const data = await UserService.fetchUsers({
+            page: pagination.current - 1,
+            size: pagination.pageSize,
+            sortField,
+            sortOrder,
+            username,
+        });
+
+        const userCount = await UserService.fetchUserCount();
 
         this.setState({
             loading: false,
             data: data,
             pagination: {
-                ...params.pagination,
+                ...this.state.pagination,
                 total: userCount, // Mock data
             },
+        });
+    };
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value,
         });
     };
 
     render() {
         const { data, pagination, loading } = this.state;
         return (
-            <Table
-                columns={columns}
-                rowKey={(record) => record.id}
-                dataSource={data}
-                pagination={pagination}
-                loading={loading}
-                onChange={this.handleTableChange}
-            />
+            <div>
+                <Form
+                    name="basic"
+                    labelCol={{
+                        span: 8,
+                    }}
+                    wrapperCol={{
+                        span: 16,
+                    }}
+                    initialValues={{
+                        remember: true,
+                    }}>
+                    <Form.Item
+                        style={{ margin: "0 auto", width: 400, display: "inline-block" }}
+                        label="Search User"
+                        name="username">
+                        <Input onChange={this.handleChange} name="username" value={this.state.username} />
+                    </Form.Item>
+                    <Form.Item style={{ "margin-left": "12px", width: 400, display: "inline-block" }}>
+                        <Button onClick={this.fetch}>Search</Button>
+                    </Form.Item>
+                </Form>
+
+                <Table
+                    columns={columns}
+                    rowKey={(record) => record.id}
+                    dataSource={data}
+                    pagination={pagination}
+                    loading={loading}
+                    onChange={this.handleTableChange}
+                />
+            </div>
         );
     }
 }
 
-export default PersonList;
+export default UserList;

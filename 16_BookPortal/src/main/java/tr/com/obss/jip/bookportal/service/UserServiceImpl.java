@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> getUsers(FetchRequest fetchRequest) {
         Pageable pageable;
 
-        if(fetchRequest.getSortField() != null && fetchRequest.getSortOrder() != null) {
+        if (fetchRequest.getSortField().length() != 0 && fetchRequest.getSortOrder().length() != 0) {
             Sort sort = Sort.by(fetchRequest.getSortField());
 
             if (fetchRequest.getSortOrder().equals("descend")) {
@@ -48,7 +48,12 @@ public class UserServiceImpl implements UserService {
             pageable = PageRequest.of(fetchRequest.getPage(), fetchRequest.getSize());
         }
 
-        Page<User> userPage = userRepository.findAll(pageable);
+        Page<User> userPage;
+        if (fetchRequest.getSearch().length() != 0) {
+            userPage = userRepository.findAllByUsernameContaining(pageable, fetchRequest.getSearch());
+        } else {
+            userPage = userRepository.findAll(pageable);
+        }
 
         List<User> users = userPage.getContent();
 
@@ -199,7 +204,6 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
     }
-
 
 
 }

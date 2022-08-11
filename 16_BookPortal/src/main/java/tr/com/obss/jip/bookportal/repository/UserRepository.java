@@ -1,8 +1,11 @@
 package tr.com.obss.jip.bookportal.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import tr.com.obss.jip.bookportal.model.Book;
 import tr.com.obss.jip.bookportal.model.User;
 
 @Repository
@@ -18,4 +21,5 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
     @Transactional
     void deleteUserByUsername(String username);
 
+    Page<User> findAllByUsernameContaining(Pageable pageable, String username);
 }

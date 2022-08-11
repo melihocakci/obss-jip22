@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import AuthService from "../service/AuthService";
 import { useNavigate } from "react-router-dom";
 import UserService from "../service/UserService";
+import { Button } from "antd";
 
 const UserActions = ({ userId }) => {
     const navigate = useNavigate();
@@ -46,26 +47,26 @@ const UserActions = ({ userId }) => {
         return (
             <div>
                 <h3>Actions:</h3>
-                <button onClick={signOut}>Sign out</button>
-                <button onClick={removeThisUser}>Delete Account</button>
-                <button
+                <Button onClick={signOut}>Sign out</Button>
+                <Button onClick={removeThisUser}>Delete Account</Button>
+                <Button
                     onClick={() => {
                         navigate("/users/" + userId + "/update");
                     }}>
                     Update Account
-                </button>
+                </Button>
             </div>
         );
     } else if (user.role == "ROLE_ADMIN") {
         return (
             <div>
-                <button onClick={removeUser}>Delete User</button>
-                <button
+                <Button onClick={removeUser}>Delete User</Button>
+                <Button
                     onClick={() => {
                         navigate("/users/" + userId + "/update");
                     }}>
                     Update User
-                </button>
+                </Button>
             </div>
         );
     }

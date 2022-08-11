@@ -31,7 +31,7 @@ public class BookServiceImpl implements BookService {
     public List<BookDto> getBooks(FetchRequest fetchRequest) {
         Pageable pageable;
 
-        if(fetchRequest.getSortField() != null && fetchRequest.getSortOrder() != null) {
+        if (fetchRequest.getSortField().length() != 0 && fetchRequest.getSortOrder().length() != 0) {
             Sort sort = Sort.by(fetchRequest.getSortField());
 
             if (fetchRequest.getSortOrder().equals("descend")) {
@@ -43,7 +43,12 @@ public class BookServiceImpl implements BookService {
             pageable = PageRequest.of(fetchRequest.getPage(), fetchRequest.getSize());
         }
 
-        Page<Book> bookPage = bookRepository.findAll(pageable);
+        Page<Book> bookPage;
+        if (fetchRequest.getSearch().length() != 0) {
+            bookPage = bookRepository.findAllByNameContaining(pageable, fetchRequest.getSearch());
+        } else {
+            bookPage = bookRepository.findAll(pageable);
+        }
 
         List<Book> books = bookPage.getContent();
 

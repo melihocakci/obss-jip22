@@ -3,13 +3,7 @@ import LocalStorageService from "../util/LocalStorageUtil";
 
 const BookService = (function () {
     const _fetchBooks = async (params) => {
-        const response = await axios.get("http://localhost:8080/api/book", {
-            params: {
-                size: params.pagination.pageSize,
-                page: params.pagination.current - 1,
-                ...params,
-            },
-        });
+        const response = await axios.get("http://localhost:8080/api/book", { params });
 
         if (!response) {
             console.log("An error occured");

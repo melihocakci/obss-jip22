@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import UserService from "../service/UserService";
 import BookService from "../service/BookService";
 import { useState } from "react";
-import { Spin } from "antd";
+import { Spin, Button } from "antd";
 
 const BookActions = (props) => {
     const navigate = useNavigate();
@@ -80,13 +80,13 @@ const BookActions = (props) => {
         return (
             <div>
                 <h3>Actions:</h3>
-                <button onClick={removeBook}>Remove Book</button>
-                <button
+                <Button onClick={removeBook}>Remove Book</Button>
+                <Button
                     onClick={() => {
                         navigate("/books/" + props.bookId + "/update");
                     }}>
                     Update Book
-                </button>
+                </Button>
             </div>
         );
     } else if (role == "ROLE_USER") {
@@ -97,10 +97,10 @@ const BookActions = (props) => {
         return (
             <div>
                 <h3>Actions:</h3>
-                <button onClick={toggleRead}>{read ? "Remove from read list" : "Add to read list"}</button>
-                <button onClick={toggleFavorite}>
+                <Button onClick={toggleRead}>{read ? "Remove from read list" : "Add to read list"}</Button>
+                <Button onClick={toggleFavorite}>
                     {favorite ? "Remove from favorite list" : "Add to favorite list"}
-                </button>
+                </Button>
             </div>
         );
     }
