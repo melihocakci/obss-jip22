@@ -10,10 +10,14 @@ const AdminPanel = () => {
             <Title>Admin Panel</Title>
             <ul>
                 <li>
-                    <Link to="/admin/create">Create Book</Link>
+                    <h2>
+                        <Link to="/admin/create">Create Book</Link>
+                    </h2>
                 </li>
                 <li>
-                    <Link to="/register">Create User</Link>
+                    <h2>
+                        <Link to="/register">Create User</Link>
+                    </h2>
                 </li>
             </ul>
         </div>
