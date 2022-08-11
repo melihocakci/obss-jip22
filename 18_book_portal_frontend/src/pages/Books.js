@@ -53,6 +53,7 @@ class BookList extends React.Component {
         this.setState({ loading: true });
 
         const data = await BookService.fetchBooks(params);
+        const bookCount = await BookService.fetchBookCount();
 
         console.log(JSON.stringify(data));
 
@@ -61,7 +62,7 @@ class BookList extends React.Component {
             data: data,
             pagination: {
                 ...params.pagination,
-                total: 200, // Mock data
+                total: bookCount, // Mock data
             },
         });
     };

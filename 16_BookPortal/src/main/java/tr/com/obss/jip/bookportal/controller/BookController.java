@@ -3,6 +3,7 @@ package tr.com.obss.jip.bookportal.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tr.com.obss.jip.bookportal.dto.CreateBookDto;
+import tr.com.obss.jip.bookportal.dto.FetchRequest;
 import tr.com.obss.jip.bookportal.dto.ResponseDto;
 import tr.com.obss.jip.bookportal.dto.UpdateBookDto;
 import tr.com.obss.jip.bookportal.service.BookService;
@@ -17,8 +18,13 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    public ResponseDto getBooks() {
-        return new ResponseDto(true, null, bookService.getBooks());
+    public ResponseDto getBooks(@RequestParam(defaultValue = "10") Integer size,
+                                @RequestParam(defaultValue = "1") Integer page,
+                                @RequestParam(required = false) String sortField,
+                                @RequestParam(required = false) String sortOrder) {
+
+        FetchRequest fetchRequest = new FetchRequest(size, page, sortField, sortOrder);
+        return new ResponseDto(true, null, bookService.getBooks(fetchRequest));
     }
 
     @GetMapping("/{id}")
@@ -26,9 +32,9 @@ public class BookController {
         return new ResponseDto(true, null, bookService.getBook(id));
     }
 
-    @GetMapping("/search")
-    public ResponseDto findBookByName(@RequestParam(name = "name") String name) {
-        return new ResponseDto(true, null, bookService.findBooksByName(name));
+    @GetMapping("/count")
+    public ResponseDto getBookCount() {
+        return new ResponseDto(true, null, bookService.getBookCount());
     }
 
     @PostMapping("/")

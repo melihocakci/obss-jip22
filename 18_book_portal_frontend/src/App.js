@@ -18,6 +18,7 @@ import About from "./pages/About";
 import AdminMenu from "./components/AdminMenu";
 import UpdateBook from "./pages/UpdateBook";
 import UpdateUser from "./pages/UpdateUser";
+import MyBreadcumb from "./components/MyBreadCumb";
 
 const { Header, Content, Footer } = Layout;
 
@@ -47,12 +48,7 @@ export default function App() {
                     </Menu>
                 </Header>
                 <Content className="site-layout" style={{ padding: "0 50px", marginTop: 64 }}>
-                    <Breadcrumb style={{ margin: "16px 0" }}>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>Books</Breadcrumb.Item>
-                        <Breadcrumb.Item>Users</Breadcrumb.Item>
-                        <Breadcrumb.Item>About</Breadcrumb.Item>
-                    </Breadcrumb>
+                    <MyBreadcumb />
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
                         <Routes>
                             <Route path="/admin/create" element={<CreateBook />} />

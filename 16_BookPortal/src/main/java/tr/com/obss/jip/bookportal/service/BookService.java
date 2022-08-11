@@ -2,12 +2,15 @@ package tr.com.obss.jip.bookportal.service;
 
 import tr.com.obss.jip.bookportal.dto.BookDto;
 import tr.com.obss.jip.bookportal.dto.CreateBookDto;
+import tr.com.obss.jip.bookportal.dto.FetchRequest;
 import tr.com.obss.jip.bookportal.dto.UpdateBookDto;
 
 import java.util.List;
 
 public interface BookService {
-    List<BookDto> getBooks();
+    List<BookDto> getBooks(FetchRequest fetchRequest);
+
+    Long getBookCount();
 
     void createBook(CreateBookDto createBookDto);
 
@@ -17,5 +20,4 @@ public interface BookService {
 
     void updateBook(Long id, UpdateBookDto updateBookDto);
 
-    List<BookDto> findBooksByName(String name);
 }

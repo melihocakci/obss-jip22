@@ -5,8 +5,8 @@ const BookService = (function () {
     const _fetchBooks = async (params) => {
         const response = await axios.get("http://localhost:8080/api/book", {
             params: {
-                results: params.pagination.pageSize,
-                page: params.pagination.current,
+                size: params.pagination.pageSize,
+                page: params.pagination.current - 1,
                 ...params,
             },
         });
@@ -15,6 +15,18 @@ const BookService = (function () {
             console.log("An error occured");
             //ToDo: Display error message to user not just log it
             //Ex: https://www.npmjs.com/package/react-toastify
+            return;
+        }
+
+        return response.data.body;
+    };
+
+    const _fetchBookCount = async () => {
+        let response;
+        try {
+            response = await axios.get("http://localhost:8080/api/book/count");
+        } catch (error) {
+            console.log(error);
             return;
         }
 
@@ -79,6 +91,7 @@ const BookService = (function () {
         createBook: _createBook,
         removeBook: _removeBook,
         updateBook: _updateBook,
+        fetchBookCount: _fetchBookCount,
     };
 })();
 

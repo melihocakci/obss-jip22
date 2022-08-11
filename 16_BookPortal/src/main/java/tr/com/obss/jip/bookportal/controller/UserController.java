@@ -17,14 +17,23 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseDto getUsers() {
-        List<UserDto> userDtoList = userService.getUsers();
-        return new ResponseDto(true, null, userDtoList);
+    public ResponseDto getBooks(@RequestParam(defaultValue = "10") Integer size,
+                                @RequestParam(defaultValue = "1") Integer page,
+                                @RequestParam(required = false) String sortField,
+                                @RequestParam(required = false) String sortOrder) {
+
+        FetchRequest fetchRequest = new FetchRequest(size, page, sortField, sortOrder);
+        return new ResponseDto(true, null, userService.getUsers(fetchRequest));
     }
 
     @GetMapping("/{id}")
     public ResponseDto getUser(@PathVariable(name = "id") Long id) {
         return new ResponseDto(true, null, userService.getUserDto(id));
+    }
+
+    @GetMapping("/count")
+    public ResponseDto getUserCount() {
+        return new ResponseDto(true, null, userService.getUserCount());
     }
 
     @PostMapping

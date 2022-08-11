@@ -5,8 +5,8 @@ const UserService = (function () {
     const _fetchUsers = async (params) => {
         const response = await axios.get("http://localhost:8080/api/user", {
             params: {
-                results: params.pagination.pageSize,
-                page: params.pagination.current,
+                size: params.pagination.pageSize,
+                page: params.pagination.current - 1,
                 ...params,
             },
         });
@@ -15,6 +15,18 @@ const UserService = (function () {
             console.log("An error occured");
             //ToDo: Display error message to user not just log it
             //Ex: https://www.npmjs.com/package/react-toastify
+            return;
+        }
+
+        return response.data.body;
+    };
+
+    const _fetchUserCount = async () => {
+        let response;
+        try {
+            response = await axios.get("http://localhost:8080/api/user/count");
+        } catch (error) {
+            console.log(error);
             return;
         }
 
@@ -152,6 +164,7 @@ const UserService = (function () {
         removeFavorite: _removeFavorite,
         removeUser: _removeUser,
         updateUser: _updateUser,
+        fetchUserCount: _fetchUserCount,
     };
 })();
 

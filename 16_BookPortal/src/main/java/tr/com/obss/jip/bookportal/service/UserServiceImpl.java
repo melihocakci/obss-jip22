@@ -1,9 +1,14 @@
 package tr.com.obss.jip.bookportal.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import tr.com.obss.jip.bookportal.dto.CreateUserDto;
+import tr.com.obss.jip.bookportal.dto.FetchRequest;
 import tr.com.obss.jip.bookportal.dto.UpdateUserDto;
 import tr.com.obss.jip.bookportal.model.Book;
 import tr.com.obss.jip.bookportal.other.RoleType;
@@ -28,8 +33,24 @@ public class UserServiceImpl implements UserService {
     private final MyMapper mapper = new MyMapperImpl();
 
     @Override
-    public List<UserDto> getUsers() {
-        List<User> users = (List<User>) userRepository.findAll();
+    public List<UserDto> getUsers(FetchRequest fetchRequest) {
+        Pageable pageable;
+
+        if(fetchRequest.getSortField() != null && fetchRequest.getSortOrder() != null) {
+            Sort sort = Sort.by(fetchRequest.getSortField());
+
+            if (fetchRequest.getSortOrder().equals("descend")) {
+                sort = sort.descending();
+            }
+
+            pageable = PageRequest.of(fetchRequest.getPage(), fetchRequest.getSize(), sort);
+        } else {
+            pageable = PageRequest.of(fetchRequest.getPage(), fetchRequest.getSize());
+        }
+
+        Page<User> userPage = userRepository.findAll(pageable);
+
+        List<User> users = userPage.getContent();
 
         List<UserDto> userDtoList = new ArrayList<>();
 
@@ -133,6 +154,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Long getUserCount() {
+        return userRepository.count();
+    }
+
+    @Override
     public void createUser(CreateUserDto createUserDto, RoleType roleType) {
         User user = mapper.toUser(createUserDto);
         user.setRole(roleService.findByName(roleType));
@@ -173,5 +199,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
     }
+
+
 
 }

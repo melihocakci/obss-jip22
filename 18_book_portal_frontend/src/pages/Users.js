@@ -14,14 +14,12 @@ const columns = [
     {
         title: "Read Books",
         dataIndex: "readBooks",
-        sorter: true,
         render: (list) => list.length,
         width: "20%",
     },
     {
         title: "Favorited Books",
         dataIndex: "favoriteBooks",
-        sorter: true,
         render: (list) => list.length,
         width: "20%",
     },
@@ -61,6 +59,7 @@ class PersonList extends React.Component {
         this.setState({ loading: true });
 
         const data = await UserService.fetchUsers(params);
+        const userCount = await UserService.fetchUserCount();
 
         console.log(JSON.stringify(data));
 
@@ -69,7 +68,7 @@ class PersonList extends React.Component {
             data: data,
             pagination: {
                 ...params.pagination,
-                total: 200, // Mock data
+                total: userCount, // Mock data
             },
         });
     };

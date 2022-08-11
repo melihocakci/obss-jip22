@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import UserActions from "../components/UserActions";
 import { Spin } from "antd";
+import ThisUser from "../util/ThisUser";
 
 const Profile = (props) => {
     const [user, setUser] = useState();
@@ -25,33 +26,45 @@ const Profile = (props) => {
         return <Spin />;
     }
 
+    const readBooks = () => {
+        if (user.readBooks.length == 0) {
+            return "None";
+        }
+
+        return user.readBooks.map((book) => {
+            return (
+                <li key={book.id}>
+                    <Link to={"/books/" + book.id}>
+                        {book.name}, {book.author}
+                    </Link>
+                </li>
+            );
+        });
+    };
+
+    const favoriteBooks = () => {
+        if (user.favoriteBooks.length == 0) {
+            return "None";
+        }
+
+        return user.favoriteBooks.map((book) => {
+            return (
+                <li key={book.id}>
+                    <Link to={"/books/" + book.id}>
+                        {book.name}, {book.author}
+                    </Link>
+                </li>
+            );
+        });
+    };
+
     return (
         <div>
-            <h1>Username: {user.username}</h1>
+            <h1>{user.username}</h1>
             <h3>Read Books:</h3>
-            <ul>
-                {user.readBooks.map((book) => {
-                    return (
-                        <li key={book.id}>
-                            <Link to={"/books/" + book.id}>
-                                {book.name}, {book.author}
-                            </Link>
-                        </li>
-                    );
-                })}
-            </ul>
+            <ul>{readBooks()}</ul>
             <h3>Favorite Books:</h3>
-            <ul>
-                {user.favoriteBooks.map((book) => {
-                    return (
-                        <li key={book.id}>
-                            <Link to={"/books/" + book.id}>
-                                {book.name}, {book.author}
-                            </Link>
-                        </li>
-                    );
-                })}
-            </ul>
+            <ul>{favoriteBooks()}</ul>
             <UserActions userId={id} />
         </div>
     );

@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import UserService from "../service/UserService";
 import AuthService from "../service/AuthService";
-import ThisUser from "../other/ThisUser";
+import ThisUser from "../util/ThisUser";
 
 const UpdateUser = () => {
     const navigate = useNavigate();

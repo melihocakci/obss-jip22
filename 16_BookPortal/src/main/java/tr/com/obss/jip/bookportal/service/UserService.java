@@ -1,6 +1,7 @@
 package tr.com.obss.jip.bookportal.service;
 
 import tr.com.obss.jip.bookportal.dto.CreateUserDto;
+import tr.com.obss.jip.bookportal.dto.FetchRequest;
 import tr.com.obss.jip.bookportal.dto.UpdateUserDto;
 import tr.com.obss.jip.bookportal.dto.UserDto;
 import tr.com.obss.jip.bookportal.model.User;
@@ -10,10 +11,11 @@ import java.util.List;
 
 public interface UserService {
 
-    List<UserDto> getUsers();
+    List<UserDto> getUsers(FetchRequest fetchRequest);
     User getUser(String username);
     UserDto getUserDto(String username);
     UserDto getUserDto(Long userId);
+    Long getUserCount();
 
     void createUser(CreateUserDto createUserDto, RoleType roleType);
     void addFavoriteBook(String username, Long bookId);

@@ -1,9 +1,14 @@
 package tr.com.obss.jip.bookportal.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import tr.com.obss.jip.bookportal.dto.BookDto;
 import tr.com.obss.jip.bookportal.dto.CreateBookDto;
+import tr.com.obss.jip.bookportal.dto.FetchRequest;
 import tr.com.obss.jip.bookportal.dto.UpdateBookDto;
 import tr.com.obss.jip.bookportal.mapper.MyMapper;
 import tr.com.obss.jip.bookportal.mapper.MyMapperImpl;
@@ -16,23 +21,44 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
     private final UserService userService;
     private final MyMapper mapper = new MyMapperImpl();
 
     @Override
-    public List<BookDto> getBooks() {
-        List<Book> books = (List<Book>) bookRepository.findAll();
+    public List<BookDto> getBooks(FetchRequest fetchRequest) {
+        Pageable pageable;
 
-        List<BookDto> bookDtos = new ArrayList<>();
+        if(fetchRequest.getSortField() != null && fetchRequest.getSortOrder() != null) {
+            Sort sort = Sort.by(fetchRequest.getSortField());
 
-        for(Book book : books) {
-            bookDtos.add(mapper.toBookDto(book));
+            if (fetchRequest.getSortOrder().equals("descend")) {
+                sort = sort.descending();
+            }
+
+            pageable = PageRequest.of(fetchRequest.getPage(), fetchRequest.getSize(), sort);
+        } else {
+            pageable = PageRequest.of(fetchRequest.getPage(), fetchRequest.getSize());
         }
 
-        return bookDtos;
+        Page<Book> bookPage = bookRepository.findAll(pageable);
+
+        List<Book> books = bookPage.getContent();
+
+        List<BookDto> bookDtoList = new ArrayList<>();
+
+        for (Book book : books) {
+            bookDtoList.add(mapper.toBookDto(book));
+        }
+
+        return bookDtoList;
+    }
+
+    @Override
+    public Long getBookCount() {
+        return bookRepository.count();
     }
 
     @Override
@@ -45,11 +71,11 @@ public class BookServiceImpl implements BookService{
     public void deleteBook(Long id) {
         Book book = bookRepository.findBookById(id);
 
-        for(User user : book.getReadUsers()){
+        for (User user : book.getReadUsers()) {
             userService.removeReadBook(user.getUsername(), book.getId());
         }
 
-        for(User user : book.getReadUsers()){
+        for (User user : book.getReadUsers()) {
             userService.removeFavoriteBook(user.getUsername(), book.getId());
         }
 
@@ -75,17 +101,5 @@ public class BookServiceImpl implements BookService{
         }
 
         bookRepository.save(book);
-    }
-
-    @Override
-    public List<BookDto> findBooksByName(String name) {
-        List<Book> books = bookRepository.findBooksByName(name);
-        List<BookDto> bookDtoList = new ArrayList<>();
-
-        for(Book book : books) {
-            bookDtoList.add(mapper.toBookDto(book));
-        }
-
-        return bookDtoList;
     }
 }

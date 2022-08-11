@@ -1,4 +1,4 @@
-import ThisUser from "../other/ThisUser";
+import ThisUser from "../util/ThisUser";
 import { Menu } from "antd";
 import { Link } from "react-router-dom";
 
