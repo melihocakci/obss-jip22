@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import tr.com.obss.jip.bookportal.dto.CreateUserDto;
 import tr.com.obss.jip.bookportal.dto.FetchRequest;
 import tr.com.obss.jip.bookportal.dto.UpdateUserDto;
+import tr.com.obss.jip.bookportal.exception.BadRequestException;
+import tr.com.obss.jip.bookportal.exception.ConflictException;
+import tr.com.obss.jip.bookportal.exception.NotFoundException;
 import tr.com.obss.jip.bookportal.model.Book;
 import tr.com.obss.jip.bookportal.other.RoleType;
 import tr.com.obss.jip.bookportal.dto.UserDto;
@@ -33,13 +36,15 @@ public class UserServiceImpl implements UserService {
     private final MyMapper mapper = new MyMapperImpl();
 
     @Override
-    public List<UserDto> getUsers(FetchRequest fetchRequest) {
+    public List<UserDto> getUserDtos(FetchRequest fetchRequest) {
         Pageable pageable;
+        String sortField = fetchRequest.getSortField();
+        String sortOrder = fetchRequest.getSortOrder();
 
-        if (fetchRequest.getSortField().length() != 0 && fetchRequest.getSortOrder().length() != 0) {
-            Sort sort = Sort.by(fetchRequest.getSortField());
+        if (!sortField.isEmpty() && !sortOrder.isEmpty()) {
+            Sort sort = Sort.by(sortField);
 
-            if (fetchRequest.getSortOrder().equals("descend")) {
+            if (sortOrder.equals("descend")) {
                 sort = sort.descending();
             }
 
@@ -49,8 +54,10 @@ public class UserServiceImpl implements UserService {
         }
 
         Page<User> userPage;
-        if (fetchRequest.getSearch().length() != 0) {
-            userPage = userRepository.findAllByUsernameContaining(pageable, fetchRequest.getSearch());
+        String username = fetchRequest.getSearch();
+
+        if (!username.isEmpty()) {
+            userPage = userRepository.findAllByUsernameContaining(pageable, username);
         } else {
             userPage = userRepository.findAll(pageable);
         }
@@ -72,22 +79,49 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Long getUserCount() {
+        return userRepository.count();
+    }
+
+    @Override
+    public UserDto getUserDto(Long userId) {
+        User user = userRepository.findUserById(userId);
+
+        if (user == null) {
+            throw new NotFoundException("User does not exist");
+        }
+
+        return mapper.toUserDto(user);
+    }
+
+    @Override
     public UserDto getUserDto(String username) {
         User user = userRepository.findUserByUsername(username);
-        return mapper.toUserDto(user);
 
+        if (user == null) {
+            throw new NotFoundException("User does not exist");
+        }
+
+        return mapper.toUserDto(user);
     }
 
     @Override
     public void updateUser(String username, UpdateUserDto updateUserDto) {
         User user = userRepository.findUserByUsername(username);
 
-        if (updateUserDto.getUsername() != null) {
-            user.setUsername(updateUserDto.getUsername());
+        if (user == null) {
+            throw new BadRequestException("User does not exist");
         }
 
-        if (updateUserDto.getPassword() != null) {
-            user.setPassword(passwordEncoder.encode(updateUserDto.getPassword()));
+        String newUsername = updateUserDto.getUsername();
+        String newPassword = updateUserDto.getPassword();
+
+        if (newUsername != null && !newUsername.isEmpty()) {
+            user.setUsername(newUsername);
+        }
+
+        if (newPassword != null && !newPassword.isEmpty()) {
+            user.setPassword(passwordEncoder.encode(newPassword));
         }
 
         userRepository.save(user);
@@ -97,12 +131,19 @@ public class UserServiceImpl implements UserService {
     public void updateUser(Long userId, UpdateUserDto updateUserDto) {
         User user = userRepository.findUserById(userId);
 
-        if (updateUserDto.getUsername() != null) {
-            user.setUsername(updateUserDto.getUsername());
+        if (user == null) {
+            throw new BadRequestException("User does not exist");
         }
 
-        if (updateUserDto.getPassword() != null) {
-            user.setPassword(passwordEncoder.encode(updateUserDto.getPassword()));
+        String newUsername = updateUserDto.getUsername();
+        String newPassword = updateUserDto.getPassword();
+
+        if (newUsername != null && !newUsername.isEmpty()) {
+            user.setUsername(newUsername);
+        }
+
+        if (newPassword != null && !newPassword.isEmpty()) {
+            user.setPassword(passwordEncoder.encode(newPassword));
         }
 
         userRepository.save(user);
@@ -111,6 +152,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long userId) {
         User user = userRepository.findUserById(userId);
+
+        if (user == null) {
+            throw new NotFoundException("User does not exist");
+        }
+
         user.getReadBooks().clear();
         user.getFavoriteBooks().clear();
         userRepository.save(user);
@@ -120,7 +166,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(String username) {
-        userRepository.deleteUserByUsername(username);
+        User user = userRepository.findUserByUsername(username);
+
+        if (user == null) {
+            throw new NotFoundException("User does not exist");
+        }
+
+        user.getReadBooks().clear();
+        user.getFavoriteBooks().clear();
+        userRepository.save(user);
+
+        userRepository.deleteUserById(user.getId());
     }
 
     @Override
@@ -129,13 +185,14 @@ public class UserServiceImpl implements UserService {
 
         List<Book> favoriteBooks = user.getFavoriteBooks();
         for (int i = 0; i < favoriteBooks.size(); i++) {
-            if (favoriteBooks.get(i).getId() == bookId) {
+            if (favoriteBooks.get(i).getId().equals(bookId)) {
                 favoriteBooks.remove(i);
                 userRepository.save(user);
                 return;
             }
         }
 
+        throw new NotFoundException("Book not in favorite list");
     }
 
     @Override
@@ -144,30 +201,26 @@ public class UserServiceImpl implements UserService {
 
         List<Book> readBooks = user.getReadBooks();
         for (int i = 0; i < readBooks.size(); i++) {
-            if (readBooks.get(i).getId() == bookId) {
+            if (readBooks.get(i).getId().equals(bookId)) {
                 readBooks.remove(i);
                 userRepository.save(user);
                 return;
             }
         }
-    }
 
-    @Override
-    public UserDto getUserDto(Long userId) {
-        User user = userRepository.findUserById(userId);
-        return mapper.toUserDto(user);
-    }
-
-    @Override
-    public Long getUserCount() {
-        return userRepository.count();
+        throw new NotFoundException("Book not in read list");
     }
 
     @Override
     public void createUser(CreateUserDto createUserDto, RoleType roleType) {
+        if (userRepository.findUserByUsername(createUserDto.getUsername()) != null) {
+            throw new ConflictException("Username is already in use");
+        }
+
         User user = mapper.toUser(createUserDto);
         user.setRole(roleService.findByName(roleType));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         userRepository.save(user);
     }
 
@@ -176,8 +229,8 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findUserByUsername(username);
 
         for (Book book : user.getFavoriteBooks()) {
-            if (book.getId() == bookId) {
-                return;
+            if (book.getId().equals(bookId)) {
+                throw new ConflictException("Book already in favorite list");
             }
         }
 
@@ -193,8 +246,8 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findUserByUsername(username);
 
         for (Book book : user.getReadBooks()) {
-            if (book.getId() == bookId) {
-                return;
+            if (book.getId().equals(bookId)) {
+                throw new ConflictException("Book already in read list");
             }
         }
 

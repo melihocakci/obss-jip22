@@ -10,6 +10,7 @@ import tr.com.obss.jip.bookportal.dto.BookDto;
 import tr.com.obss.jip.bookportal.dto.CreateBookDto;
 import tr.com.obss.jip.bookportal.dto.FetchRequest;
 import tr.com.obss.jip.bookportal.dto.UpdateBookDto;
+import tr.com.obss.jip.bookportal.exception.NotFoundException;
 import tr.com.obss.jip.bookportal.mapper.MyMapper;
 import tr.com.obss.jip.bookportal.mapper.MyMapperImpl;
 import tr.com.obss.jip.bookportal.model.Book;
@@ -28,13 +29,15 @@ public class BookServiceImpl implements BookService {
     private final MyMapper mapper = new MyMapperImpl();
 
     @Override
-    public List<BookDto> getBooks(FetchRequest fetchRequest) {
+    public List<BookDto> getBookDtos(FetchRequest fetchRequest) {
         Pageable pageable;
+        String sortField = fetchRequest.getSortField();
+        String sortOrder = fetchRequest.getSortOrder();
 
-        if (fetchRequest.getSortField().length() != 0 && fetchRequest.getSortOrder().length() != 0) {
-            Sort sort = Sort.by(fetchRequest.getSortField());
+        if (!sortField.isEmpty() && !sortOrder.isEmpty()) {
+            Sort sort = Sort.by(sortField);
 
-            if (fetchRequest.getSortOrder().equals("descend")) {
+            if (sortOrder.equals("descend")) {
                 sort = sort.descending();
             }
 
@@ -44,8 +47,10 @@ public class BookServiceImpl implements BookService {
         }
 
         Page<Book> bookPage;
-        if (fetchRequest.getSearch().length() != 0) {
-            bookPage = bookRepository.findAllByNameContaining(pageable, fetchRequest.getSearch());
+        String name = fetchRequest.getSearch();
+
+        if (!name.isEmpty()) {
+            bookPage = bookRepository.findAllByNameContaining(pageable, name);
         } else {
             bookPage = bookRepository.findAll(pageable);
         }
@@ -76,6 +81,10 @@ public class BookServiceImpl implements BookService {
     public void deleteBook(Long id) {
         Book book = bookRepository.findBookById(id);
 
+        if (book == null) {
+            throw new NotFoundException("Book does not exist");
+        }
+
         for (User user : book.getReadUsers()) {
             userService.removeReadBook(user.getUsername(), book.getId());
         }
@@ -90,6 +99,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookDto getBook(Long id) {
         Book book = bookRepository.findBookById(id);
+
+        if (book == null) {
+            throw new NotFoundException("Book does not exist");
+        }
+
         return mapper.toBookDto(book);
     }
 
@@ -97,11 +111,18 @@ public class BookServiceImpl implements BookService {
     public void updateBook(Long id, UpdateBookDto updateBookDto) {
         Book book = bookRepository.findBookById(id);
 
-        if (updateBookDto.getName() != null) {
+        if (book == null) {
+            throw new NotFoundException("Book does not exist");
+        }
+
+        String name = updateBookDto.getName();
+        String author = updateBookDto.getAuthor();
+
+        if (name != null && !name.isEmpty()) {
             book.setName(updateBookDto.getName());
         }
 
-        if (updateBookDto.getAuthor() != null) {
+        if (author != null && !author.isEmpty()) {
             book.setAuthor(updateBookDto.getAuthor());
         }
 

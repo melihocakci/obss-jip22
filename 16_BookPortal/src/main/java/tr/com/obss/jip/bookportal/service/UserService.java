@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface UserService {
 
-    List<UserDto> getUsers(FetchRequest fetchRequest);
+    List<UserDto> getUserDtos(FetchRequest fetchRequest);
     User getUser(String username);
     UserDto getUserDto(String username);
     UserDto getUserDto(Long userId);
@@ -26,7 +26,6 @@ public interface UserService {
 
     void deleteUser(Long userId);
     void deleteUser(String username);
-
     void removeFavoriteBook(String username, Long bookId);
     void removeReadBook(String username, Long bookId);
 }

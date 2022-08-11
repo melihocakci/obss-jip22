@@ -25,7 +25,7 @@ public class BookController {
                                 @RequestParam(defaultValue = "") String name) {
 
         FetchRequest fetchRequest = new FetchRequest(size, page, sortField, sortOrder, name);
-        return new ResponseDto(true, null, bookService.getBooks(fetchRequest));
+        return new ResponseDto(true, null, bookService.getBookDtos(fetchRequest));
     }
 
     @GetMapping("/{id}")

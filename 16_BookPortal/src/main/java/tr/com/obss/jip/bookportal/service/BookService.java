@@ -8,15 +8,14 @@ import tr.com.obss.jip.bookportal.dto.UpdateBookDto;
 import java.util.List;
 
 public interface BookService {
-    List<BookDto> getBooks(FetchRequest fetchRequest);
 
+    List<BookDto> getBookDtos(FetchRequest fetchRequest);
+    BookDto getBook(Long id);
     Long getBookCount();
 
     void createBook(CreateBookDto createBookDto);
 
     void deleteBook(Long id);
-
-    BookDto getBook(Long id);
 
     void updateBook(Long id, UpdateBookDto updateBookDto);
 

@@ -67,8 +67,8 @@ const BookActions = (props) => {
 
         if (response) {
             navigate("/books");
-            window.location.reload();
             alert("Book deleted");
+            window.location.reload();
         }
     };
 

@@ -8,7 +8,6 @@ import tr.com.obss.jip.bookportal.other.RoleType;
 import tr.com.obss.jip.bookportal.service.UserService;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -24,7 +23,7 @@ public class UserController {
                                 @RequestParam(defaultValue = "") String username) {
 
         FetchRequest fetchRequest = new FetchRequest(size, page, sortField, sortOrder, username);
-        return new ResponseDto(true, null, userService.getUsers(fetchRequest));
+        return new ResponseDto(true, null, userService.getUserDtos(fetchRequest));
     }
 
     @GetMapping("/{id}")
