@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import tr.com.obss.jip.bookportal.model.User;
 import tr.com.obss.jip.bookportal.service.UserService;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,10 +17,9 @@ import java.util.function.Function;
 
 @RequiredArgsConstructor
 @Component
-public class JwtTokenUtil implements Serializable {
+public class JwtTokenUtil {
 
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
-    private static final long serialVersionUID = -2550185165626007488L;
     public final UserService userService;
 
     @Value("${jwt.secret}")
@@ -29,10 +27,6 @@ public class JwtTokenUtil implements Serializable {
 
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
-    }
-
-    public String getIdFromToken(String token) {
-        return getClaimFromToken(token, Claims::getId);
     }
 
     public Date getExpirationDateFromToken(String token) {
