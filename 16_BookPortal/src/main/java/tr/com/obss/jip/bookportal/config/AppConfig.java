@@ -10,8 +10,8 @@ import java.security.SecureRandom;
 @Configuration
 public class AppConfig {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(5, new SecureRandom());
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder(5, new SecureRandom());
+  }
 }

@@ -3,25 +3,25 @@ import "antd/dist/antd.css";
 import UserService from "../service/UserService";
 
 class Account extends React.Component {
-    state = { data: {} };
+  state = { data: {} };
 
-    componentDidMount() {
-        this.fetch();
-    }
+  componentDidMount() {
+    this.fetch();
+  }
 
-    fetch = async () => {
-        const data = await UserService.fetchAuthUser();
-        this.setState({ data: data });
-    };
+  fetch = async () => {
+    const data = await UserService.fetchAuthUser();
+    this.setState({ data: data });
+  };
 
-    render() {
-        const { data } = this.state;
-        return (
-            <div>
-                <h2>{data.username}</h2>
-            </div>
-        );
-    }
+  render() {
+    const { data } = this.state;
+    return (
+      <div>
+        <h2>{data.username}</h2>
+      </div>
+    );
+  }
 }
 
 export default Account;

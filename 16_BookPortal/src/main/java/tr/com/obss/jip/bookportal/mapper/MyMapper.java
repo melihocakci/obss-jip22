@@ -10,11 +10,11 @@ import tr.com.obss.jip.bookportal.model.User;
 
 @Mapper
 public interface MyMapper {
-    Book toBook(CreateBookDto createBookDto);
+  Book toBook(CreateBookDto createBookDto);
 
-    BookDto toBookDto(Book book);
+  BookDto toBookDto(Book book);
 
-    UserDto toUserDto(User user);
+  UserDto toUserDto(User user);
 
-    User toUser(CreateUserDto createUserDto);
+  User toUser(CreateUserDto createUserDto);
 }

@@ -1,10 +1,9 @@
 package tr.com.obss.jip.bookportal.exception;
 
-public class BadRequestException extends RuntimeException{
-    public BadRequestException() {
-    }
+public class BadRequestException extends RuntimeException {
+  public BadRequestException() {}
 
-    public BadRequestException(String message) {
-        super(message);
-    }
+  public BadRequestException(String message) {
+    super(message);
+  }
 }

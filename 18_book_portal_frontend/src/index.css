@@ -1,31 +1,31 @@
 .App {
-    font-family: sans-serif;
-    text-align: center;
+  font-family: sans-serif;
+  text-align: center;
 }
 
 table {
-    border: 1px solid;
+  border: 1px solid;
 }
 
 td {
-    width: 100px;
-    text-align: center;
+  width: 100px;
+  text-align: center;
 }
 
 .logo {
-    float: left;
-    width: 120px;
-    height: 31px;
-    margin: 16px 24px 16px 0;
-    background: rgba(255, 255, 255, 0.2);
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.2);
 }
 .site-layout .site-layout-background {
-    background: #fff;
+  background: #fff;
 }
 [data-theme="dark"] .site-layout .site-layout-background {
-    background: #141414;
+  background: #141414;
 }
 
 Button {
-    margin-right: 8px;
+  margin-right: 8px;
 }

@@ -7,8 +7,8 @@ AxiosConfigurer.configure();
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
-    <StrictMode>
-        <App />
-    </StrictMode>,
-    rootElement
+  <StrictMode>
+    <App />
+  </StrictMode>,
+  rootElement
 );

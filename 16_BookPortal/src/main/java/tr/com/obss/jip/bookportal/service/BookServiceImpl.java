@@ -14,7 +14,6 @@ import tr.com.obss.jip.bookportal.exception.NotFoundException;
 import tr.com.obss.jip.bookportal.mapper.MyMapper;
 import tr.com.obss.jip.bookportal.mapper.MyMapperImpl;
 import tr.com.obss.jip.bookportal.model.Book;
-import tr.com.obss.jip.bookportal.model.User;
 import tr.com.obss.jip.bookportal.repository.BookRepository;
 
 import java.util.ArrayList;
@@ -24,108 +23,100 @@ import java.util.List;
 @Service
 public class BookServiceImpl implements BookService {
 
-    private final BookRepository bookRepository;
-    private final UserService userService;
-    private final MyMapper mapper = new MyMapperImpl();
+  private final BookRepository bookRepository;
+  private final UserService userService;
+  private final MyMapper mapper = new MyMapperImpl();
 
-    @Override
-    public List<BookDto> getBookDtos(FetchRequest fetchRequest) {
-        Pageable pageable;
-        String sortField = fetchRequest.getSortField();
-        String sortOrder = fetchRequest.getSortOrder();
+  @Override
+  public List<BookDto> getBookDtos(FetchRequest fetchRequest) {
+    Pageable pageable;
+    String sortField = fetchRequest.getSortField();
+    String sortOrder = fetchRequest.getSortOrder();
 
-        if (!sortField.isEmpty() && !sortOrder.isEmpty()) {
-            Sort sort = Sort.by(sortField);
+    if (!sortField.isEmpty() && !sortOrder.isEmpty()) {
+      Sort sort = Sort.by(sortField);
 
-            if (sortOrder.equals("descend")) {
-                sort = sort.descending();
-            }
+      if (sortOrder.equals("descend")) {
+        sort = sort.descending();
+      }
 
-            pageable = PageRequest.of(fetchRequest.getPage(), fetchRequest.getSize(), sort);
-        } else {
-            pageable = PageRequest.of(fetchRequest.getPage(), fetchRequest.getSize());
-        }
-
-        Page<Book> bookPage;
-        String name = fetchRequest.getSearch();
-
-        if (!name.isEmpty()) {
-            bookPage = bookRepository.findAllByNameContaining(pageable, name);
-        } else {
-            bookPage = bookRepository.findAll(pageable);
-        }
-
-        List<Book> books = bookPage.getContent();
-
-        List<BookDto> bookDtoList = new ArrayList<>();
-
-        for (Book book : books) {
-            bookDtoList.add(mapper.toBookDto(book));
-        }
-
-        return bookDtoList;
+      pageable = PageRequest.of(fetchRequest.getPage(), fetchRequest.getSize(), sort);
+    } else {
+      pageable = PageRequest.of(fetchRequest.getPage(), fetchRequest.getSize());
     }
 
-    @Override
-    public Long getBookCount() {
-        return bookRepository.count();
+    Page<Book> bookPage;
+    String name = fetchRequest.getSearch();
+
+    if (!name.isEmpty()) {
+      bookPage = bookRepository.findAllByNameContaining(pageable, name);
+    } else {
+      bookPage = bookRepository.findAll(pageable);
     }
 
-    @Override
-    public void createBook(CreateBookDto createBookDto) {
-        Book book = mapper.toBook(createBookDto);
-        bookRepository.save(book);
+    List<Book> books = bookPage.getContent();
+
+    List<BookDto> bookDtoList = new ArrayList<>();
+
+    for (Book book : books) {
+      bookDtoList.add(mapper.toBookDto(book));
     }
 
-    @Override
-    public void deleteBook(Long id) {
-        Book book = bookRepository.findBookById(id);
+    return bookDtoList;
+  }
 
-        if (book == null) {
-            throw new NotFoundException("Book does not exist");
-        }
+  @Override
+  public Long getBookCount() {
+    return bookRepository.count();
+  }
 
-        for (User user : book.getReadUsers()) {
-            userService.removeReadBook(user.getUsername(), book.getId());
-        }
+  @Override
+  public void createBook(CreateBookDto createBookDto) {
+    Book book = mapper.toBook(createBookDto);
+    bookRepository.save(book);
+  }
 
-        for (User user : book.getReadUsers()) {
-            userService.removeFavoriteBook(user.getUsername(), book.getId());
-        }
+  @Override
+  public void deleteBook(Long id) {
+    Book book = bookRepository.findBookById(id);
 
-        bookRepository.deleteBookById(id);
+    if (book == null) {
+      throw new NotFoundException("Book does not exist");
     }
 
-    @Override
-    public BookDto getBook(Long id) {
-        Book book = bookRepository.findBookById(id);
+    bookRepository.deleteBookById(id);
+  }
 
-        if (book == null) {
-            throw new NotFoundException("Book does not exist");
-        }
+  @Override
+  public BookDto getBook(Long id) {
+    Book book = bookRepository.findBookById(id);
 
-        return mapper.toBookDto(book);
+    if (book == null) {
+      throw new NotFoundException("Book does not exist");
     }
 
-    @Override
-    public void updateBook(Long id, UpdateBookDto updateBookDto) {
-        Book book = bookRepository.findBookById(id);
+    return mapper.toBookDto(book);
+  }
 
-        if (book == null) {
-            throw new NotFoundException("Book does not exist");
-        }
+  @Override
+  public void updateBook(Long id, UpdateBookDto updateBookDto) {
+    Book book = bookRepository.findBookById(id);
 
-        String name = updateBookDto.getName();
-        String author = updateBookDto.getAuthor();
-
-        if (name != null && !name.isEmpty()) {
-            book.setName(updateBookDto.getName());
-        }
-
-        if (author != null && !author.isEmpty()) {
-            book.setAuthor(updateBookDto.getAuthor());
-        }
-
-        bookRepository.save(book);
+    if (book == null) {
+      throw new NotFoundException("Book does not exist");
     }
+
+    String name = updateBookDto.getName();
+    String author = updateBookDto.getAuthor();
+
+    if (name != null && !name.isEmpty()) {
+      book.setName(name);
+    }
+
+    if (author != null && !author.isEmpty()) {
+      book.setAuthor(author);
+    }
+
+    bookRepository.save(book);
+  }
 }

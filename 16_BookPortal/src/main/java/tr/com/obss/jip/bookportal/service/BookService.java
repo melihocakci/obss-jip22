@@ -9,14 +9,15 @@ import java.util.List;
 
 public interface BookService {
 
-    List<BookDto> getBookDtos(FetchRequest fetchRequest);
-    BookDto getBook(Long id);
-    Long getBookCount();
+  List<BookDto> getBookDtos(FetchRequest fetchRequest);
 
-    void createBook(CreateBookDto createBookDto);
+  BookDto getBook(Long id);
 
-    void deleteBook(Long id);
+  Long getBookCount();
 
-    void updateBook(Long id, UpdateBookDto updateBookDto);
+  void createBook(CreateBookDto createBookDto);
 
+  void deleteBook(Long id);
+
+  void updateBook(Long id, UpdateBookDto updateBookDto);
 }

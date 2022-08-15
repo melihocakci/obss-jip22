@@ -2,75 +2,75 @@ import LocalStorageService from "./LocalStorageUtil";
 import jwt from "jwt-decode";
 
 const isAuthenticated = () => {
-    const token = LocalStorageService.getToken();
+  const token = LocalStorageService.getToken();
 
-    if (!token) {
-        return false;
-    }
+  if (!token) {
+    return false;
+  }
 
-    const user = jwt(token);
+  const user = jwt(token);
 
-    if (!user || !user.id) {
-        return false;
-    }
+  if (!user || !user.id) {
+    return false;
+  }
 
-    return true;
+  return true;
 };
 
 const isAdmin = () => {
-    const token = LocalStorageService.getToken();
+  const token = LocalStorageService.getToken();
 
-    if (!token) {
-        return false;
-    }
+  if (!token) {
+    return false;
+  }
 
-    const user = jwt(token);
+  const user = jwt(token);
 
-    if (!user) {
-        return false;
-    }
+  if (!user) {
+    return false;
+  }
 
-    if (user.role != "ROLE_ADMIN") {
-        return false;
-    }
+  if (user.role != "ROLE_ADMIN") {
+    return false;
+  }
 
-    return true;
+  return true;
 };
 
 const isUser = () => {
-    const token = LocalStorageService.getToken();
+  const token = LocalStorageService.getToken();
 
-    if (!token) {
-        return false;
-    }
+  if (!token) {
+    return false;
+  }
 
-    const user = jwt(token);
+  const user = jwt(token);
 
-    if (!user) {
-        return false;
-    }
+  if (!user) {
+    return false;
+  }
 
-    if (user.role != "ROLE_USER") {
-        return false;
-    }
+  if (user.role != "ROLE_USER") {
+    return false;
+  }
 
-    return true;
+  return true;
 };
 
 const getId = () => {
-    const token = LocalStorageService.getToken();
+  const token = LocalStorageService.getToken();
 
-    if (!token) {
-        return null;
-    }
+  if (!token) {
+    return null;
+  }
 
-    const user = jwt(token);
+  const user = jwt(token);
 
-    if (!user) {
-        return null;
-    }
+  if (!user) {
+    return null;
+  }
 
-    return user.id;
+  return user.id;
 };
 
 export default { isAdmin, isUser, isAuthenticated, getId };

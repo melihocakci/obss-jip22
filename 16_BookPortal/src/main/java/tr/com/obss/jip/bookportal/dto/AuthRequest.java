@@ -10,9 +10,7 @@ import java.io.Serializable;
 @Setter
 public class AuthRequest implements Serializable {
 
-    @NotNull
-    private String username;
+  @NotNull private String username;
 
-    @NotNull
-    private String password;
+  @NotNull private String password;
 }

@@ -9,9 +9,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ResponseDto {
 
-    private Boolean success;
+  private Boolean success;
 
-    private String message;
+  private String message;
 
-    private Object body;
+  private Object body;
 }
