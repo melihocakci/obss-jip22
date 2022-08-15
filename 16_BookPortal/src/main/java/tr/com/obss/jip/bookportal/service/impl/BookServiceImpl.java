@@ -86,7 +86,7 @@ public class BookServiceImpl implements BookService {
             throw new NotFoundException("Book does not exist");
         }
 
-        bookRepository.deleteBookById(id);
+        bookRepository.deleteById(id);
     }
 
     @Override

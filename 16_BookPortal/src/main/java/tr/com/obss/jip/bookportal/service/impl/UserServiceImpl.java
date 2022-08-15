@@ -158,7 +158,7 @@ public class UserServiceImpl implements UserService {
             throw new NotFoundException("User does not exist");
         }
 
-        userRepository.deleteUserById(userId);
+        userRepository.deleteById(userId);
     }
 
     @Override
@@ -173,7 +173,7 @@ public class UserServiceImpl implements UserService {
         user.getFavoriteBooks().clear();
         userRepository.save(user);
 
-        userRepository.deleteUserById(user.getId());
+        userRepository.deleteById(user.getId());
     }
 
     @Override

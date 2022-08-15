@@ -2,6 +2,8 @@ package tr.com.obss.jip.bookportal.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,6 +13,8 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "users")
+@SQLDelete(sql = "UPDATE users SET deleted = true WHERE id = ?")
+@Where(clause = "deleted=false")
 public class User {
 
     @Id
@@ -41,4 +45,6 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
     private List<Book> favoriteBooks = new ArrayList<>();
+
+    private Boolean deleted = Boolean.FALSE;
 }
