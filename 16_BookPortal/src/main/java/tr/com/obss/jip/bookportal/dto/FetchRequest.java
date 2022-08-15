@@ -16,5 +16,5 @@ public class FetchRequest {
 
     private String sortOrder;
 
-    private String search;
+    private String searchParam;
 }

@@ -9,7 +9,5 @@ import tr.com.obss.jip.bookportal.model.Book;
 @Repository
 public interface BookRepository extends PagingAndSortingRepository<Book, Long> {
 
-    Book findBookById(Long id);
-
     Page<Book> findAllByNameContaining(Pageable pageable, String name);
 }

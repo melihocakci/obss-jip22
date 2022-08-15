@@ -7,12 +7,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import tr.com.obss.jip.bookportal.exception.NotFoundException;
 import tr.com.obss.jip.bookportal.model.User;
 import tr.com.obss.jip.bookportal.service.UserService;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 @RequiredArgsConstructor
@@ -48,8 +50,15 @@ public class JwtTokenUtil {
     }
 
     public String generateToken(UserDetails userDetails) {
+        Optional<User> optionalUser = userService.getUser(userDetails.getUsername());
+
+        if (optionalUser.isEmpty()) {
+            throw new NotFoundException("User does not exist");
+        }
+
+        User user = optionalUser.get();
+
         Map<String, Object> claims = new HashMap<>();
-        User user = userService.getUser(userDetails.getUsername());
         claims.put("id", user.getId());
         claims.put("role", user.getRole().getName().toString());
         return doGenerateToken(claims, userDetails.getUsername());

@@ -25,6 +25,7 @@ import tr.com.obss.jip.bookportal.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -55,7 +56,7 @@ public class UserServiceImpl implements UserService {
         }
 
         Page<User> userPage;
-        String username = fetchRequest.getSearch();
+        String username = fetchRequest.getSearchParam();
 
         if (!username.isEmpty()) {
             userPage = userRepository.findAllByUsernameContaining(pageable, username);
@@ -75,8 +76,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(String username) {
-        return userRepository.findUserByUsername(username);
+    public Optional<User> getUser(String username) {
+        return userRepository.findByUsername(username);
     }
 
     @Override
@@ -86,33 +87,35 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserDto(Long userId) {
-        User user = userRepository.findUserById(userId);
+        Optional<User> optionalUser = userRepository.findById(userId);
 
-        if (user == null) {
+        if (optionalUser.isEmpty()) {
             throw new NotFoundException("User does not exist");
         }
 
-        return mapper.toUserDto(user);
+        return mapper.toUserDto(optionalUser.get());
     }
 
     @Override
     public UserDto getUserDto(String username) {
-        User user = userRepository.findUserByUsername(username);
+        Optional<User> optionalUser = userRepository.findByUsername(username);
 
-        if (user == null) {
+        if (optionalUser.isEmpty()) {
             throw new NotFoundException("User does not exist");
         }
 
-        return mapper.toUserDto(user);
+        return mapper.toUserDto(optionalUser.get());
     }
 
     @Override
     public void updateUser(String username, UpdateUserDto updateUserDto) {
-        User user = userRepository.findUserByUsername(username);
+        Optional<User> optionalUser = userRepository.findByUsername(username);
 
-        if (user == null) {
+        if (optionalUser.isEmpty()) {
             throw new NotFoundException("User does not exist");
         }
+
+        User user = optionalUser.get();
 
         String newUsername = updateUserDto.getUsername();
         String newPassword = updateUserDto.getPassword();
@@ -130,11 +133,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(Long userId, UpdateUserDto updateUserDto) {
-        User user = userRepository.findUserById(userId);
+        Optional<User> optionalUser = userRepository.findById(userId);
 
-        if (user == null) {
+        if (optionalUser.isEmpty()) {
             throw new NotFoundException("User does not exist");
         }
+
+        User user = optionalUser.get();
 
         String newUsername = updateUserDto.getUsername();
         String newPassword = updateUserDto.getPassword();
@@ -152,9 +157,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long userId) {
-        User user = userRepository.findUserById(userId);
+        Optional<User> optionalUser = userRepository.findById(userId);
 
-        if (user == null) {
+        if (optionalUser.isEmpty()) {
             throw new NotFoundException("User does not exist");
         }
 
@@ -163,22 +168,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(String username) {
-        User user = userRepository.findUserByUsername(username);
+        Optional<User> optionalUser = userRepository.findByUsername(username);
 
-        if (user == null) {
+        if (optionalUser.isEmpty()) {
             throw new NotFoundException("User does not exist");
         }
 
-        user.getReadBooks().clear();
-        user.getFavoriteBooks().clear();
-        userRepository.save(user);
-
-        userRepository.deleteById(user.getId());
+        userRepository.deleteById(optionalUser.get().getId());
     }
 
     @Override
     public void removeFavoriteBook(String username, Long bookId) {
-        User user = userRepository.findUserByUsername(username);
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+
+        if (optionalUser.isEmpty()) {
+            throw new NotFoundException("User does not exist");
+        }
+
+        User user = optionalUser.get();
 
         List<Book> favoriteBooks = user.getFavoriteBooks();
         for (int i = 0; i < favoriteBooks.size(); i++) {
@@ -194,7 +201,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void removeReadBook(String username, Long bookId) {
-        User user = userRepository.findUserByUsername(username);
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+
+        if (optionalUser.isEmpty()) {
+            throw new NotFoundException("User does not exist");
+        }
+
+        User user = optionalUser.get();
 
         List<Book> readBooks = user.getReadBooks();
         for (int i = 0; i < readBooks.size(); i++) {
@@ -210,12 +223,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(CreateUserDto createUserDto, RoleType roleType) {
-        if (userRepository.findUserByUsername(createUserDto.getUsername()) != null) {
+        if (userRepository.findByUsername(createUserDto.getUsername()).isPresent()) {
             throw new ConflictException("Username is already in use");
         }
 
         User user = mapper.toUser(createUserDto);
-        user.setRole(roleService.findByName(roleType));
+        user.setRole(roleService.getRole(roleType));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
@@ -223,7 +236,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addFavoriteBook(String username, Long bookId) {
-        User user = userRepository.findUserByUsername(username);
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+
+        if (optionalUser.isEmpty()) {
+            throw new NotFoundException("User does not exist");
+        }
+
+        User user = optionalUser.get();
 
         for (Book book : user.getFavoriteBooks()) {
             if (book.getId().equals(bookId)) {
@@ -231,16 +250,26 @@ public class UserServiceImpl implements UserService {
             }
         }
 
-        Book book = bookRepository.findBookById(bookId);
+        Optional<Book> optionalBook = bookRepository.findById(bookId);
 
-        user.getFavoriteBooks().add(book);
+        if (optionalBook.isEmpty()) {
+            throw new NotFoundException("Book does not exist");
+        }
+
+        user.getFavoriteBooks().add(optionalBook.get());
 
         userRepository.save(user);
     }
 
     @Override
     public void addReadBook(String username, Long bookId) {
-        User user = userRepository.findUserByUsername(username);
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+
+        if (optionalUser.isEmpty()) {
+            throw new NotFoundException("User does not exist");
+        }
+
+        User user = optionalUser.get();
 
         for (Book book : user.getReadBooks()) {
             if (book.getId().equals(bookId)) {
@@ -248,9 +277,13 @@ public class UserServiceImpl implements UserService {
             }
         }
 
-        Book book = bookRepository.findBookById(bookId);
+        Optional<Book> optionalBook = bookRepository.findById(bookId);
 
-        user.getReadBooks().add(book);
+        if (optionalBook.isEmpty()) {
+            throw new NotFoundException("Book does not exist");
+        }
+
+        user.getReadBooks().add(optionalBook.get());
 
         userRepository.save(user);
     }

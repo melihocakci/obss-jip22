@@ -6,12 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import tr.com.obss.jip.bookportal.model.User;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findUserByUsername(String username);
-
-    User findUserById(Long id);
+    Optional<User> findByUsername(String username);
 
     Page<User> findAllByUsernameContaining(Pageable pageable, String username);
 }

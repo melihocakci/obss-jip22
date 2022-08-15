@@ -8,12 +8,13 @@ import tr.com.obss.jip.bookportal.model.User;
 import tr.com.obss.jip.bookportal.other.RoleType;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
 
     List<UserDto> getUserDtos(FetchRequest fetchRequest);
 
-    User getUser(String username);
+    Optional<User> getUser(String username);
 
     UserDto getUserDto(String username);
 

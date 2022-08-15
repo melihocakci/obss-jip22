@@ -13,6 +13,7 @@ import tr.com.obss.jip.bookportal.service.UserService;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Configuration
@@ -25,7 +26,7 @@ public class AppInitConfig {
     public CommandLineRunner loadData() {
         return args -> {
             final List<RoleType> allRoles =
-                    roleService.getAllRoles().stream().map(Role::getName).toList();
+                    roleService.getRoles().stream().map(Role::getName).toList();
 
             Arrays.stream(RoleType.values())
                     .filter(roleType -> !allRoles.contains(roleType))
@@ -33,12 +34,12 @@ public class AppInitConfig {
                             roleType -> {
                                 Role role = new Role();
                                 role.setName(roleType);
-                                roleService.createNewRole(role);
+                                roleService.createRole(role);
                             });
 
-            User adminUser = userService.getUser("admin");
+            Optional<User> adminUser = userService.getUser("admin");
 
-            if (adminUser != null) {
+            if (adminUser.isPresent()) {
                 return;
             }
 

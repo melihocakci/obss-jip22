@@ -16,17 +16,16 @@ import tr.com.obss.jip.bookportal.mapper.MyMapperImpl;
 import tr.com.obss.jip.bookportal.model.Book;
 import tr.com.obss.jip.bookportal.repository.BookRepository;
 import tr.com.obss.jip.bookportal.service.BookService;
-import tr.com.obss.jip.bookportal.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
-    private final UserService userService;
     private final MyMapper mapper = new MyMapperImpl();
 
     @Override
@@ -48,7 +47,7 @@ public class BookServiceImpl implements BookService {
         }
 
         Page<Book> bookPage;
-        String name = fetchRequest.getSearch();
+        String name = fetchRequest.getSearchParam();
 
         if (!name.isEmpty()) {
             bookPage = bookRepository.findAllByNameContaining(pageable, name);
@@ -79,34 +78,36 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void deleteBook(Long id) {
-        Book book = bookRepository.findBookById(id);
+    public void deleteBook(Long bookId) {
+        Optional<Book> optionalBook = bookRepository.findById(bookId);
 
-        if (book == null) {
+        if (optionalBook.isEmpty()) {
             throw new NotFoundException("Book does not exist");
         }
 
-        bookRepository.deleteById(id);
+        bookRepository.deleteById(bookId);
     }
 
     @Override
-    public BookDto getBook(Long id) {
-        Book book = bookRepository.findBookById(id);
+    public BookDto getBook(Long bookId) {
+        Optional<Book> optionalBook = bookRepository.findById(bookId);
 
-        if (book == null) {
+        if (optionalBook.isEmpty()) {
             throw new NotFoundException("Book does not exist");
         }
 
-        return mapper.toBookDto(book);
+        return mapper.toBookDto(optionalBook.get());
     }
 
     @Override
-    public void updateBook(Long id, UpdateBookDto updateBookDto) {
-        Book book = bookRepository.findBookById(id);
+    public void updateBook(Long bookId, UpdateBookDto updateBookDto) {
+        Optional<Book> optionalBook = bookRepository.findById(bookId);
 
-        if (book == null) {
+        if (optionalBook.isEmpty()) {
             throw new NotFoundException("Book does not exist");
         }
+
+        Book book = optionalBook.get();
 
         String name = updateBookDto.getName();
         String author = updateBookDto.getAuthor();
