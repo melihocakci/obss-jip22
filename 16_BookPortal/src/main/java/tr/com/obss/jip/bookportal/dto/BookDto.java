@@ -10,9 +10,9 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 public class BookDto {
-  @NotNull private Long id;
+    @NotNull private Long id;
 
-  @NotNull private String name;
+    @NotNull private String name;
 
-  @NotNull private String author;
+    @NotNull private String author;
 }

@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface RoleService {
 
-  void createNewRole(Role role);
+    void createNewRole(Role role);
 
-  List<Role> getAllRoles();
+    List<Role> getAllRoles();
 
-  Role findByName(RoleType name);
+    Role findByName(RoleType name);
 }

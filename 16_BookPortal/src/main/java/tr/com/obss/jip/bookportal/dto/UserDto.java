@@ -11,11 +11,11 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 public class UserDto {
-  @NotNull private long id;
+    @NotNull private long id;
 
-  @NotNull private String username;
+    @NotNull private String username;
 
-  private List<BookDto> readBooks;
+    private List<BookDto> readBooks;
 
-  private List<BookDto> favoriteBooks;
+    private List<BookDto> favoriteBooks;
 }

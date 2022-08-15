@@ -8,13 +8,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FetchRequest {
-  private Integer size;
+    private Integer size;
 
-  private Integer page;
+    private Integer page;
 
-  private String sortField;
+    private String sortField;
 
-  private String sortOrder;
+    private String sortOrder;
 
-  private String search;
+    private String search;
 }

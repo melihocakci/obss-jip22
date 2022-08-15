@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 public class CreateBookDto {
-  @NotNull private String name;
+    @NotNull private String name;
 
-  @NotNull private String author;
+    @NotNull private String author;
 }
