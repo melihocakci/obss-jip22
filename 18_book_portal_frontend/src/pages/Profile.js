@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
-import "antd/dist/antd.css";
+import React, { useContext, useEffect, useState } from "react";
 import UserService from "../service/UserService";
-import AuthService from "../service/AuthService";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import UserActions from "../components/UserActions";
-import ThisUser from "../util/ThisUser";
+import UserProfileActions from "../components/ProfileActions/UserProfileActions";
+import AdminProfileActions from "../components/ProfileActions/AdminProfileActions";
 import { Typography, List, Spin, Divider, Card } from "antd";
+import UserContext from "../context/UserContext";
 const { Title } = Typography;
 
-const Profile = (props) => {
+const Profile = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState();
-  const [loading, setLoading] = useState(true);
+  const [userDetails, setUserDetails] = useState();
+  const { user } = useContext(UserContext);
 
   const { id } = useParams();
 
@@ -21,56 +20,35 @@ const Profile = (props) => {
   }, []);
 
   const fetch = async () => {
-    setLoading(true);
     const user = await UserService.fetchUser(id);
-    setUser(user);
-    setLoading(false);
+    setUserDetails(user);
   };
 
-  const readBooks = () => {
-    if (user.readBooks.length == 0) {
-      return "None";
+  const profileActions = () => {
+    if (!user) {
+      return;
     }
 
-    return user.readBooks.map((book) => {
-      return (
-        <li key={book.id}>
-          <Link to={"/books/" + book.id}>
-            {book.name}, {book.author}
-          </Link>
-        </li>
-      );
-    });
-  };
-
-  const favoriteBooks = () => {
-    if (user.favoriteBooks.length == 0) {
-      return "None";
+    if (user.id === userDetails.id) {
+      return <UserProfileActions />;
     }
 
-    return user.favoriteBooks.map((book) => {
-      return (
-        <li key={book.id}>
-          <Link to={"/books/" + book.id}>
-            {book.name}, {book.author}
-          </Link>
-        </li>
-      );
-    });
+    if (user.role === "admin") {
+      return <AdminProfileActions />;
+    }
   };
 
-  if (loading) {
+  if (!userDetails) {
     return <Spin />;
   }
 
   return (
     <div>
       <div style={{ display: "inline-block" }}>
-        <Title>{user.username}</Title>
+        <Title>{userDetails.username}</Title>
       </div>
-      <div style={{ float: "right", display: "inline-block" }}>
-        <UserActions userId={id} />
-      </div>
+
+      {profileActions()}
 
       <Divider orientation="left">
         <Title level={5}>Read Books</Title>
@@ -86,7 +64,7 @@ const Profile = (props) => {
           xl: 6,
           xxl: 3,
         }}
-        dataSource={user.readBooks}
+        dataSource={userDetails.readBooks}
         renderItem={(book) => (
           <List.Item>
             <Card
@@ -114,7 +92,7 @@ const Profile = (props) => {
           xl: 6,
           xxl: 3,
         }}
-        dataSource={user.favoriteBooks}
+        dataSource={userDetails.favoriteBooks}
         renderItem={(book) => (
           <List.Item>
             <Card

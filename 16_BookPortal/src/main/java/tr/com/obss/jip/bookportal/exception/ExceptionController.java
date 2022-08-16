@@ -18,11 +18,12 @@ public class ExceptionController {
     private Map<String, String> responseBody(Exception ex, HttpServletRequest request) {
         Map<String, String> responseBody = new LinkedHashMap<>();
 
-        responseBody.put(
-                "timestamp", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+        responseBody.put("success", "false");
         responseBody.put("error", ex.getClass().getSimpleName());
         responseBody.put("message", ex.getMessage());
         responseBody.put("path", request.getRequestURI());
+        responseBody.put(
+                "timestamp", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
 
         return responseBody;
     }

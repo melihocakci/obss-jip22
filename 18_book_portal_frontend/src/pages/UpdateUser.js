@@ -1,41 +1,41 @@
 import { Form, Input, Button, Spin } from "antd";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import UserService from "../service/UserService";
 import AuthService from "../service/AuthService";
 import ThisUser from "../util/ThisUser";
+import UserContext from "../context/UserContext";
 
-const UpdateUser = () => {
+export default () => {
   const navigate = useNavigate();
-  const { id } = useParams();
-  const [loading, setLoading] = useState(true);
-  const [currentCredentials, setCurrentCredentials] = useState({});
+  const { id: userId } = useParams();
+  const [currentCredentials, setCurrentCredentials] = useState();
   const [credentials, setCredentials] = useState({});
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     fetch();
   }, []);
 
   const fetch = async () => {
-    setLoading(true);
-    const user = await UserService.fetchUser(id);
+    const user = await UserService.fetchUser(userId);
     setCurrentCredentials(user);
-    setLoading(false);
   };
 
   const onFinish = async (values) => {
     console.log("Success:", values);
-    if (ThisUser.getId() == id) {
+    if (ThisUser.getId() == userId) {
       const response = await UserService.updateUser("", credentials);
       if (response) {
         AuthService.signout();
+        setUser(undefined);
         navigate("/login");
         alert("Account updated");
       }
     } else {
-      const response = await UserService.updateUser(id, credentials);
+      const response = await UserService.updateUser(userId, credentials);
       if (response) {
-        navigate("/users/" + id);
+        navigate("/users/" + userId);
         alert("User updated");
       }
     }
@@ -54,7 +54,7 @@ const UpdateUser = () => {
     });
   };
 
-  if (loading) {
+  if (!currentCredentials) {
     return <Spin />;
   }
 
@@ -117,5 +117,3 @@ const UpdateUser = () => {
     </div>
   );
 };
-
-export default UpdateUser;

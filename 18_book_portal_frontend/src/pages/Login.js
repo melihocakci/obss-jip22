@@ -1,24 +1,25 @@
 import { Form, Input, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import AuthService from "../service/AuthService";
 import { Typography } from "antd";
+import UserContext from "../context/UserContext";
+import ThisUser from "../util/ThisUser";
 const { Title } = Typography;
 
 const Login = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({});
+  const { setUser } = useContext(UserContext);
 
   const onFinish = async (values) => {
     console.log("Success:", values);
 
     const response = await AuthService.signin(credentials);
     if (response) {
+      setUser(ThisUser.get());
       navigate("/");
-      window.location.reload();
     }
-
-    //UserService.delete();
   };
 
   const onFinishFailed = (errorInfo) => {

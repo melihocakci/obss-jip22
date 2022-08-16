@@ -1,5 +1,4 @@
 import React from "react";
-import "antd/dist/antd.css";
 import { Table, Form, Button, Input } from "antd";
 import BookService from "../service/BookService";
 import { Link } from "react-router-dom";
@@ -73,7 +72,7 @@ class BookList extends React.Component {
       data: data,
       pagination: {
         ...this.state.pagination,
-        total: bookCount, // Mock data
+        total: bookCount,
       },
     });
   };

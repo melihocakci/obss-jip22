@@ -60,7 +60,7 @@ public class JwtTokenUtil {
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", user.getId());
-        claims.put("role", user.getRole().getName().toString());
+        claims.put("role", user.getRole().getName().toString().split("_")[1].toLowerCase());
         return doGenerateToken(claims, userDetails.getUsername());
     }
 

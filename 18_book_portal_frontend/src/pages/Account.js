@@ -1,5 +1,4 @@
 import React from "react";
-import "antd/dist/antd.css";
 import UserService from "../service/UserService";
 
 class Account extends React.Component {

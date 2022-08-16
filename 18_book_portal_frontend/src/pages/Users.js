@@ -1,5 +1,4 @@
 import React from "react";
-import "antd/dist/antd.css";
 import { Table, Form, Input, Button } from "antd";
 import UserService from "../service/UserService";
 import { Link } from "react-router-dom";

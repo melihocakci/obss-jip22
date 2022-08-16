@@ -30,11 +30,7 @@ const isAdmin = () => {
     return false;
   }
 
-  if (user.role != "ROLE_ADMIN") {
-    return false;
-  }
-
-  return true;
+  return user.role === "admin";
 };
 
 const isUser = () => {
@@ -50,11 +46,7 @@ const isUser = () => {
     return false;
   }
 
-  if (user.role != "ROLE_USER") {
-    return false;
-  }
-
-  return true;
+  return user.role === "user";
 };
 
 const getId = () => {
@@ -73,4 +65,12 @@ const getId = () => {
   return user.id;
 };
 
-export default { isAdmin, isUser, isAuthenticated, getId };
+const get = () => {
+  const token = LocalStorageService.getToken();
+
+  if (token) {
+    return jwt(token);
+  }
+};
+
+export default { isAdmin, isUser, isAuthenticated, getId, get };

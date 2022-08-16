@@ -1,21 +1,40 @@
-import React, { useEffect, useState } from "react";
-import "antd/dist/antd.css";
+import React, { useContext, useEffect, useState } from "react";
 import BookService from "../service/BookService";
-import BookActions from "../components/BookActions";
+import AdminBookActions from "../components/BookActions/AdminBookActions";
+import UserBookActions from "../components/BookActions/UserBookActions";
 import { useParams } from "react-router-dom";
 import { Typography, Spin, Divider } from "antd";
+import UserContext from "../context/UserContext";
 const { Title } = Typography;
 
-const Book = (props) => {
+export default () => {
   const [book, setBook] = useState();
+  const { user, setUser } = useContext(UserContext);
 
-  const { id } = useParams();
+  const { id: bookId } = useParams();
 
   useEffect(() => {
-    BookService.fetchBook(id).then((book) => {
-      setBook(book);
-    });
+    fetch();
   }, []);
+
+  const fetch = async () => {
+    const book = await BookService.fetchBook(bookId);
+    setBook(book);
+  };
+
+  const bookActions = () => {
+    if (!user) {
+      return;
+    }
+
+    if (user.role === "user") {
+      return <UserBookActions />;
+    }
+
+    if (user.role === "admin") {
+      return <AdminBookActions />;
+    }
+  };
 
   if (!book) {
     return <Spin />;
@@ -27,9 +46,8 @@ const Book = (props) => {
         <Title>{book.name}</Title>
         <Title level={3}>by {book.author}</Title>
       </div>
-      <div style={{ float: "right", display: "inline-block" }}>
-        <BookActions bookId={id} />
-      </div>
+
+      {bookActions()}
 
       <Divider orientation="left" style={{ marginTop: 30 }}>
         <Title level={5}>Sypnosis</Title>
@@ -45,5 +63,3 @@ const Book = (props) => {
     </div>
   );
 };
-
-export default Book;

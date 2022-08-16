@@ -11,7 +11,7 @@ public interface BookService {
 
     List<BookDto> getBookDtos(FetchRequest fetchRequest);
 
-    BookDto getBook(Long id);
+    BookDto getBookDto(Long id);
 
     Long getBookCount();
 

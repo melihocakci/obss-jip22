@@ -1,4 +1,6 @@
 import { Typography } from "antd";
+import { useContext } from "react";
+import UserContext from "../context/UserContext";
 const { Title } = Typography;
 
 const Home = () => {

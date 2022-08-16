@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/api/user/read/**", "/api/user/favorite/**")
                 .authenticated()
-                .antMatchers(HttpMethod.POST, "/api/user", "api/user/")
+                .antMatchers(HttpMethod.POST, "/api/user*")
                 .permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/user/{\\d+}/**")
                 .hasRole("ADMIN")

@@ -1,6 +1,7 @@
 package tr.com.obss.jip.bookportal.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import tr.com.obss.jip.bookportal.dto.*;
@@ -16,6 +17,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto getUsers(
             @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(defaultValue = "1") Integer page,
@@ -28,16 +30,19 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto getUser(@PathVariable(name = "id") Long id) {
         return new ResponseDto(true, null, userService.getUserDto(id));
     }
 
     @GetMapping("/count")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto getUserCount() {
         return new ResponseDto(true, null, userService.getUserCount());
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseDto createUser(@RequestBody @Valid CreateUserDto createUserDto) {
         userService.createUser(createUserDto, RoleType.ROLE_USER);
 
@@ -45,6 +50,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto deleteUser(@PathVariable(name = "id") Long id) {
         userService.deleteUser(id);
 
@@ -52,6 +58,7 @@ public class UserController {
     }
 
     @DeleteMapping
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto deleteThisUser() {
         final String username = SecurityContextHolder.getContext().getAuthentication().getName();
         userService.deleteUser(username);
@@ -60,6 +67,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto updateUser(
             @PathVariable(name = "id") Long id, @RequestBody @Valid UpdateUserDto updateUserDto) {
         userService.updateUser(id, updateUserDto);
@@ -68,6 +76,7 @@ public class UserController {
     }
 
     @PutMapping
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto updateThisUser(@RequestBody @Valid UpdateUserDto updateUserDto) {
         final String username = SecurityContextHolder.getContext().getAuthentication().getName();
         userService.updateUser(username, updateUserDto);
@@ -76,6 +85,7 @@ public class UserController {
     }
 
     @PostMapping("/favorite/{bookId}")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseDto addFavoriteBook(@PathVariable Long bookId) {
         final String username = SecurityContextHolder.getContext().getAuthentication().getName();
         userService.addFavoriteBook(username, bookId);
@@ -84,6 +94,7 @@ public class UserController {
     }
 
     @PostMapping("/read/{bookId}")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseDto addReadBook(@PathVariable Long bookId) {
         final String username = SecurityContextHolder.getContext().getAuthentication().getName();
         userService.addReadBook(username, bookId);
@@ -92,6 +103,7 @@ public class UserController {
     }
 
     @DeleteMapping("/favorite/{bookId}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto removeFavoriteBook(@PathVariable Long bookId) {
         final String username = SecurityContextHolder.getContext().getAuthentication().getName();
         userService.removeFavoriteBook(username, bookId);
@@ -100,6 +112,7 @@ public class UserController {
     }
 
     @DeleteMapping("/read/{bookId}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto removeReadBook(@PathVariable Long bookId) {
         final String username = SecurityContextHolder.getContext().getAuthentication().getName();
         userService.removeReadBook(username, bookId);
@@ -108,6 +121,7 @@ public class UserController {
     }
 
     @GetMapping("/profile")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto getProfile() {
         final String username = SecurityContextHolder.getContext().getAuthentication().getName();
         UserDto userDto = userService.getUserDto(username);

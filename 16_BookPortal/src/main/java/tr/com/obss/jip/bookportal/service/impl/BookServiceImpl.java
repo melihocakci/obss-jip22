@@ -89,7 +89,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDto getBook(Long bookId) {
+    public BookDto getBookDto(Long bookId) {
         Optional<Book> optionalBook = bookRepository.findById(bookId);
 
         if (optionalBook.isEmpty()) {

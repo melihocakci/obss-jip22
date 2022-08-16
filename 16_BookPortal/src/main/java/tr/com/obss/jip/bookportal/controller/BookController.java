@@ -1,7 +1,7 @@
 package tr.com.obss.jip.bookportal.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import tr.com.obss.jip.bookportal.dto.CreateBookDto;
 import tr.com.obss.jip.bookportal.dto.FetchRequest;
@@ -19,7 +19,8 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    public ResponseEntity<?> getBooks(
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseDto getBooks(
             @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "") String sortField,
@@ -27,26 +28,30 @@ public class BookController {
             @RequestParam(defaultValue = "") String name) {
 
         FetchRequest fetchRequest = new FetchRequest(size, page, sortField, sortOrder, name);
-        return ResponseEntity.ok(bookService.getBookDtos(fetchRequest));
+        return new ResponseDto(true, null, bookService.getBookDtos(fetchRequest));
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto getBook(@PathVariable(name = "id") Long id) {
-        return new ResponseDto(true, null, bookService.getBook(id));
+        return new ResponseDto(true, null, bookService.getBookDto(id));
     }
 
     @GetMapping("/count")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto getBookCount() {
         return new ResponseDto(true, null, bookService.getBookCount());
     }
 
-    @PostMapping("/")
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseDto createBook(@RequestBody @Valid CreateBookDto createBookDto) {
         bookService.createBook(createBookDto);
         return new ResponseDto(true, "Book created successfully", null);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto deleteBook(@PathVariable(name = "id") Long id) {
         bookService.deleteBook(id);
 
@@ -54,6 +59,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseDto updateBook(
             @PathVariable(name = "id") Long id, @RequestBody @Valid UpdateBookDto updateBookDto) {
         bookService.updateBook(id, updateBookDto);
