@@ -1,6 +1,7 @@
 package tr.com.obss.jip.bookportal.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tr.com.obss.jip.bookportal.dto.CreateBookDto;
 import tr.com.obss.jip.bookportal.dto.FetchRequest;
@@ -18,7 +19,7 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    public ResponseDto getBooks(
+    public ResponseEntity<?> getBooks(
             @RequestParam(defaultValue = "10") Integer size,
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "") String sortField,
@@ -26,7 +27,7 @@ public class BookController {
             @RequestParam(defaultValue = "") String name) {
 
         FetchRequest fetchRequest = new FetchRequest(size, page, sortField, sortOrder, name);
-        return new ResponseDto(true, null, bookService.getBookDtos(fetchRequest));
+        return ResponseEntity.ok(bookService.getBookDtos(fetchRequest));
     }
 
     @GetMapping("/{id}")

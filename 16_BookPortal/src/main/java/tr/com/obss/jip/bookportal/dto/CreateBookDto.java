@@ -5,12 +5,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
 @AllArgsConstructor
 public class CreateBookDto {
-    @NotNull private String name;
+    @Size(min = 1)
+    @NotNull
+    private String name;
 
-    @NotNull private String author;
+    @Size(min = 1)
+    @NotNull
+    private String author;
 }

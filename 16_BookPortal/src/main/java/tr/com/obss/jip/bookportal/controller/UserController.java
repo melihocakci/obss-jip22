@@ -3,7 +3,6 @@ package tr.com.obss.jip.bookportal.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import tr.com.obss.jip.bookportal.component.JwtTokenUtil;
 import tr.com.obss.jip.bookportal.dto.*;
 import tr.com.obss.jip.bookportal.other.RoleType;
 import tr.com.obss.jip.bookportal.service.UserService;
@@ -15,7 +14,6 @@ import javax.validation.Valid;
 @RequestMapping("/api/user")
 public class UserController {
     private final UserService userService;
-    private JwtTokenUtil jwtTokenUtil;
 
     @GetMapping
     public ResponseDto getUsers(
