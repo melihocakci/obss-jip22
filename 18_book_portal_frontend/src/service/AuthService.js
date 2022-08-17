@@ -3,17 +3,16 @@ import LocalStorageUtil from "../util/LocalStorageUtil";
 
 const _signin = async (credentials) => {
   let response;
+
   try {
     response = await axios.post("http://localhost:8080/api/auth", credentials);
-    if (response && response.data) {
-      const token = response.data.token;
-      LocalStorageUtil.setToken(token);
-    }
+    LocalStorageUtil.setToken(response.data.body);
   } catch (error) {
     console.log(error);
+    response = error.response;
   }
 
-  return response;
+  return response.data;
 };
 
 const _signout = async () => {

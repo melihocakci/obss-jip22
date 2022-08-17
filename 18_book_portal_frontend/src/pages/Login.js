@@ -2,7 +2,7 @@ import { Form, Input, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import AuthService from "../service/AuthService";
-import { Typography } from "antd";
+import { Typography, Alert } from "antd";
 import UserContext from "../context/UserContext";
 import ThisUser from "../util/ThisUser";
 const { Title } = Typography;
@@ -11,14 +11,16 @@ const Login = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({});
   const { setUser } = useContext(UserContext);
+  const [errorMessage, setErrorMessage] = useState();
 
-  const onFinish = async (values) => {
-    console.log("Success:", values);
-
+  const onFinish = async () => {
     const response = await AuthService.signin(credentials);
-    if (response) {
+
+    if (response.success) {
       setUser(ThisUser.get());
       navigate("/");
+    } else {
+      setErrorMessage(response.message);
     }
   };
 
@@ -31,6 +33,12 @@ const Login = () => {
       ...credentials,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const getAlert = () => {
+    if (errorMessage) {
+      return <Alert message={errorMessage} type="error" style={{ marginBottom: "10px" }} />;
+    }
   };
 
   return (
@@ -50,6 +58,8 @@ const Login = () => {
         onFinishFailed={onFinishFailed}
         style={{ margin: "0 auto", width: 400 }}>
         <Title level={3}>Log in</Title>
+
+        {getAlert()}
 
         <Form.Item
           label="Username"
@@ -84,6 +94,7 @@ const Login = () => {
             Submit
           </Button>
         </Form.Item>
+
         <Link to="/register">Register</Link>
       </Form>
     </div>

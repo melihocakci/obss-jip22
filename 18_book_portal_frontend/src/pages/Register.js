@@ -2,22 +2,22 @@ import { Form, Input, Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import UserService from "../service/UserService";
-import { Typography } from "antd";
+import { Typography, Alert } from "antd";
 const { Title } = Typography;
 
 const Register = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({});
+  const [errorMessage, setErrorMessage] = useState();
 
-  const onFinish = async (values) => {
-    console.log("Success:", values);
-
+  const onFinish = async () => {
     const response = await UserService.createUser(credentials);
-    if (response) {
-      navigate("/login");
-    }
 
-    //UserService.delete();
+    if (response.success) {
+      navigate("/login");
+    } else {
+      setErrorMessage(response.message);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -29,6 +29,12 @@ const Register = () => {
       ...credentials,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const getAlert = () => {
+    if (errorMessage) {
+      return <Alert message={errorMessage} type="error" style={{ marginBottom: "10px" }} />;
+    }
   };
 
   return (
@@ -48,6 +54,8 @@ const Register = () => {
         onFinishFailed={onFinishFailed}
         style={{ margin: "0 auto", width: 400 }}>
         <Title level={3}>Register</Title>
+
+        {getAlert()}
 
         <Form.Item
           label="Username"
