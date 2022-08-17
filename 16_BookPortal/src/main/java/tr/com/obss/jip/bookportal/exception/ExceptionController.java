@@ -22,6 +22,7 @@ public class ExceptionController {
         responseBody.put("error", ex.getClass().getSimpleName());
         responseBody.put("message", ex.getMessage());
         responseBody.put("path", request.getRequestURI());
+        responseBody.put("method", request.getMethod());
         responseBody.put(
                 "timestamp", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
 

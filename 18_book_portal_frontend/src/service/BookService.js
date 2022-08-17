@@ -1,92 +1,83 @@
 import axios from "axios";
 import LocalStorageService from "../util/LocalStorageUtil";
 
-const BookService = (function () {
-  const _fetchBooks = async (params) => {
-    const response = await axios.get("http://localhost:8080/api/book", { params });
+const _fetchBooks = async (params) => {
+  let response;
+  try {
+    response = await axios.get("http://localhost:8080/api/book", { params });
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
 
-    if (!response) {
-      console.log("An error occured");
-      //ToDo: Display error message to user not just log it
-      //Ex: https://www.npmjs.com/package/react-toastify
-      return;
-    }
+  return response.data;
+};
 
-    return response.data.body;
-  };
+const _fetchBookCount = async () => {
+  let response;
+  try {
+    response = await axios.get("http://localhost:8080/api/book/count");
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
 
-  const _fetchBookCount = async () => {
-    let response;
-    try {
-      response = await axios.get("http://localhost:8080/api/book/count");
-    } catch (error) {
-      console.log(error);
-      return;
-    }
+  return response.data;
+};
 
-    return response.data.body;
-  };
+const _fetchBook = async (id) => {
+  let response;
+  try {
+    response = await axios.get("http://localhost:8080/api/book/" + id);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
 
-  const _fetchBook = async (id) => {
-    const response = await axios.get("http://localhost:8080/api/book/" + id);
+  return response.data;
+};
 
-    if (!response) {
-      console.log("An error occured");
-      //ToDo: Display error message to user not just log it
-      //Ex: https://www.npmjs.com/package/react-toastify
-      return;
-    }
+const _createBook = async (credentials) => {
+  let response;
+  try {
+    response = await axios.post("http://localhost:8080/api/book/", credentials);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
 
-    return response.data.body;
-  };
+  return response.data;
+};
 
-  const _createBook = async (credentials) => {
-    const response = await axios.post("http://localhost:8080/api/book/", credentials);
+const _updateBook = async (bookId, credentials) => {
+  let response;
+  try {
+    response = await axios.put("http://localhost:8080/api/book/" + bookId, credentials);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
 
-    if (!response) {
-      console.log("An error occured");
-      //ToDo: Display error message to user not just log it
-      //Ex: https://www.npmjs.com/package/react-toastify
-      return;
-    }
+  return response.data;
+};
 
-    return response;
-  };
+const _removeBook = async (bookId) => {
+  let response;
+  try {
+    response = await axios.delete("http://localhost:8080/api/book/" + bookId);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
 
-  const _updateBook = async (bookId, credentials) => {
-    const response = await axios.put("http://localhost:8080/api/book/" + bookId, credentials);
+  return response.data;
+};
 
-    if (!response) {
-      console.log("An error occured");
-      //ToDo: Display error message to user not just log it
-      //Ex: https://www.npmjs.com/package/react-toastify
-      return;
-    }
-
-    return response;
-  };
-
-  const _removeBook = async (bookId) => {
-    const response = await axios.delete("http://localhost:8080/api/book/" + bookId);
-
-    if (!response) {
-      console.log("An error occured");
-      //ToDo: Display error message to user not just log it
-      //Ex: https://www.npmjs.com/package/react-toastify
-      return;
-    }
-
-    return response;
-  };
-
-  return {
-    fetchBooks: _fetchBooks,
-    fetchBook: _fetchBook,
-    createBook: _createBook,
-    removeBook: _removeBook,
-    updateBook: _updateBook,
-    fetchBookCount: _fetchBookCount,
-  };
-})();
-
-export default BookService;
+export default {
+  fetchBooks: _fetchBooks,
+  fetchBook: _fetchBook,
+  createBook: _createBook,
+  removeBook: _removeBook,
+  updateBook: _updateBook,
+  fetchBookCount: _fetchBookCount,
+};

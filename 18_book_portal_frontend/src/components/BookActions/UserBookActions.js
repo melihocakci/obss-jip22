@@ -17,7 +17,7 @@ export default () => {
 
   const fetch = async () => {
     setLoading(true);
-    const user = await UserService.fetchAuthUser();
+    const { body: user } = await UserService.fetchThisUser();
 
     let isRead = false;
     for (let i = 0; i < user.readBooks.length; i++) {

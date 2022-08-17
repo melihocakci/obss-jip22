@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import UserService from "../service/UserService";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import UserProfileActions from "../components/ProfileActions/UserProfileActions";
 import AdminProfileActions from "../components/ProfileActions/AdminProfileActions";
@@ -8,7 +8,7 @@ import { Typography, List, Spin, Divider, Card } from "antd";
 import UserContext from "../context/UserContext";
 const { Title } = Typography;
 
-const Profile = () => {
+export default () => {
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState();
   const { user } = useContext(UserContext);
@@ -20,7 +20,7 @@ const Profile = () => {
   }, []);
 
   const fetch = async () => {
-    const user = await UserService.fetchUser(id);
+    const { body: user } = await UserService.fetchUser(id);
     setUserDetails(user);
   };
 
@@ -108,5 +108,3 @@ const Profile = () => {
     </div>
   );
 };
-
-export default Profile;

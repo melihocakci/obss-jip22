@@ -43,11 +43,20 @@ class UserList extends React.Component {
       current: 1,
       pageSize: 10,
     },
-    loading: false,
+    loading: true,
     username: "",
     sortField: "",
     sortOrder: "",
   };
+
+  clean(obj) {
+    for (var propName in obj) {
+      if (obj[propName] === null || obj[propName] === undefined || obj[propName] === "") {
+        delete obj[propName];
+      }
+    }
+    return obj;
+  }
 
   componentDidMount() {
     this.fetch();
@@ -61,9 +70,11 @@ class UserList extends React.Component {
   fetch = async () => {
     this.setState({ loading: true });
 
-    const { pagination, sortField, sortOrder, username } = this.state;
+    const cleanState = this.clean(this.state);
 
-    const data = await UserService.fetchUsers({
+    const { pagination, sortField, sortOrder, username } = cleanState;
+
+    const { body: users } = await UserService.fetchUsers({
       page: pagination.current - 1,
       size: pagination.pageSize,
       sortField,
@@ -71,11 +82,11 @@ class UserList extends React.Component {
       username,
     });
 
-    const userCount = await UserService.fetchUserCount();
+    const { body: userCount } = await UserService.fetchUserCount();
 
     this.setState({
       loading: false,
-      data: data,
+      data: users,
       pagination: {
         ...this.state.pagination,
         total: userCount, // Mock data
@@ -110,7 +121,7 @@ class UserList extends React.Component {
             name="username">
             <Input onChange={this.handleChange} name="username" value={this.state.username} />
           </Form.Item>
-          <Form.Item style={{ "margin-left": "12px", width: 400, display: "inline-block" }}>
+          <Form.Item style={{ marginLeft: "12px", width: 400, display: "inline-block" }}>
             <Button onClick={this.fetch}>Search</Button>
           </Form.Item>
         </Form>

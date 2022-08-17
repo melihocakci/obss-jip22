@@ -3,7 +3,6 @@ import Login from "../pages/Login";
 import Books from "../pages/Books";
 import Users from "../pages/Users";
 import Book from "../pages/Book";
-import Account from "../pages/Account";
 import Profile from "../pages/Profile";
 import Register from "../pages/Register";
 import AdminPanel from "../pages/AdminPanel";
@@ -34,8 +33,6 @@ export default () => {
         <Route path="/users/:id" element={<Profile />} />
 
         <Route path="/users" element={<Users />} />
-
-        <Route path="/account" element={<Account />} />
 
         <Route path="/login" element={<Login />} />
 

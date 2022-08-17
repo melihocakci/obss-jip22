@@ -37,11 +37,20 @@ class BookList extends React.Component {
       current: 1,
       pageSize: 10,
     },
-    loading: false,
+    loading: true,
     name: "",
     sortField: "",
     sortOrder: "",
   };
+
+  clean(obj) {
+    for (var propName in obj) {
+      if (obj[propName] === null || obj[propName] === undefined || obj[propName] === "") {
+        delete obj[propName];
+      }
+    }
+    return obj;
+  }
 
   componentDidMount() {
     this.fetch();
@@ -55,9 +64,11 @@ class BookList extends React.Component {
   fetch = async () => {
     this.setState({ loading: true });
 
-    const { pagination, sortField, sortOrder, name } = this.state;
+    const cleanState = this.clean(this.state);
 
-    const data = await BookService.fetchBooks({
+    const { pagination, sortField, sortOrder, name } = cleanState;
+
+    const { body: books } = await BookService.fetchBooks({
       page: pagination.current - 1,
       size: pagination.pageSize,
       sortField,
@@ -65,11 +76,11 @@ class BookList extends React.Component {
       name,
     });
 
-    const bookCount = await BookService.fetchBookCount();
+    const { body: bookCount } = await BookService.fetchBookCount();
 
     this.setState({
       loading: false,
-      data: data,
+      data: books,
       pagination: {
         ...this.state.pagination,
         total: bookCount,
@@ -101,7 +112,7 @@ class BookList extends React.Component {
           <Form.Item style={{ margin: "0 auto", width: 400, display: "inline-block" }} label="Search Book" name="name">
             <Input onChange={this.handleChange} name="name" value={this.state.name} />
           </Form.Item>
-          <Form.Item style={{ "margin-left": "12px", width: 400, display: "inline-block" }}>
+          <Form.Item style={{ marginLeft: "12px", width: 400, display: "inline-block" }}>
             <Button onClick={this.fetch}>Search</Button>
           </Form.Item>
         </Form>

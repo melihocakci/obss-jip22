@@ -18,7 +18,7 @@ export default () => {
   }, []);
 
   const fetch = async () => {
-    const user = await UserService.fetchUser(userId);
+    const { body: user } = await UserService.fetchUser(userId);
     setCurrentCredentials(user);
   };
 

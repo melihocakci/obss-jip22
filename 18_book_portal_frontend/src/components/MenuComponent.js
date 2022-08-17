@@ -8,15 +8,27 @@ export default () => {
 
   const loginOrProfile = () => {
     if (user) {
-      return <Link to={"/users/" + user.id}>Profile</Link>;
+      return (
+        <Menu.Item key="5">
+          <Link to={"/users/" + user.id}>Profile</Link>
+        </Menu.Item>
+      );
     } else {
-      return <Link to={"/login"}>Login</Link>;
+      return (
+        <Menu.Item key="5">
+          <Link to={"/login"}>Login</Link>
+        </Menu.Item>
+      );
     }
   };
 
   const adminMenu = () => {
     if (user && user.role === "admin") {
-      return <Link to="/admin">Admin Panel</Link>;
+      return (
+        <Menu.Item key="6">
+          <Link to="/admin">Admin Panel</Link>
+        </Menu.Item>
+      );
     } else {
       return;
     }
@@ -40,9 +52,9 @@ export default () => {
         <Link to="/about">About</Link>
       </Menu.Item>
 
-      <Menu.Item key="5">{loginOrProfile()}</Menu.Item>
+      {loginOrProfile()}
 
-      <Menu.Item key="6">{adminMenu()}</Menu.Item>
+      {adminMenu()}
     </Menu>
   );
 };

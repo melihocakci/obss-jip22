@@ -18,7 +18,7 @@ export default () => {
   }, []);
 
   const fetch = async () => {
-    const book = await BookService.fetchBook(bookId);
+    const { body: book } = await BookService.fetchBook(bookId);
     setBook(book);
   };
 

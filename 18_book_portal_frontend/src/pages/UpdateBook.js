@@ -16,7 +16,7 @@ const UpdateBook = () => {
 
   const fetch = async () => {
     setLoading(true);
-    const user = await BookService.fetchBook(id);
+    const { body: user } = await BookService.fetchBook(id);
     setCurrentCredentials(user);
     setLoading(false);
   };
