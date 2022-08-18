@@ -24,7 +24,9 @@ export default function App() {
           </UserContext.Provider>
         </Header>
 
-        <Content className="site-layout" style={{ padding: "0 50px", marginTop: 64 }}>
+        <Content
+          className="site-layout"
+          style={{ padding: "0 50px", marginTop: 64 }}>
           <UserContext.Provider value={{ user, setUser }}>
             <RoutesComponent />
           </UserContext.Provider>

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import UserService from "../../service/UserService";
 import { useState } from "react";
-import { Typography, Spin, Divider, Button } from "antd";
+import { Typography, Spin, Divider, Button, message } from "antd";
 const { Title } = Typography;
 
 export default () => {
@@ -43,8 +43,10 @@ export default () => {
   const toggleRead = async () => {
     if (!read) {
       await UserService.addRead(bookId);
+      message.success("Added to read books");
     } else {
       await UserService.removeRead(bookId);
+      message.success("Removed from read books");
     }
 
     fetch();
@@ -53,8 +55,10 @@ export default () => {
   const toggleFavorite = async () => {
     if (!favorite) {
       await UserService.addFavorite(bookId);
+      message.success("Added to favorite books");
     } else {
       await UserService.removeFavorite(bookId);
+      message.success("Removed from favorite books");
     }
 
     fetch();
@@ -69,8 +73,12 @@ export default () => {
       <Divider orientation="left">
         <Title level={5}>Actions</Title>
       </Divider>
-      <Button onClick={toggleRead}>{read ? "Remove from read list" : "Add to read list"}</Button>
-      <Button onClick={toggleFavorite}>{favorite ? "Remove from favorite list" : "Add to favorite list"}</Button>
+      <Button onClick={toggleRead}>
+        {read ? "Remove from read list" : "Add to read list"}
+      </Button>
+      <Button onClick={toggleFavorite}>
+        {favorite ? "Remove from favorite list" : "Add to favorite list"}
+      </Button>
     </div>
   );
 };

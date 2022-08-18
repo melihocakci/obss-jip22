@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BookService from "../../service/BookService";
-import { Typography, Divider, Button } from "antd";
+import { Typography, Divider, Button, Popconfirm, message } from "antd";
 const { Title } = Typography;
 
 export default () => {
@@ -11,9 +11,9 @@ export default () => {
   const removeBook = async () => {
     const response = await BookService.removeBook(bookId);
 
-    if (response) {
+    if (response.success) {
       navigate("/books");
-      alert("Book deleted");
+      message.success("Book deleted");
     }
   };
 
@@ -27,7 +27,14 @@ export default () => {
         <Title level={5}>Actions</Title>
       </Divider>
 
-      <Button onClick={removeBook}>Remove Book</Button>
+      <Popconfirm
+        title="Are you sure?"
+        okText="Yes"
+        cancelText="No"
+        onConfirm={removeBook}>
+        <Button>Delete Book</Button>
+      </Popconfirm>
+
       <Button onClick={updateBook}>Update Book</Button>
     </div>
   );

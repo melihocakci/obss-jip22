@@ -10,6 +10,7 @@ import tr.com.obss.jip.bookportal.dto.BookDto;
 import tr.com.obss.jip.bookportal.dto.CreateBookDto;
 import tr.com.obss.jip.bookportal.dto.FetchRequest;
 import tr.com.obss.jip.bookportal.dto.UpdateBookDto;
+import tr.com.obss.jip.bookportal.exception.BadRequestException;
 import tr.com.obss.jip.bookportal.exception.NotFoundException;
 import tr.com.obss.jip.bookportal.mapper.MyMapper;
 import tr.com.obss.jip.bookportal.mapper.MyMapperImpl;
@@ -73,6 +74,12 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void createBook(CreateBookDto createBookDto) {
+        if (createBookDto.getName().isEmpty()) {
+            throw new BadRequestException("Missing book name input");
+        } else if (createBookDto.getAuthor().isEmpty()) {
+            throw new BadRequestException("Missing book author input");
+        }
+
         Book book = mapper.toBook(createBookDto);
         bookRepository.save(book);
     }

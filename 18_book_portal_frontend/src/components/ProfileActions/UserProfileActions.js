@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import AuthService from "../../service/AuthService";
 import { useNavigate } from "react-router-dom";
 import UserService from "../../service/UserService";
-import { Button, Divider, Typography } from "antd";
+import { Button, Divider, Typography, Popconfirm, message } from "antd";
 import UserContext from "../../context/UserContext";
 const { Title } = Typography;
 
@@ -12,8 +12,9 @@ export default () => {
 
   const signOut = () => {
     AuthService.signout();
-    setUser(undefined);
-    navigate("/login");
+    setUser();
+    navigate("/signin");
+    message.success("Signed out");
   };
 
   const updateAccount = () => {
@@ -22,11 +23,11 @@ export default () => {
 
   const removeThisUser = async () => {
     const response = await UserService.removeUser("");
-    if (response) {
+    if (response.success) {
       AuthService.signout();
-      setUser(undefined);
+      setUser();
       navigate("/");
-      alert("Account deleted");
+      message.success("Account deleted");
     }
   };
 
@@ -37,7 +38,15 @@ export default () => {
       </Divider>
 
       <Button onClick={signOut}>Sign out</Button>
-      <Button onClick={removeThisUser}>Delete Account</Button>
+
+      <Popconfirm
+        title="Are you sure?"
+        okText="Yes"
+        cancelText="No"
+        onConfirm={removeThisUser}>
+        <Button>Delete Account</Button>
+      </Popconfirm>
+
       <Button onClick={updateAccount}>Update Account</Button>
     </div>
   );

@@ -1,5 +1,5 @@
-import { Form, Input, Button, Spin } from "antd";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Form, Input, Button, Spin, message } from "antd";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import BookService from "../service/BookService";
 
@@ -21,13 +21,11 @@ const UpdateBook = () => {
     setLoading(false);
   };
 
-  const onFinish = async (values) => {
-    console.log("Success:", values);
-
+  const onFinish = async () => {
     const response = await BookService.updateBook(id, credentials);
     if (response) {
       navigate("/books/" + id);
-      alert("Book updated");
+      message.success("Book updated");
     }
 
     //UserService.delete();
@@ -74,7 +72,12 @@ const UpdateBook = () => {
               message: "Please input name!",
             },
           ]}>
-          <Input onChange={handleChange} name="name" value={credentials.name} placeholder={currentCredentials.name} />
+          <Input
+            onChange={handleChange}
+            name="name"
+            value={credentials.name}
+            placeholder={currentCredentials.name}
+          />
         </Form.Item>
 
         <Form.Item

@@ -2,12 +2,12 @@ import { Form, Input, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import AuthService from "../service/AuthService";
-import { Typography, Alert } from "antd";
+import { Typography, Alert, message } from "antd";
 import UserContext from "../context/UserContext";
 import ThisUser from "../util/ThisUser";
 const { Title } = Typography;
 
-const Login = () => {
+export default () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({});
   const { setUser } = useContext(UserContext);
@@ -19,6 +19,7 @@ const Login = () => {
     if (response.success) {
       setUser(ThisUser.get());
       navigate("/");
+      message.success("Signed in");
     } else {
       setErrorMessage(response.message);
     }
@@ -37,7 +38,14 @@ const Login = () => {
 
   const getAlert = () => {
     if (errorMessage) {
-      return <Alert message={errorMessage} type="error" style={{ marginBottom: "10px" }} />;
+      return (
+        <Alert
+          message={errorMessage}
+          type="error"
+          showIcon
+          style={{ marginBottom: "10px" }}
+        />
+      );
     }
   };
 
@@ -57,7 +65,7 @@ const Login = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         style={{ margin: "0 auto", width: 400 }}>
-        <Title level={3}>Log in</Title>
+        <Title level={3}>Sign in</Title>
 
         {getAlert()}
 
@@ -70,7 +78,11 @@ const Login = () => {
               message: "Please input your username!",
             },
           ]}>
-          <Input onChange={handleChange} name="username" value={credentials.username} />
+          <Input
+            onChange={handleChange}
+            name="username"
+            value={credentials.username}
+          />
         </Form.Item>
 
         <Form.Item
@@ -82,7 +94,11 @@ const Login = () => {
               message: "Please input your password!",
             },
           ]}>
-          <Input.Password onChange={handleChange} name="password" value={credentials.password} />
+          <Input.Password
+            onChange={handleChange}
+            name="password"
+            value={credentials.password}
+          />
         </Form.Item>
 
         <Form.Item
@@ -100,5 +116,3 @@ const Login = () => {
     </div>
   );
 };
-
-export default Login;

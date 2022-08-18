@@ -1,9 +1,7 @@
 package tr.com.obss.jip.bookportal.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tr.com.obss.jip.bookportal.component.JwtTokenUtil;
 import tr.com.obss.jip.bookportal.dto.AuthRequest;
-import tr.com.obss.jip.bookportal.dto.AuthResponse;
+import tr.com.obss.jip.bookportal.dto.ResponseDto;
 import tr.com.obss.jip.bookportal.service.impl.JwtUserDetailsService;
 
 @RequiredArgsConstructor
@@ -27,7 +25,7 @@ public class AuthController {
     private final JwtUserDetailsService userDetailsService;
 
     @PostMapping
-    public ResponseEntity<?> createAuthenticationToken(
+    public ResponseDto createAuthenticationToken(
             @RequestBody AuthRequest authenticationRequest) {
 
         authenticationManager.authenticate(
@@ -39,6 +37,6 @@ public class AuthController {
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthResponse(token));
+        return new ResponseDto(true, null, token);
     }
 }

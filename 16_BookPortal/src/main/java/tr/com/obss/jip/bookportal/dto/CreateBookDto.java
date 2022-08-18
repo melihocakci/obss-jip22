@@ -11,11 +11,9 @@ import javax.validation.constraints.Size;
 @Setter
 @AllArgsConstructor
 public class CreateBookDto {
-    @Size(min = 1)
     @NotNull
     private String name;
 
-    @Size(min = 1)
     @NotNull
     private String author;
 }

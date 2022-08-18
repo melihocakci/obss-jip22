@@ -5,7 +5,9 @@ const About = () => {
   return (
     <div>
       <Title>About</Title>
-      <p>This site was pretty hard to make, so the developer hopes you like it.</p>
+      <p>
+        This site was pretty hard to make, so the developer hopes you like it.
+      </p>
     </div>
   );
 };

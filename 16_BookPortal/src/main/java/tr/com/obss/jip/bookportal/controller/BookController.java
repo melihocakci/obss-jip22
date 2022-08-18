@@ -21,8 +21,8 @@ public class BookController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public ResponseDto getBooks(
-            @RequestParam(defaultValue = "10") Integer size,
-            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "200") Integer size,
+            @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "") String sortField,
             @RequestParam(defaultValue = "") String sortOrder,
             @RequestParam(defaultValue = "") String name) {

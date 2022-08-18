@@ -51,7 +51,11 @@ class UserList extends React.Component {
 
   clean(obj) {
     for (var propName in obj) {
-      if (obj[propName] === null || obj[propName] === undefined || obj[propName] === "") {
+      if (
+        obj[propName] === null ||
+        obj[propName] === undefined ||
+        obj[propName] === ""
+      ) {
         delete obj[propName];
       }
     }
@@ -63,7 +67,11 @@ class UserList extends React.Component {
   }
 
   handleTableChange = async (pagination, filters, sorter) => {
-    await this.setState({ pagination: pagination, sortField: sorter.field, sortOrder: sorter.order });
+    await this.setState({
+      pagination: pagination,
+      sortField: sorter.field,
+      sortOrder: sorter.order,
+    });
     this.fetch();
   };
 
@@ -119,9 +127,14 @@ class UserList extends React.Component {
             style={{ margin: "0 auto", width: 400, display: "inline-block" }}
             label="Search User"
             name="username">
-            <Input onChange={this.handleChange} name="username" value={this.state.username} />
+            <Input
+              onChange={this.handleChange}
+              name="username"
+              value={this.state.username}
+            />
           </Form.Item>
-          <Form.Item style={{ marginLeft: "12px", width: 400, display: "inline-block" }}>
+          <Form.Item
+            style={{ marginLeft: "12px", width: 400, display: "inline-block" }}>
             <Button onClick={this.fetch}>Search</Button>
           </Form.Item>
         </Form>

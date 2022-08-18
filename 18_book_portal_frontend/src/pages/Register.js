@@ -1,22 +1,30 @@
 import { Form, Input, Button } from "antd";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useContext, useState } from "react";
 import UserService from "../service/UserService";
-import { Typography, Alert } from "antd";
+import { Typography, Alert, message } from "antd";
+import UserContext from "../context/UserContext";
 const { Title } = Typography;
 
 const Register = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({});
-  const [errorMessage, setErrorMessage] = useState();
+  const [alertMessage, setAlertMessage] = useState();
+  const { user } = useContext(UserContext);
 
   const onFinish = async () => {
     const response = await UserService.createUser(credentials);
 
     if (response.success) {
-      navigate("/login");
+      if (user && user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/signin");
+      }
+
+      message.success("User created");
     } else {
-      setErrorMessage(response.message);
+      setAlertMessage(response.message);
     }
   };
 
@@ -32,8 +40,15 @@ const Register = () => {
   };
 
   const getAlert = () => {
-    if (errorMessage) {
-      return <Alert message={errorMessage} type="error" style={{ marginBottom: "10px" }} />;
+    if (alertMessage) {
+      return (
+        <Alert
+          message={alertMessage}
+          type="error"
+          showIcon
+          style={{ marginBottom: "10px" }}
+        />
+      );
     }
   };
 
@@ -66,7 +81,11 @@ const Register = () => {
               message: "Please input your username!",
             },
           ]}>
-          <Input onChange={handleChange} name="username" value={credentials.username} />
+          <Input
+            onChange={handleChange}
+            name="username"
+            value={credentials.username}
+          />
         </Form.Item>
 
         <Form.Item
@@ -78,7 +97,11 @@ const Register = () => {
               message: "Please input your password!",
             },
           ]}>
-          <Input.Password onChange={handleChange} name="password" value={credentials.password} />
+          <Input.Password
+            onChange={handleChange}
+            name="password"
+            value={credentials.password}
+          />
         </Form.Item>
 
         <Form.Item
@@ -90,6 +113,7 @@ const Register = () => {
             Submit
           </Button>
         </Form.Item>
+        <Link to="/signin">Sign in</Link>
       </Form>
     </div>
   );

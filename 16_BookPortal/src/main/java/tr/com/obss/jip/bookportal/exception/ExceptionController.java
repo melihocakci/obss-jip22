@@ -5,62 +5,56 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import tr.com.obss.jip.bookportal.dto.ErrorDto;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 @ControllerAdvice
 public class ExceptionController {
 
-    private Map<String, String> responseBody(Exception ex, HttpServletRequest request) {
-        Map<String, String> responseBody = new LinkedHashMap<>();
+    private ErrorDto responseBody(Exception ex, HttpServletRequest request, Integer status) {
+        ErrorDto errorDto = new ErrorDto();
 
-        responseBody.put("success", "false");
-        responseBody.put("error", ex.getClass().getSimpleName());
-        responseBody.put("message", ex.getMessage());
-        responseBody.put("path", request.getRequestURI());
-        responseBody.put("method", request.getMethod());
-        responseBody.put(
-                "timestamp", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+        errorDto.setSuccess(Boolean.FALSE);
+        errorDto.setStatus(status);
+        errorDto.setError(ex.getClass().getSimpleName());
+        errorDto.setMessage(ex.getMessage());
+        errorDto.setPath(request.getRequestURI());
+        errorDto.setMethod(request.getMethod());
+        errorDto.setTimestamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
 
-        return responseBody;
+        return errorDto;
     }
 
-    @ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler(Exception.class)
     public ResponseEntity<?> ExceptionHandler(RuntimeException ex, HttpServletRequest request) {
-
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(responseBody(ex, request));
+                .body(responseBody(ex, request, 500));
     }
 
-    @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<?> AuthenticationExceptionHandler(
-            RuntimeException ex, HttpServletRequest request) {
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody(ex, request));
-    }
-
-    @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<?> BadRequestExceptionHandler(
+    @ExceptionHandler({BadRequestException.class, AuthenticationException.class})
+    public ResponseEntity<?> BadRequestHandler(
             BadRequestException ex, HttpServletRequest request) {
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody(ex, request));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(responseBody(ex, request, 400));
     }
 
     @ExceptionHandler(ConflictException.class)
-    public ResponseEntity<?> ConflictExceptionHandler(
+    public ResponseEntity<?> ConflictHandler(
             ConflictException ex, HttpServletRequest request) {
 
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(responseBody(ex, request));
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(responseBody(ex, request, 409));
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<?> NotFoundExceptionHandler(
+    public ResponseEntity<?> NotFoundHandler(
             NotFoundException ex, HttpServletRequest request) {
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody(ex, request));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(responseBody(ex, request, 404));
     }
 }

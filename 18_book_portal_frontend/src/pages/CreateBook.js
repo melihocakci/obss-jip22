@@ -1,8 +1,6 @@
-import { Form, Input, Button } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Form, Input, Button, message } from "antd";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import AuthService from "../service/AuthService";
-import UserService from "../service/UserService";
 import BookService from "../service/BookService";
 
 const CreateBook = () => {
@@ -10,15 +8,11 @@ const CreateBook = () => {
   const [credentials, setCredentials] = useState({});
 
   const onFinish = async (values) => {
-    console.log("Success:", values);
-
     const response = await BookService.createBook(credentials);
-    if (response) {
+    if (response.success) {
       navigate("/admin");
-      alert("Book added");
+      message.success("Book created");
     }
-
-    //UserService.delete();
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -70,7 +64,11 @@ const CreateBook = () => {
               message: "Please input author!",
             },
           ]}>
-          <Input onChange={handleChange} name="author" value={credentials.author} />
+          <Input
+            onChange={handleChange}
+            name="author"
+            value={credentials.author}
+          />
         </Form.Item>
 
         <Form.Item

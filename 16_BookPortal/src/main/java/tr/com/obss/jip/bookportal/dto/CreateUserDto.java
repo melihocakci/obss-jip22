@@ -11,11 +11,9 @@ import javax.validation.constraints.Size;
 @Setter
 @AllArgsConstructor
 public class CreateUserDto {
-    @Size(min = 3, max = 20)
     @NotNull
     private String username;
 
-    @Size(min = 8, max = 20)
     @NotNull
     private String password;
 }

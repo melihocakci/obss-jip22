@@ -1,5 +1,4 @@
 import axios from "axios";
-import LocalStorageService from "../util/LocalStorageUtil";
 
 const _fetchBooks = async (params) => {
   let response;
@@ -8,6 +7,7 @@ const _fetchBooks = async (params) => {
     console.log(response);
   } catch (error) {
     console.log(error);
+    response = error.response;
   }
 
   return response.data;
@@ -20,6 +20,7 @@ const _fetchBookCount = async () => {
     console.log(response);
   } catch (error) {
     console.log(error);
+    response = error.response;
   }
 
   return response.data;
@@ -32,6 +33,7 @@ const _fetchBook = async (id) => {
     console.log(response);
   } catch (error) {
     console.log(error);
+    response = error.response;
   }
 
   return response.data;
@@ -44,6 +46,7 @@ const _createBook = async (credentials) => {
     console.log(response);
   } catch (error) {
     console.log(error);
+    response = error.response;
   }
 
   return response.data;
@@ -52,10 +55,14 @@ const _createBook = async (credentials) => {
 const _updateBook = async (bookId, credentials) => {
   let response;
   try {
-    response = await axios.put("http://localhost:8080/api/book/" + bookId, credentials);
+    response = await axios.put(
+      "http://localhost:8080/api/book/" + bookId,
+      credentials
+    );
     console.log(response);
   } catch (error) {
     console.log(error);
+    response = error.response;
   }
 
   return response.data;
@@ -68,6 +75,7 @@ const _removeBook = async (bookId) => {
     console.log(response);
   } catch (error) {
     console.log(error);
+    response = error.response;
   }
 
   return response.data;

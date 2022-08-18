@@ -11,6 +11,7 @@ import tr.com.obss.jip.bookportal.dto.CreateUserDto;
 import tr.com.obss.jip.bookportal.dto.FetchRequest;
 import tr.com.obss.jip.bookportal.dto.UpdateUserDto;
 import tr.com.obss.jip.bookportal.dto.UserDto;
+import tr.com.obss.jip.bookportal.exception.BadRequestException;
 import tr.com.obss.jip.bookportal.exception.ConflictException;
 import tr.com.obss.jip.bookportal.exception.NotFoundException;
 import tr.com.obss.jip.bookportal.mapper.MyMapper;
@@ -223,7 +224,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(CreateUserDto createUserDto, RoleType roleType) {
-        if (userRepository.findByUsername(createUserDto.getUsername()).isPresent()) {
+        if (createUserDto.getUsername().isEmpty()) {
+            throw new BadRequestException("Missing username input");
+        } else if (createUserDto.getPassword().length() < 8) {
+            throw new BadRequestException("Password must be at least 8 characters long");
+        } else if (userRepository.findByUsername(createUserDto.getUsername()).isPresent()) {
             throw new ConflictException("Username is already in use");
         }
 

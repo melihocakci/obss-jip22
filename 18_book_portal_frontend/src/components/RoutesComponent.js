@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Login from "../pages/Login";
+import Signin from "../pages/Signin";
 import Books from "../pages/Books";
 import Users from "../pages/Users";
 import Book from "../pages/Book";
@@ -14,7 +14,9 @@ import UpdateUser from "../pages/UpdateUser";
 
 export default () => {
   return (
-    <div className="site-layout-background" style={{ padding: 35, minHeight: 580, marginTop: 40, marginBottom: 50 }}>
+    <div
+      className="site-layout-background"
+      style={{ padding: 35, minHeight: 580, marginTop: 40, marginBottom: 50 }}>
       <Routes>
         <Route path="/admin/create" element={<CreateBook />} />
 
@@ -34,7 +36,7 @@ export default () => {
 
         <Route path="/users" element={<Users />} />
 
-        <Route path="/login" element={<Login />} />
+        <Route path="/signin" element={<Signin />} />
 
         <Route path="/register" element={<Register />} />
 
