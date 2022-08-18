@@ -5,6 +5,7 @@ import UserService from "../service/UserService";
 import AuthService from "../service/AuthService";
 import ThisUser from "../util/ThisUser";
 import UserContext from "../context/UserContext";
+import clean from "../util/clean";
 const { Title } = Typography;
 
 export default () => {
@@ -19,13 +20,16 @@ export default () => {
   }, []);
 
   const fetch = async () => {
-    const { body: user } = await UserService.fetchUser(userId);
-    setCurrentCredentials(user);
+    const response = await UserService.fetchUser(userId);
+
+    if (response.success) {
+      setCurrentCredentials(response.body);
+    }
   };
 
-  const onFinish = async (values) => {
+  const onFinish = async () => {
     if (ThisUser.getId() == userId) {
-      const response = await UserService.updateUser("", credentials);
+      const response = await UserService.updateUser("", clean(credentials));
 
       if (response.success) {
         AuthService.signout();
@@ -34,7 +38,7 @@ export default () => {
         message.success("Account updated");
       }
     } else {
-      const response = await UserService.updateUser(userId, credentials);
+      const response = await UserService.updateUser(userId, clean(credentials));
 
       if (response.success) {
         navigate("/users/" + userId);

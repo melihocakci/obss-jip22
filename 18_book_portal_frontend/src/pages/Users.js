@@ -2,6 +2,7 @@ import React from "react";
 import { Table, Form, Input, Button } from "antd";
 import UserService from "../service/UserService";
 import { Link } from "react-router-dom";
+import clean from "../util/clean";
 
 const columns = [
   {
@@ -49,19 +50,6 @@ class UserList extends React.Component {
     sortOrder: "",
   };
 
-  clean(obj) {
-    for (var propName in obj) {
-      if (
-        obj[propName] === null ||
-        obj[propName] === undefined ||
-        obj[propName] === ""
-      ) {
-        delete obj[propName];
-      }
-    }
-    return obj;
-  }
-
   componentDidMount() {
     this.fetch();
   }
@@ -78,7 +66,7 @@ class UserList extends React.Component {
   fetch = async () => {
     this.setState({ loading: true });
 
-    const cleanState = this.clean(this.state);
+    const cleanState = clean(this.state);
 
     const { pagination, sortField, sortOrder, username } = cleanState;
 

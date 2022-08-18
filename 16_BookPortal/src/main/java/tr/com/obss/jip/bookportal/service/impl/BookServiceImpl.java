@@ -74,12 +74,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void createBook(CreateBookDto createBookDto) {
-        if (createBookDto.getName().isEmpty()) {
-            throw new BadRequestException("Missing book name input");
-        } else if (createBookDto.getAuthor().isEmpty()) {
-            throw new BadRequestException("Missing book author input");
-        }
-
         Book book = mapper.toBook(createBookDto);
         bookRepository.save(book);
     }
@@ -119,11 +113,11 @@ public class BookServiceImpl implements BookService {
         String name = updateBookDto.getName();
         String author = updateBookDto.getAuthor();
 
-        if (name != null && !name.isEmpty()) {
+        if (name != null) {
             book.setName(name);
         }
 
-        if (author != null && !author.isEmpty()) {
+        if (author != null) {
             book.setAuthor(author);
         }
 

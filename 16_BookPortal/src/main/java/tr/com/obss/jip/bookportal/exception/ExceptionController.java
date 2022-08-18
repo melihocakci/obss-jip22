@@ -30,31 +30,30 @@ public class ExceptionController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> ExceptionHandler(RuntimeException ex, HttpServletRequest request) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(responseBody(ex, request, 500));
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+
+        return ResponseEntity.status(status)
+                .body(responseBody(ex, request, status.value()));
     }
 
     @ExceptionHandler({BadRequestException.class, AuthenticationException.class})
-    public ResponseEntity<?> BadRequestHandler(
-            BadRequestException ex, HttpServletRequest request) {
+    public ResponseEntity<?> BadRequestHandler(BadRequestException ex, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(responseBody(ex, request, 400));
+        return ResponseEntity.status(status).body(responseBody(ex, request, status.value()));
     }
 
     @ExceptionHandler(ConflictException.class)
-    public ResponseEntity<?> ConflictHandler(
-            ConflictException ex, HttpServletRequest request) {
+    public ResponseEntity<?> ConflictHandler(ConflictException ex, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.CONFLICT;
 
-        return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(responseBody(ex, request, 409));
+        return ResponseEntity.status(status).body(responseBody(ex, request, status.value()));
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<?> NotFoundHandler(
-            NotFoundException ex, HttpServletRequest request) {
+    public ResponseEntity<?> NotFoundHandler(NotFoundException ex, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(responseBody(ex, request, 404));
+        return ResponseEntity.status(status).body(responseBody(ex, request, status.value()));
     }
 }

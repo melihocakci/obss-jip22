@@ -1,17 +1,22 @@
-import { Form, Input, Button, message } from "antd";
+import { Form, Input, Button, message, Typography, Alert } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import BookService from "../service/BookService";
+const { Title } = Typography;
 
 const CreateBook = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({});
+  const [alertMessage, setAlertMessage] = useState();
 
-  const onFinish = async (values) => {
+  const onFinish = async () => {
     const response = await BookService.createBook(credentials);
+
     if (response.success) {
       navigate("/admin");
       message.success("Book created");
+    } else {
+      setAlertMessage(response.message);
     }
   };
 
@@ -24,6 +29,19 @@ const CreateBook = () => {
       ...credentials,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const getAlert = () => {
+    if (alertMessage) {
+      return (
+        <Alert
+          message={alertMessage}
+          type="error"
+          showIcon
+          style={{ marginBottom: "10px" }}
+        />
+      );
+    }
   };
 
   return (
@@ -42,7 +60,10 @@ const CreateBook = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         style={{ margin: "0 auto", width: 400 }}>
-        <h1>Create Book</h1>
+        <Title level={3}>Create Book</Title>
+
+        {getAlert()}
+
         <Form.Item
           label="Name"
           name="name"

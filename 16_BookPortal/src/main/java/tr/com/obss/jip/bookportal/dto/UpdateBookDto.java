@@ -10,9 +10,9 @@ import javax.validation.constraints.Size;
 @Setter
 @AllArgsConstructor
 public class UpdateBookDto {
-    @Size(min = 1)
+    @Size(min = 5, max = 20)
     private String name;
 
-    @Size(min = 1)
+    @Size(min = 5, max = 20)
     private String author;
 }

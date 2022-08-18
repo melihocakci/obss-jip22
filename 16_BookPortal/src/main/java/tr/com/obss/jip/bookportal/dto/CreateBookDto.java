@@ -12,8 +12,10 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class CreateBookDto {
     @NotNull
+    @Size(min = 1, max = 30)
     private String name;
 
     @NotNull
+    @Size(min = 1, max = 30)
     private String author;
 }

@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import UserService from "../service/UserService";
 import { Typography, Alert, message } from "antd";
 import UserContext from "../context/UserContext";
+import clean from "../util/clean";
 const { Title } = Typography;
 
 const Register = () => {
@@ -13,7 +14,7 @@ const Register = () => {
   const { user } = useContext(UserContext);
 
   const onFinish = async () => {
-    const response = await UserService.createUser(credentials);
+    const response = await UserService.createUser(clean(credentials));
 
     if (response.success) {
       if (user && user.role === "admin") {

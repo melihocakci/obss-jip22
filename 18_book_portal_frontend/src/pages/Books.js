@@ -1,7 +1,8 @@
 import React from "react";
-import { Table, Form, Button, Input } from "antd";
+import { Table, Form, Button, Input, message } from "antd";
 import BookService from "../service/BookService";
 import { Link } from "react-router-dom";
+import clean from "../util/clean";
 
 const columns = [
   {
@@ -43,19 +44,6 @@ class BookList extends React.Component {
     sortOrder: "",
   };
 
-  clean(obj) {
-    for (var propName in obj) {
-      if (
-        obj[propName] === null ||
-        obj[propName] === undefined ||
-        obj[propName] === ""
-      ) {
-        delete obj[propName];
-      }
-    }
-    return obj;
-  }
-
   componentDidMount() {
     this.fetch();
   }
@@ -72,11 +60,11 @@ class BookList extends React.Component {
   fetch = async () => {
     this.setState({ loading: true });
 
-    const cleanState = this.clean(this.state);
+    const cleanState = clean(this.state);
 
     const { pagination, sortField, sortOrder, name } = cleanState;
 
-    const { body: books } = await BookService.fetchBooks({
+    const responseOne = await BookService.fetchBooks({
       page: pagination.current - 1,
       size: pagination.pageSize,
       sortField,
@@ -84,14 +72,24 @@ class BookList extends React.Component {
       name,
     });
 
-    const { body: bookCount } = await BookService.fetchBookCount();
+    if (!responseOne.success) {
+      message.error(responseOne.message);
+      return;
+    }
+
+    const responseTwo = await BookService.fetchBookCount();
+
+    if (!responseTwo.success) {
+      message.error(responseTwo.message);
+      return;
+    }
 
     this.setState({
       loading: false,
-      data: books,
+      data: responseOne.body,
       pagination: {
         ...this.state.pagination,
-        total: bookCount,
+        total: responseTwo.body,
       },
     });
   };

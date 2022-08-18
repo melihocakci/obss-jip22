@@ -1,7 +1,9 @@
-import { Form, Input, Button, Spin, message } from "antd";
+import { Form, Input, Button, Spin, message, Typography, Alert } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import BookService from "../service/BookService";
+import clean from "../util/clean";
+const { Title } = Typography;
 
 const UpdateBook = () => {
   const navigate = useNavigate();
@@ -9,6 +11,7 @@ const UpdateBook = () => {
   const [loading, setLoading] = useState(true);
   const [currentCredentials, setCurrentCredentials] = useState({});
   const [credentials, setCredentials] = useState({});
+  const [alertMessage, setAlertMessage] = useState();
 
   useEffect(() => {
     fetch();
@@ -22,13 +25,14 @@ const UpdateBook = () => {
   };
 
   const onFinish = async () => {
-    const response = await BookService.updateBook(id, credentials);
-    if (response) {
+    const response = await BookService.updateBook(id, clean(credentials));
+
+    if (response.success) {
       navigate("/books/" + id);
       message.success("Book updated");
+    } else {
+      setAlertMessage(response.message);
     }
-
-    //UserService.delete();
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -42,13 +46,25 @@ const UpdateBook = () => {
     });
   };
 
+  const getAlert = () => {
+    if (alertMessage) {
+      return (
+        <Alert
+          message={alertMessage}
+          type="error"
+          showIcon
+          style={{ marginBottom: "10px" }}
+        />
+      );
+    }
+  };
+
   if (loading) {
     return <Spin />;
   }
 
   return (
     <div>
-      <h1>Update Book</h1>
       <Form
         name="basic"
         labelCol={{
@@ -63,6 +79,10 @@ const UpdateBook = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         style={{ margin: "0 auto", width: 400 }}>
+        <Title level={3}>Update book</Title>
+
+        {getAlert()}
+
         <Form.Item
           label="Name"
           name="name"

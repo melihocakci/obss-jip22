@@ -3,13 +3,13 @@ import BookService from "../service/BookService";
 import AdminBookActions from "../components/BookActions/AdminBookActions";
 import UserBookActions from "../components/BookActions/UserBookActions";
 import { useParams } from "react-router-dom";
-import { Typography, Spin, Divider } from "antd";
+import { Typography, Spin, Divider, message } from "antd";
 import UserContext from "../context/UserContext";
 const { Title } = Typography;
 
 export default () => {
   const [book, setBook] = useState();
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const { id: bookId } = useParams();
 
@@ -18,8 +18,13 @@ export default () => {
   }, []);
 
   const fetch = async () => {
-    const { body: book } = await BookService.fetchBook(bookId);
-    setBook(book);
+    const response = await BookService.fetchBook(bookId);
+
+    if (response.success) {
+      setBook(response.body);
+    } else {
+      message.error(response.message);
+    }
   };
 
   const bookActions = () => {

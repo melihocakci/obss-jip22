@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import UserProfileActions from "../components/ProfileActions/UserProfileActions";
 import AdminProfileActions from "../components/ProfileActions/AdminProfileActions";
-import { Typography, List, Spin, Divider, Card } from "antd";
+import { Typography, List, Spin, Divider, Card, message } from "antd";
 import UserContext from "../context/UserContext";
 const { Title } = Typography;
 
@@ -20,8 +20,13 @@ export default () => {
   }, []);
 
   const fetch = async () => {
-    const { body: user } = await UserService.fetchUser(id);
-    setUserDetails(user);
+    const response = await UserService.fetchUser(id);
+
+    if (response.success) {
+      setUserDetails(response.body);
+    } else {
+      message.error(response.message);
+    }
   };
 
   const profileActions = () => {

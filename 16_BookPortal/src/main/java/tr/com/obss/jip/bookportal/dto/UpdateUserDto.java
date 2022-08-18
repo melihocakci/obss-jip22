@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 @Setter
 @AllArgsConstructor
 public class UpdateUserDto {
-    @Size(min = 3, max = 20)
+    @Size(min = 5, max = 20)
     private String username;
 
     @Size(min = 8, max = 20)
