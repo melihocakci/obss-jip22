@@ -10,7 +10,6 @@ import tr.com.obss.jip.bookportal.dto.BookDto;
 import tr.com.obss.jip.bookportal.dto.CreateBookDto;
 import tr.com.obss.jip.bookportal.dto.FetchRequest;
 import tr.com.obss.jip.bookportal.dto.UpdateBookDto;
-import tr.com.obss.jip.bookportal.exception.BadRequestException;
 import tr.com.obss.jip.bookportal.exception.NotFoundException;
 import tr.com.obss.jip.bookportal.mapper.MyMapper;
 import tr.com.obss.jip.bookportal.mapper.MyMapperImpl;

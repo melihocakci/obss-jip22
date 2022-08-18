@@ -8,31 +8,35 @@ const { Title } = Typography;
 const UpdateBook = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [loading, setLoading] = useState(true);
-  const [currentCredentials, setCurrentCredentials] = useState({});
+  const [currentCredentials, setCurrentCredentials] = useState();
   const [credentials, setCredentials] = useState({});
-  const [alertMessage, setAlertMessage] = useState();
+  const [errorMessage, setErrorMessage] = useState();
 
   useEffect(() => {
     fetch();
   }, []);
 
   const fetch = async () => {
-    setLoading(true);
-    const { body: user } = await BookService.fetchBook(id);
-    setCurrentCredentials(user);
-    setLoading(false);
+    const response = await BookService.fetchBook(id);
+
+    if (!response.success) {
+      message.error(response.message);
+      return;
+    }
+
+    setCurrentCredentials(response.body);
   };
 
   const onFinish = async () => {
     const response = await BookService.updateBook(id, clean(credentials));
 
-    if (response.success) {
-      navigate("/books/" + id);
-      message.success("Book updated");
-    } else {
-      setAlertMessage(response.message);
+    if (!response.success) {
+      setErrorMessage(response.message);
+      return;
     }
+
+    navigate("/books/" + id);
+    message.success("Book updated");
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -47,10 +51,10 @@ const UpdateBook = () => {
   };
 
   const getAlert = () => {
-    if (alertMessage) {
+    if (errorMessage) {
       return (
         <Alert
-          message={alertMessage}
+          message={errorMessage}
           type="error"
           showIcon
           style={{ marginBottom: "10px" }}
@@ -59,7 +63,7 @@ const UpdateBook = () => {
     }
   };
 
-  if (loading) {
+  if (!currentCredentials) {
     return <Spin />;
   }
 
@@ -89,7 +93,14 @@ const UpdateBook = () => {
           rules={[
             {
               required: false,
-              message: "Please input name!",
+            },
+            {
+              min: 1,
+              message: "too short",
+            },
+            {
+              max: 30,
+              message: "too long",
             },
           ]}>
           <Input
@@ -106,7 +117,14 @@ const UpdateBook = () => {
           rules={[
             {
               required: false,
-              message: "Please input author!",
+            },
+            {
+              min: 1,
+              message: "too short",
+            },
+            {
+              max: 30,
+              message: "too long",
             },
           ]}>
           <Input

@@ -23,16 +23,20 @@ export default () => {
 
   const removeThisUser = async () => {
     const response = await UserService.removeUser("");
-    if (response.success) {
-      AuthService.signout();
-      setUser();
-      navigate("/");
-      message.success("Account deleted");
+
+    if (!response.success) {
+      message.error(response.message);
+      return;
     }
+
+    AuthService.signout();
+    setUser();
+    navigate("/");
+    message.success("Account deleted");
   };
 
   return (
-    <div style={{ float: "right", display: "inline-block" }}>
+    <div class="actions">
       <Divider orientation="left">
         <Title level={5}>Actions</Title>
       </Divider>

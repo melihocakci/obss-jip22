@@ -32,8 +32,7 @@ public class ExceptionController {
     public ResponseEntity<?> ExceptionHandler(RuntimeException ex, HttpServletRequest request) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
-        return ResponseEntity.status(status)
-                .body(responseBody(ex, request, status.value()));
+        return ResponseEntity.status(status).body(responseBody(ex, request, status.value()));
     }
 
     @ExceptionHandler({BadRequestException.class, AuthenticationException.class})

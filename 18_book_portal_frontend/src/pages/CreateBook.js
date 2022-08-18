@@ -7,17 +7,18 @@ const { Title } = Typography;
 const CreateBook = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({});
-  const [alertMessage, setAlertMessage] = useState();
+  const [errorMessage, setErrorMessage] = useState();
 
   const onFinish = async () => {
     const response = await BookService.createBook(credentials);
 
-    if (response.success) {
-      navigate("/admin");
-      message.success("Book created");
-    } else {
-      setAlertMessage(response.message);
+    if (!response.success) {
+      setErrorMessage(response.message);
+      return;
     }
+
+    navigate("/admin");
+    message.success("Book created");
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -32,10 +33,10 @@ const CreateBook = () => {
   };
 
   const getAlert = () => {
-    if (alertMessage) {
+    if (errorMessage) {
       return (
         <Alert
-          message={alertMessage}
+          message={errorMessage}
           type="error"
           showIcon
           style={{ marginBottom: "10px" }}
@@ -72,6 +73,14 @@ const CreateBook = () => {
               required: true,
               message: "Please input name!",
             },
+            {
+              min: 1,
+              message: "too short",
+            },
+            {
+              max: 30,
+              message: "too long",
+            },
           ]}>
           <Input onChange={handleChange} name="name" value={credentials.name} />
         </Form.Item>
@@ -83,6 +92,14 @@ const CreateBook = () => {
             {
               required: true,
               message: "Please input author!",
+            },
+            {
+              min: 1,
+              message: "too short",
+            },
+            {
+              max: 30,
+              message: "too long",
             },
           ]}>
           <Input

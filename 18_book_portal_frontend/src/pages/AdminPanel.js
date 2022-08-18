@@ -15,7 +15,7 @@ const AdminPanel = () => {
         </li>
         <li>
           <h2>
-            <Link to="/register">Create User</Link>
+            <Link to="/signup">Create User</Link>
           </h2>
         </li>
       </ul>

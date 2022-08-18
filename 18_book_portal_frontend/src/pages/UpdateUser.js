@@ -1,4 +1,4 @@
-import { Form, Input, Button, Spin, message, Typography } from "antd";
+import { Form, Input, Button, Spin, message, Typography, Alert } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import UserService from "../service/UserService";
@@ -14,6 +14,7 @@ export default () => {
   const [currentCredentials, setCurrentCredentials] = useState();
   const [credentials, setCredentials] = useState({});
   const { setUser } = useContext(UserContext);
+  const [errorMessage, setErrorMessage] = useState();
 
   useEffect(() => {
     fetch();
@@ -22,28 +23,37 @@ export default () => {
   const fetch = async () => {
     const response = await UserService.fetchUser(userId);
 
-    if (response.success) {
-      setCurrentCredentials(response.body);
+    if (!response.success) {
+      message.error(response.message);
+      return;
     }
+
+    setCurrentCredentials(response.body);
   };
 
   const onFinish = async () => {
     if (ThisUser.getId() == userId) {
       const response = await UserService.updateUser("", clean(credentials));
 
-      if (response.success) {
-        AuthService.signout();
-        setUser();
-        navigate("/signin");
-        message.success("Account updated");
+      if (!response.success) {
+        setErrorMessage(response.message);
+        return;
       }
+
+      AuthService.signout();
+      setUser();
+      navigate("/signin");
+      message.success("Account updated");
     } else {
       const response = await UserService.updateUser(userId, clean(credentials));
 
-      if (response.success) {
-        navigate("/users/" + userId);
-        message.success("User updated");
+      if (!response.success) {
+        setErrorMessage(response.message);
+        return;
       }
+
+      navigate("/users/" + userId);
+      message.success("User updated");
     }
   };
 
@@ -56,6 +66,19 @@ export default () => {
       ...credentials,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const getAlert = () => {
+    if (errorMessage) {
+      return (
+        <Alert
+          message={errorMessage}
+          type="error"
+          showIcon
+          style={{ marginBottom: "10px" }}
+        />
+      );
+    }
   };
 
   if (!currentCredentials) {
@@ -80,6 +103,8 @@ export default () => {
         style={{ margin: "0 auto", width: 400 }}>
         <Title level={3}>Update user</Title>
 
+        {getAlert()}
+
         <Form.Item
           label="Username"
           name="username"
@@ -87,6 +112,14 @@ export default () => {
             {
               required: false,
               message: "Please input username!",
+            },
+            {
+              min: 3,
+              message: "too short",
+            },
+            {
+              max: 20,
+              message: "too long",
             },
           ]}>
           <Input
@@ -104,6 +137,14 @@ export default () => {
             {
               required: false,
               message: "Please input password!",
+            },
+            {
+              min: 8,
+              message: "too short",
+            },
+            {
+              max: 20,
+              message: "too long",
             },
           ]}>
           <Input.Password

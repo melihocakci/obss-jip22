@@ -19,11 +19,16 @@ export default () => {
     setLoading(true);
     const response = await UserService.fetchThisUser();
 
-    const { body: user } = response;
+    if (!response.success) {
+      message.error(response.message);
+      return;
+    }
+
+    const user = response.body;
 
     let isRead = false;
-    for (let i = 0; i < user.readBooks.length; i++) {
-      if (user.readBooks[i].id == bookId) {
+    for (let book of user.readBooks) {
+      if (book.id == bookId) {
         isRead = true;
         break;
       }
@@ -31,8 +36,8 @@ export default () => {
     setRead(isRead);
 
     let isFavorite = false;
-    for (let i = 0; i < user.favoriteBooks.length; i++) {
-      if (user.favoriteBooks[i].id == bookId) {
+    for (let book of user.favoriteBooks) {
+      if (book.id == bookId) {
         isFavorite = true;
         break;
       }
@@ -44,10 +49,22 @@ export default () => {
 
   const toggleRead = async () => {
     if (!read) {
-      await UserService.addRead(bookId);
+      const response = await UserService.addRead(bookId);
+
+      if (!response.success) {
+        message.error(response.message);
+        return;
+      }
+
       message.success("Added to read books");
     } else {
-      await UserService.removeRead(bookId);
+      const response = await UserService.removeRead(bookId);
+
+      if (!response.success) {
+        message.error(response.message);
+        return;
+      }
+
       message.success("Removed from read books");
     }
 
@@ -56,10 +73,22 @@ export default () => {
 
   const toggleFavorite = async () => {
     if (!favorite) {
-      await UserService.addFavorite(bookId);
+      const response = await UserService.addFavorite(bookId);
+
+      if (!response.success) {
+        message.error(response.message);
+        return;
+      }
+
       message.success("Added to favorite books");
     } else {
-      await UserService.removeFavorite(bookId);
+      const response = await UserService.removeFavorite(bookId);
+
+      if (!response.success) {
+        message.error(response.message);
+        return;
+      }
+
       message.success("Removed from favorite books");
     }
 
@@ -67,11 +96,15 @@ export default () => {
   };
 
   if (loading) {
-    return <Spin />;
+    return (
+      <div class="actions">
+        <Spin />
+      </div>
+    );
   }
 
   return (
-    <div style={{ float: "right", display: "inline-block" }}>
+    <div class="actions">
       <Divider orientation="left">
         <Title level={5}>Actions</Title>
       </Divider>

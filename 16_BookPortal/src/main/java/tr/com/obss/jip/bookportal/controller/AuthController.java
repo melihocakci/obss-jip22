@@ -25,8 +25,7 @@ public class AuthController {
     private final JwtUserDetailsService userDetailsService;
 
     @PostMapping
-    public ResponseDto createAuthenticationToken(
-            @RequestBody AuthRequest authenticationRequest) {
+    public ResponseDto createAuthenticationToken(@RequestBody AuthRequest authenticationRequest) {
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

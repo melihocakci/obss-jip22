@@ -11,10 +11,13 @@ export default () => {
   const removeBook = async () => {
     const response = await BookService.removeBook(bookId);
 
-    if (response.success) {
-      navigate("/books");
-      message.success("Book deleted");
+    if (!response.success) {
+      message.error(response.message);
+      return;
     }
+
+    navigate("/books");
+    message.success("Book deleted");
   };
 
   const updateBook = () => {
@@ -22,7 +25,7 @@ export default () => {
   };
 
   return (
-    <div style={{ float: "right", display: "inline-block" }}>
+    <div class="actions">
       <Divider orientation="left">
         <Title level={5}>Actions</Title>
       </Divider>

@@ -29,3 +29,7 @@ td {
 Button {
   margin-right: 8px;
 }
+
+.actions {
+  float: right;
+}

@@ -22,11 +22,12 @@ export default () => {
   const fetch = async () => {
     const response = await UserService.fetchUser(id);
 
-    if (response.success) {
-      setUserDetails(response.body);
-    } else {
+    if (!response.success) {
       message.error(response.message);
+      return;
     }
+
+    setUserDetails(response.body);
   };
 
   const profileActions = () => {
@@ -72,13 +73,15 @@ export default () => {
         dataSource={userDetails.readBooks}
         renderItem={(book) => (
           <List.Item>
-            <Card
-              title={book.name}
-              onClick={() => {
-                navigate("/books/" + book.id);
-              }}>
-              {book.author}
-            </Card>
+            <a>
+              <Card
+                title={book.name}
+                onClick={() => {
+                  navigate("/books/" + book.id);
+                }}>
+                {book.author}
+              </Card>
+            </a>
           </List.Item>
         )}
       />
@@ -100,13 +103,15 @@ export default () => {
         dataSource={userDetails.favoriteBooks}
         renderItem={(book) => (
           <List.Item>
-            <Card
-              title={book.name}
-              onClick={() => {
-                navigate("/books/" + book.id);
-              }}>
-              {book.author}
-            </Card>
+            <a>
+              <Card
+                title={book.name}
+                onClick={() => {
+                  navigate("/books/" + book.id);
+                }}>
+                {book.author}
+              </Card>
+            </a>
           </List.Item>
         )}
       />

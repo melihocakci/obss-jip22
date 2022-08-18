@@ -4,7 +4,7 @@ import Books from "../pages/Books";
 import Users from "../pages/Users";
 import Book from "../pages/Book";
 import Profile from "../pages/Profile";
-import Register from "../pages/Register";
+import Signup from "../pages/Signup";
 import AdminPanel from "../pages/AdminPanel";
 import CreateBook from "../pages/CreateBook";
 import Home from "../pages/Home";
@@ -38,7 +38,7 @@ export default () => {
 
         <Route path="/signin" element={<Signin />} />
 
-        <Route path="/register" element={<Register />} />
+        <Route path="/signup" element={<Signup />} />
 
         <Route path="/" element={<Home />} />
       </Routes>

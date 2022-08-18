@@ -120,11 +120,15 @@ public class UserServiceImpl implements UserService {
         String newUsername = updateUserDto.getUsername();
         String newPassword = updateUserDto.getPassword();
 
-        if (newUsername != null && !newUsername.isEmpty()) {
+        if (newUsername != null) {
+            if (userRepository.findAnyByUsername(newUsername) != null) {
+                throw new ConflictException("Username already in use");
+            }
+
             user.setUsername(newUsername);
         }
 
-        if (newPassword != null && !newPassword.isEmpty()) {
+        if (newPassword != null) {
             user.setPassword(passwordEncoder.encode(newPassword));
         }
 
@@ -145,6 +149,10 @@ public class UserServiceImpl implements UserService {
         String newPassword = updateUserDto.getPassword();
 
         if (newUsername != null) {
+            if (userRepository.findAnyByUsername(newUsername) != null) {
+                throw new ConflictException("Username already in use");
+            }
+
             user.setUsername(newUsername);
         }
 

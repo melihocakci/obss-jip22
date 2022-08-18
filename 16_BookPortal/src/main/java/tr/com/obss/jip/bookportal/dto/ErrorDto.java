@@ -20,5 +20,4 @@ public class ErrorDto {
     private String method;
 
     private String timestamp;
-
 }

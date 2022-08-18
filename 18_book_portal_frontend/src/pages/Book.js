@@ -20,11 +20,12 @@ export default () => {
   const fetch = async () => {
     const response = await BookService.fetchBook(bookId);
 
-    if (response.success) {
-      setBook(response.body);
-    } else {
+    if (!response.success) {
       message.error(response.message);
+      return;
     }
+
+    setBook(response.body);
   };
 
   const bookActions = () => {

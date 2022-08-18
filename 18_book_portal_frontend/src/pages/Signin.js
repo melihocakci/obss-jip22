@@ -16,13 +16,14 @@ export default () => {
   const onFinish = async () => {
     const response = await AuthService.signin(credentials);
 
-    if (response.success) {
-      setUser(ThisUser.get());
-      navigate("/");
-      message.success("Signed in");
-    } else {
+    if (!response.success) {
       setErrorMessage(response.message);
+      return;
     }
+
+    setUser(ThisUser.get());
+    navigate("/");
+    message.success("Signed in");
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -111,7 +112,7 @@ export default () => {
           </Button>
         </Form.Item>
 
-        <Link to="/register">Register</Link>
+        <Link to="/signup">Create account</Link>
       </Form>
     </div>
   );

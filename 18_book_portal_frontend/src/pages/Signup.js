@@ -7,26 +7,27 @@ import UserContext from "../context/UserContext";
 import clean from "../util/clean";
 const { Title } = Typography;
 
-const Register = () => {
+export default () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({});
-  const [alertMessage, setAlertMessage] = useState();
+  const [errorMessage, setErrorMessage] = useState();
   const { user } = useContext(UserContext);
 
   const onFinish = async () => {
     const response = await UserService.createUser(clean(credentials));
 
-    if (response.success) {
-      if (user && user.role === "admin") {
-        navigate("/admin");
-      } else {
-        navigate("/signin");
-      }
-
-      message.success("User created");
-    } else {
-      setAlertMessage(response.message);
+    if (!response.success) {
+      setErrorMessage(response.message);
+      return;
     }
+
+    if (user && user.role === "admin") {
+      navigate("/admin");
+    } else {
+      navigate("/signin");
+    }
+
+    message.success("User created");
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -41,10 +42,10 @@ const Register = () => {
   };
 
   const getAlert = () => {
-    if (alertMessage) {
+    if (errorMessage) {
       return (
         <Alert
-          message={alertMessage}
+          message={errorMessage}
           type="error"
           showIcon
           style={{ marginBottom: "10px" }}
@@ -69,7 +70,7 @@ const Register = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         style={{ margin: "0 auto", width: 400 }}>
-        <Title level={3}>Register</Title>
+        <Title level={3}>Create account</Title>
 
         {getAlert()}
 
@@ -80,6 +81,14 @@ const Register = () => {
             {
               required: true,
               message: "Please input your username!",
+            },
+            {
+              min: 3,
+              message: "too short",
+            },
+            {
+              max: 20,
+              message: "too long",
             },
           ]}>
           <Input
@@ -96,6 +105,14 @@ const Register = () => {
             {
               required: true,
               message: "Please input your password!",
+            },
+            {
+              min: 8,
+              message: "too short",
+            },
+            {
+              max: 20,
+              message: "too long",
             },
           ]}>
           <Input.Password
@@ -119,5 +136,3 @@ const Register = () => {
     </div>
   );
 };
-
-export default Register;

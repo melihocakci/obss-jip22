@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Form, Input, Button } from "antd";
+import { Table, Form, Input, Button, message } from "antd";
 import UserService from "../service/UserService";
 import { Link } from "react-router-dom";
 import clean from "../util/clean";
@@ -70,7 +70,7 @@ class UserList extends React.Component {
 
     const { pagination, sortField, sortOrder, username } = cleanState;
 
-    const { body: users } = await UserService.fetchUsers({
+    const responseOne = await UserService.fetchUsers({
       page: pagination.current - 1,
       size: pagination.pageSize,
       sortField,
@@ -78,14 +78,22 @@ class UserList extends React.Component {
       username,
     });
 
-    const { body: userCount } = await UserService.fetchUserCount();
+    if (!responseOne.success) {
+      message.error(responseOne.message);
+    }
+
+    const responseTwo = await UserService.fetchUserCount();
+
+    if (!responseTwo.success) {
+      message.error(responseOne.message);
+    }
 
     this.setState({
       loading: false,
-      data: users,
+      data: responseOne.body,
       pagination: {
         ...this.state.pagination,
-        total: userCount, // Mock data
+        total: responseTwo.body, // Mock data
       },
     });
   };

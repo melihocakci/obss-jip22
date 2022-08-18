@@ -12,10 +12,13 @@ export default () => {
   const removeUser = async () => {
     const response = await UserService.removeUser(userId);
 
-    if (response.success) {
-      navigate("/users");
-      message.success("User deleted");
+    if (!response.success) {
+      message.error(response.message);
+      return;
     }
+
+    navigate("/users");
+    message.success("User deleted");
   };
 
   const updateUser = () => {
@@ -23,7 +26,7 @@ export default () => {
   };
 
   return (
-    <div style={{ float: "right", display: "inline-block" }}>
+    <div class="actions">
       <Divider orientation="left">
         <Title level={5}>Actions</Title>
       </Divider>
