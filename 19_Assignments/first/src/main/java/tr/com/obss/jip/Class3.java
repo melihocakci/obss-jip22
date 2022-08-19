@@ -8,11 +8,10 @@ public class Class3 {
     public static void main(String[] args) {
         Logger logger = LoggerFactory.getLogger(Class3.class);
 
-        try{
+        try {
             Class2.methodTwo();
         } catch (Exception ex) {
             logger.error("An error occurred", new CustomException(ex));
         }
     }
-
 }
