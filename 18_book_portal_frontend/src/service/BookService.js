@@ -13,19 +13,6 @@ const _fetchBooks = async (params) => {
   return response.data;
 };
 
-const _fetchBookCount = async () => {
-  let response;
-  try {
-    response = await axios.get("http://localhost:8080/api/book/count");
-    console.log(response);
-  } catch (error) {
-    console.log(error);
-    response = error.response;
-  }
-
-  return response.data;
-};
-
 const _fetchBook = async (id) => {
   let response;
   try {
@@ -87,5 +74,4 @@ export default {
   createBook: _createBook,
   removeBook: _removeBook,
   updateBook: _updateBook,
-  fetchBookCount: _fetchBookCount,
 };

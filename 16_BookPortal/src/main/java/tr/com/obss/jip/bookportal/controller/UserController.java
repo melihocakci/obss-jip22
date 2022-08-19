@@ -25,20 +25,15 @@ public class UserController {
             @RequestParam(defaultValue = "") String sortOrder,
             @RequestParam(defaultValue = "") String username) {
 
-        FetchRequest fetchRequest = new FetchRequest(size, page, sortField, sortOrder, username);
-        return new ResponseDto(true, null, userService.getUserDtos(fetchRequest));
+        PaginationRequest paginationRequest =
+                new PaginationRequest(size, page, sortField, sortOrder, username);
+        return new ResponseDto(true, null, userService.getPaginated(paginationRequest));
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseDto getUser(@PathVariable(name = "id") Long id) {
         return new ResponseDto(true, null, userService.getUserDto(id));
-    }
-
-    @GetMapping("/count")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseDto getUserCount() {
-        return new ResponseDto(true, null, userService.getUserCount());
     }
 
     @PostMapping

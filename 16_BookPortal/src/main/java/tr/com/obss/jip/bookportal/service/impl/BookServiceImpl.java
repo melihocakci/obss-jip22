@@ -6,10 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import tr.com.obss.jip.bookportal.dto.BookDto;
-import tr.com.obss.jip.bookportal.dto.CreateBookDto;
-import tr.com.obss.jip.bookportal.dto.FetchRequest;
-import tr.com.obss.jip.bookportal.dto.UpdateBookDto;
+import tr.com.obss.jip.bookportal.dto.*;
 import tr.com.obss.jip.bookportal.exception.NotFoundException;
 import tr.com.obss.jip.bookportal.mapper.MyMapper;
 import tr.com.obss.jip.bookportal.mapper.MyMapperImpl;
@@ -29,10 +26,10 @@ public class BookServiceImpl implements BookService {
     private final MyMapper mapper = new MyMapperImpl();
 
     @Override
-    public List<BookDto> getBookDtos(FetchRequest fetchRequest) {
+    public PaginationResponse getPaginated(PaginationRequest paginationRequest) {
         Pageable pageable;
-        String sortField = fetchRequest.getSortField();
-        String sortOrder = fetchRequest.getSortOrder();
+        String sortField = paginationRequest.getSortField();
+        String sortOrder = paginationRequest.getSortOrder();
 
         if (!sortField.isEmpty() && !sortOrder.isEmpty()) {
             Sort sort = Sort.by(sortField);
@@ -41,13 +38,14 @@ public class BookServiceImpl implements BookService {
                 sort = sort.descending();
             }
 
-            pageable = PageRequest.of(fetchRequest.getPage(), fetchRequest.getSize(), sort);
+            pageable =
+                    PageRequest.of(paginationRequest.getPage(), paginationRequest.getSize(), sort);
         } else {
-            pageable = PageRequest.of(fetchRequest.getPage(), fetchRequest.getSize());
+            pageable = PageRequest.of(paginationRequest.getPage(), paginationRequest.getSize());
         }
 
         Page<Book> bookPage;
-        String name = fetchRequest.getSearchParam();
+        String name = paginationRequest.getSearchParam();
 
         if (!name.isEmpty()) {
             bookPage = bookRepository.findAllByNameContaining(pageable, name);
@@ -63,12 +61,7 @@ public class BookServiceImpl implements BookService {
             bookDtoList.add(mapper.toBookDto(book));
         }
 
-        return bookDtoList;
-    }
-
-    @Override
-    public Long getBookCount() {
-        return bookRepository.count();
+        return new PaginationResponse(bookDtoList, bookPage.getTotalElements());
     }
 
     @Override

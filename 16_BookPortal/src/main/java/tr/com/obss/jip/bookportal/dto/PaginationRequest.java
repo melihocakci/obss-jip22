@@ -7,7 +7,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class FetchRequest {
+public class PaginationRequest {
     private Integer size;
 
     private Integer page;

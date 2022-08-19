@@ -64,7 +64,7 @@ class BookList extends React.Component {
 
     const { pagination, sortField, sortOrder, name } = cleanState;
 
-    const responseOne = await BookService.fetchBooks({
+    const response = await BookService.fetchBooks({
       page: pagination.current - 1,
       size: pagination.pageSize,
       sortField,
@@ -72,24 +72,17 @@ class BookList extends React.Component {
       name,
     });
 
-    if (!responseOne.success) {
-      message.error(responseOne.message);
-      return;
-    }
-
-    const responseTwo = await BookService.fetchBookCount();
-
-    if (!responseTwo.success) {
-      message.error(responseTwo.message);
+    if (!response.success) {
+      message.error(response.message);
       return;
     }
 
     this.setState({
       loading: false,
-      data: responseOne.body,
+      data: response.body.list,
       pagination: {
         ...this.state.pagination,
-        total: responseTwo.body,
+        total: response.body.total,
       },
     });
   };

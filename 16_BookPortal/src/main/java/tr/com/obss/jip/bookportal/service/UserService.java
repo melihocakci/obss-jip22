@@ -1,26 +1,20 @@
 package tr.com.obss.jip.bookportal.service;
 
-import tr.com.obss.jip.bookportal.dto.CreateUserDto;
-import tr.com.obss.jip.bookportal.dto.FetchRequest;
-import tr.com.obss.jip.bookportal.dto.UpdateUserDto;
-import tr.com.obss.jip.bookportal.dto.UserDto;
+import tr.com.obss.jip.bookportal.dto.*;
 import tr.com.obss.jip.bookportal.model.User;
 import tr.com.obss.jip.bookportal.other.RoleType;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
 
-    List<UserDto> getUserDtos(FetchRequest fetchRequest);
+    PaginationResponse getPaginated(PaginationRequest paginationRequest);
 
     Optional<User> getUser(String username);
 
     UserDto getUserDto(String username);
 
     UserDto getUserDto(Long userId);
-
-    Long getUserCount();
 
     void createUser(CreateUserDto createUserDto, RoleType roleType);
 

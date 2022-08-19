@@ -7,10 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import tr.com.obss.jip.bookportal.dto.CreateUserDto;
-import tr.com.obss.jip.bookportal.dto.FetchRequest;
-import tr.com.obss.jip.bookportal.dto.UpdateUserDto;
-import tr.com.obss.jip.bookportal.dto.UserDto;
+import tr.com.obss.jip.bookportal.dto.*;
 import tr.com.obss.jip.bookportal.exception.ConflictException;
 import tr.com.obss.jip.bookportal.exception.NotFoundException;
 import tr.com.obss.jip.bookportal.mapper.MyMapper;
@@ -38,10 +35,10 @@ public class UserServiceImpl implements UserService {
     private final MyMapper mapper = new MyMapperImpl();
 
     @Override
-    public List<UserDto> getUserDtos(FetchRequest fetchRequest) {
+    public PaginationResponse getPaginated(PaginationRequest paginationRequest) {
         Pageable pageable;
-        String sortField = fetchRequest.getSortField();
-        String sortOrder = fetchRequest.getSortOrder();
+        String sortField = paginationRequest.getSortField();
+        String sortOrder = paginationRequest.getSortOrder();
 
         if (!sortField.isEmpty() && !sortOrder.isEmpty()) {
             Sort sort = Sort.by(sortField);
@@ -50,13 +47,14 @@ public class UserServiceImpl implements UserService {
                 sort = sort.descending();
             }
 
-            pageable = PageRequest.of(fetchRequest.getPage(), fetchRequest.getSize(), sort);
+            pageable =
+                    PageRequest.of(paginationRequest.getPage(), paginationRequest.getSize(), sort);
         } else {
-            pageable = PageRequest.of(fetchRequest.getPage(), fetchRequest.getSize());
+            pageable = PageRequest.of(paginationRequest.getPage(), paginationRequest.getSize());
         }
 
         Page<User> userPage;
-        String username = fetchRequest.getSearchParam();
+        String username = paginationRequest.getSearchParam();
 
         if (!username.isEmpty()) {
             userPage = userRepository.findAllByUsernameContaining(pageable, username);
@@ -72,17 +70,12 @@ public class UserServiceImpl implements UserService {
             userDtoList.add(mapper.toUserDto(user));
         }
 
-        return userDtoList;
+        return new PaginationResponse(userDtoList, userPage.getTotalElements());
     }
 
     @Override
     public Optional<User> getUser(String username) {
         return userRepository.findByUsername(username);
-    }
-
-    @Override
-    public Long getUserCount() {
-        return userRepository.count();
     }
 
     @Override

@@ -1,19 +1,12 @@
 package tr.com.obss.jip.bookportal.service;
 
-import tr.com.obss.jip.bookportal.dto.BookDto;
-import tr.com.obss.jip.bookportal.dto.CreateBookDto;
-import tr.com.obss.jip.bookportal.dto.FetchRequest;
-import tr.com.obss.jip.bookportal.dto.UpdateBookDto;
-
-import java.util.List;
+import tr.com.obss.jip.bookportal.dto.*;
 
 public interface BookService {
 
-    List<BookDto> getBookDtos(FetchRequest fetchRequest);
+    PaginationResponse getPaginated(PaginationRequest paginationRequest);
 
     BookDto getBookDto(Long id);
-
-    Long getBookCount();
 
     void createBook(CreateBookDto createBookDto);
 

@@ -12,18 +12,6 @@ const _fetchUsers = async (params) => {
   return response.data;
 };
 
-const _fetchUserCount = async () => {
-  let response;
-  try {
-    response = await axios.get("http://localhost:8080/api/user/count");
-  } catch (error) {
-    console.log(error);
-    response = error.response;
-  }
-
-  return response.data;
-};
-
 const _fetchThisUser = async () => {
   let response;
   try {
@@ -154,5 +142,4 @@ export default {
   removeFavorite: _removeFavorite,
   removeUser: _removeUser,
   updateUser: _updateUser,
-  fetchUserCount: _fetchUserCount,
 };

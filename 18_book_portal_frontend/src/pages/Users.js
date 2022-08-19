@@ -70,7 +70,7 @@ class UserList extends React.Component {
 
     const { pagination, sortField, sortOrder, username } = cleanState;
 
-    const responseOne = await UserService.fetchUsers({
+    const response = await UserService.fetchUsers({
       page: pagination.current - 1,
       size: pagination.pageSize,
       sortField,
@@ -78,22 +78,16 @@ class UserList extends React.Component {
       username,
     });
 
-    if (!responseOne.success) {
-      message.error(responseOne.message);
-    }
-
-    const responseTwo = await UserService.fetchUserCount();
-
-    if (!responseTwo.success) {
-      message.error(responseOne.message);
+    if (!response.success) {
+      message.error(response.message);
     }
 
     this.setState({
       loading: false,
-      data: responseOne.body,
+      data: response.body.list,
       pagination: {
         ...this.state.pagination,
-        total: responseTwo.body, // Mock data
+        total: response.body.total, // Mock data
       },
     });
   };

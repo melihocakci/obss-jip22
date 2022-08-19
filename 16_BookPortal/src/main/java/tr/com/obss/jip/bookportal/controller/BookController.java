@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import tr.com.obss.jip.bookportal.dto.CreateBookDto;
-import tr.com.obss.jip.bookportal.dto.FetchRequest;
+import tr.com.obss.jip.bookportal.dto.PaginationRequest;
 import tr.com.obss.jip.bookportal.dto.ResponseDto;
 import tr.com.obss.jip.bookportal.dto.UpdateBookDto;
 import tr.com.obss.jip.bookportal.service.BookService;
@@ -27,20 +27,15 @@ public class BookController {
             @RequestParam(defaultValue = "") String sortOrder,
             @RequestParam(defaultValue = "") String name) {
 
-        FetchRequest fetchRequest = new FetchRequest(size, page, sortField, sortOrder, name);
-        return new ResponseDto(true, null, bookService.getBookDtos(fetchRequest));
+        PaginationRequest paginationRequest =
+                new PaginationRequest(size, page, sortField, sortOrder, name);
+        return new ResponseDto(true, null, bookService.getPaginated(paginationRequest));
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseDto getBook(@PathVariable(name = "id") Long id) {
         return new ResponseDto(true, null, bookService.getBookDto(id));
-    }
-
-    @GetMapping("/count")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseDto getBookCount() {
-        return new ResponseDto(true, null, bookService.getBookCount());
     }
 
     @PostMapping
