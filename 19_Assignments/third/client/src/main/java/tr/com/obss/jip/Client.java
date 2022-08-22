@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
-import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class Client {
@@ -16,15 +15,23 @@ public class Client {
 
             channel.connect(new InetSocketAddress("127.0.0.1", 3939));
 
-            while (channel.isConnected()) {
-                channel.read(buffer);
+            channel.read(buffer);
+            System.out.println(new String(buffer.array(), 0, buffer.position()));
+            buffer.clear();
 
-                System.out.println(new String(buffer.array(), 0, buffer.position()));
+            while (channel.isConnected()) {
+                int num = scanner.nextInt();
+                buffer.putInt(num);
+                buffer.flip();
+                channel.write(buffer);
                 buffer.clear();
 
-                int num = scanner.nextInt();
-                channel.write(ByteBuffer.wrap(Integer.toString(num).getBytes()));
+                channel.read(buffer);
+                System.out.println(new String(buffer.array(), 0, buffer.position()));
+                buffer.clear();
             }
+        } catch (Exception ex) {
+
         }
     }
 }

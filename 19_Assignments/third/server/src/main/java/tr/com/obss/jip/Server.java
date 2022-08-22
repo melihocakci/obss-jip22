@@ -10,34 +10,52 @@ import java.util.Random;
 public class Server {
     public static void main(String[] args) throws IOException {
         try (ServerSocketChannel channel = ServerSocketChannel.open()) {
-            channel.bind(new InetSocketAddress(3939));
+            channel.socket().bind(new InetSocketAddress(3939));
 
             ByteBuffer buffer = ByteBuffer.allocate(200);
             Random rand = new Random();
 
             SocketChannel client = channel.accept();
 
-            int randNum = rand.nextInt(9);
+            int randNum = rand.nextInt(10);
 
-            client.write(ByteBuffer.wrap("Enter a number between 0-9".getBytes()));
+            buffer.put("Enter a number between 0-9".getBytes());
+            buffer.flip();
+            client.write(buffer);
+            buffer.clear();
 
-            for (int i = 0; i < 3; i++) {
+            int i = 0, num;
+            while (true) {
                 client.read(buffer);
-
-                int num = Integer.parseInt(new String(buffer.array()).trim());
+                buffer.flip();
+                num = buffer.getInt();
                 buffer.clear();
 
-                if (num > randNum) {
-                    client.write(ByteBuffer.wrap("Try smaller".getBytes()));
-                } else if (num < randNum) {
-                    client.write(ByteBuffer.wrap("Try bigger".getBytes()));
+                System.out.println(num);
+
+                if (i++ == 2 || num == randNum) {
+                    break;
+                } else if (num > randNum) {
+                    buffer.put("Try smaller".getBytes());
                 } else {
-                    client.write(ByteBuffer.wrap("Congratulations!".getBytes()));
-                    return;
+                    buffer.put("Try bigger".getBytes());
                 }
+
+                buffer.flip();
+                client.write(buffer);
+                buffer.clear();
             }
 
-            client.write(ByteBuffer.wrap("You lost!".getBytes()));
+            if (num == randNum) {
+                buffer.put("Congratulations!".getBytes());
+            } else {
+                buffer.put(("You lost! The number was " + randNum).getBytes());
+            }
+
+            buffer.flip();
+            client.write(buffer);
+        } catch (Exception ex) {
+
         }
     }
 }

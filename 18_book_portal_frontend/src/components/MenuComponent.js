@@ -29,8 +29,6 @@ export default () => {
           <Link to="/admin">Admin Panel</Link>
         </Menu.Item>
       );
-    } else {
-      return;
     }
   };
 
