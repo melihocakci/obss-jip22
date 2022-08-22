@@ -37,8 +37,6 @@ public class Server {
                         SocketChannel client = server.accept();
                         client.configureBlocking(false);
 
-                        sendMessage(client, "Enter a number between 0-9");
-
                         ClientContext context = new ClientContext(rand.nextInt(10), 0);
 
                         client.register(selector, SelectionKey.OP_READ, context);
@@ -57,15 +55,15 @@ public class Server {
                         buffer.clear();
 
                         if (num == randNum) {
-                            sendMessage(client, "Congratulations! You won!");
+                            response(client, Status.CORRECT);
                             client.close();
                         } else if (tries == 2) {
-                            sendMessage(client, "You lost! The number was " + randNum);
+                            response(client, Status.FAIL);
                             client.close();
                         } else if (num > randNum) {
-                            sendMessage(client, "Try a smaller number");
+                            response(client, Status.SMALLER);
                         } else {
-                            sendMessage(client, "Try a bigger number");
+                            response(client, Status.BIGGER);
                         }
 
                         context.setTries(++tries);
@@ -79,8 +77,8 @@ public class Server {
         }
     }
 
-    private static void sendMessage(SocketChannel client, String message) throws IOException {
-        buffer.put(message.getBytes());
+    private static void response(SocketChannel client, Status status) throws IOException {
+        buffer.putInt(status.value());
         buffer.flip();
         client.write(buffer);
         buffer.clear();
