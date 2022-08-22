@@ -1,13 +1,14 @@
 package tr.com.obss.jip;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.Scanner;
 
+import static java.lang.Thread.sleep;
+
 public class Client {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         try (SocketChannel channel = SocketChannel.open()) {
             ByteBuffer buffer = ByteBuffer.allocate(200);
 
