@@ -7,8 +7,7 @@ public class Bean implements Serializable {
     private double price;
     private int time;
 
-    public Bean() {
-    }
+    public Bean() {}
 
     public String getName() {
         return name;

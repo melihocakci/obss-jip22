@@ -1,7 +1,8 @@
-package tr.com.obss.jip.second.menu;
+package tr.com.obss.jip.second.menu.food;
 
 import tr.com.obss.jip.second.annotation.Food;
 import tr.com.obss.jip.second.annotation.Time;
+import tr.com.obss.jip.second.menu.MenuItem;
 
 @Food(price = 12.5)
 public class Kebab implements MenuItem {

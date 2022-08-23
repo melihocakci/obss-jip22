@@ -1,16 +1,20 @@
 package tr.com.obss.jip.second;
 
+import org.reflections.Reflections;
+import org.reflections.scanners.SubTypesScanner;
 import tr.com.obss.jip.second.annotation.Food;
 import tr.com.obss.jip.second.annotation.Time;
-import tr.com.obss.jip.second.menu.Kebab;
-import tr.com.obss.jip.second.menu.Pizza;
-import tr.com.obss.jip.second.menu.Sushi;
 
 import java.lang.reflect.Method;
+import java.util.Set;
 
 public class MainClass {
     public static void main(String[] args) {
-        Class<?>[] items = new Class[] {Kebab.class, Pizza.class, Sushi.class};
+        Reflections reflections =
+                new Reflections("tr.com.obss.jip.second.menu.food", new SubTypesScanner(false));
+
+        Set<Class<?>> items = reflections.getSubTypesOf(Object.class);
+
         Result result = new Result();
 
         for (Class<?> item : items) {
