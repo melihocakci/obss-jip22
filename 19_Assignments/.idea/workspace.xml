@@ -5,18 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="71666cbc-ac10-44af-bc17-bac27a323105" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/first/src/main/java/tr/com/obss/jip/first/MainClass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/second/src/main/java/tr/com/obss/jip/second/MainClass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/second/src/main/java/tr/com/obss/jip/second/annotation/Food.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/second/src/main/java/tr/com/obss/jip/second/annotation/Time.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/second/src/main/java/tr/com/obss/jip/second/food/FoodInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/second/src/main/java/tr/com/obss/jip/second/food/Kebab.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/second/src/main/java/tr/com/obss/jip/second/food/Pizza.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/second/src/main/java/tr/com/obss/jip/second/food/Sushi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first/error.log" beforeDir="false" afterPath="$PROJECT_DIR$/first/error.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first/src/main/java/tr/com/obss/jip/Class1.java" beforeDir="false" afterPath="$PROJECT_DIR$/first/src/main/java/tr/com/obss/jip/first/Class1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first/src/main/java/tr/com/obss/jip/Class2.java" beforeDir="false" afterPath="$PROJECT_DIR$/first/src/main/java/tr/com/obss/jip/first/Class2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first/src/main/java/tr/com/obss/jip/Class3.java" beforeDir="false" afterPath="$PROJECT_DIR$/first/src/main/java/tr/com/obss/jip/first/Class3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/first/src/main/java/tr/com/obss/jip/CustomException.java" beforeDir="false" afterPath="$PROJECT_DIR$/first/src/main/java/tr/com/obss/jip/first/CustomException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/third/client/src/main/java/tr/com/obss/jip/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/third/client/src/main/java/tr/com/obss/jip/client/MainClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/third/client/src/main/java/tr/com/obss/jip/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/third/client/src/main/java/tr/com/obss/jip/client/Status.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/third/server/src/main/java/tr/com/obss/jip/ClientContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/third/server/src/main/java/tr/com/obss/jip/server/ClientContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/third/server/src/main/java/tr/com/obss/jip/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/third/server/src/main/java/tr/com/obss/jip/server/MainClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/third/server/src/main/java/tr/com/obss/jip/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/third/server/src/main/java/tr/com/obss/jip/server/Status.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +24,7 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -67,6 +64,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="tr.com.obss.jip.second.annotation" />
       <recent name="tr.com.obss.jip" />
     </key>
   </component>
@@ -104,7 +102,7 @@
       <workItem from="1661093367264" duration="35000" />
       <workItem from="1661098605374" duration="1125000" />
       <workItem from="1661148479822" duration="24827000" />
-      <workItem from="1661234891230" duration="2955000" />
+      <workItem from="1661234891230" duration="5054000" />
     </task>
     <servers />
   </component>
