@@ -13,17 +13,21 @@ import java.util.Set;
 
 public class Server {
     private static ByteBuffer buffer;
+    private static Selector selector;
+    private static ServerSocketChannel server;
+    private static Random rand;
 
     public static void main(String[] args) {
-        try (ServerSocketChannel server = ServerSocketChannel.open()) {
-            Selector selector = Selector.open();
+        try (ServerSocketChannel serverSocketChannel = ServerSocketChannel.open()) {
+            server = serverSocketChannel;
+            selector = Selector.open();
 
             server.bind(new InetSocketAddress(3939));
             server.configureBlocking(false);
             server.register(selector, SelectionKey.OP_ACCEPT);
 
-            Random rand = new Random();
-            buffer = ByteBuffer.allocate(256);
+            rand = new Random();
+            buffer = ByteBuffer.allocate(4);
 
             while (true) {
                 selector.select();
@@ -33,54 +37,84 @@ public class Server {
                 while (iter.hasNext()) {
                     SelectionKey key = iter.next();
 
-                    if (key.isAcceptable()) {
-                        SocketChannel client = server.accept();
-                        client.configureBlocking(false);
-
-                        ClientContext context = new ClientContext(rand.nextInt(10), 0);
-
-                        client.register(selector, SelectionKey.OP_READ, context);
-                    }
-
-                    if (key.isReadable()) {
-                        SocketChannel client = (SocketChannel) key.channel();
-
-                        ClientContext context = (ClientContext) key.attachment();
-                        int tries = context.getTries();
-                        int randNum = context.getRandNum();
-
-                        client.read(buffer);
-                        buffer.flip();
-                        int num = buffer.getInt();
-                        buffer.clear();
-
-                        if (num == randNum) {
-                            response(client, Status.CORRECT);
-                            client.close();
-                        } else if (tries == 2) {
-                            response(client, Status.FAIL);
-                            client.close();
-                        } else if (num > randNum) {
-                            response(client, Status.SMALLER);
-                        } else {
-                            response(client, Status.BIGGER);
+                    try {
+                        if (key.isAcceptable()) {
+                            accept();
                         }
 
-                        context.setTries(++tries);
-                        key.attach(context);
+                        if (key.isReadable()) {
+                            read(key);
+                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
                     }
+
                     iter.remove();
                 }
             }
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         }
     }
 
-    private static void response(SocketChannel client, Status status) throws IOException {
+    private static void accept() throws IOException {
+        SocketChannel client = null;
+        try {
+            client = server.accept();
+            client.configureBlocking(false);
+
+            ClientContext context = new ClientContext(rand.nextInt(10), 0);
+
+            client.register(selector, SelectionKey.OP_READ, context);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            if (client != null) {
+                client.close();
+            }
+        }
+    }
+
+    private static void read(SelectionKey key) throws IOException {
+        SocketChannel client = (SocketChannel) key.channel();
+        try {
+            ClientContext context = (ClientContext) key.attachment();
+            int tries = context.getTries();
+            int randNum = context.getRandNum();
+
+            int num = receive(client);
+
+            if (num == randNum) {
+                respond(client, Status.CORRECT);
+                client.close();
+            } else if (tries == 2) {
+                respond(client, Status.FAIL);
+                client.close();
+            } else if (num > randNum) {
+                respond(client, Status.SMALLER);
+            } else {
+                respond(client, Status.BIGGER);
+            }
+
+            context.setTries(++tries);
+            key.attach(context);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            client.close();
+        }
+    }
+
+    private static void respond(SocketChannel client, Status status) throws IOException {
         buffer.putInt(status.value());
         buffer.flip();
         client.write(buffer);
         buffer.clear();
+    }
+
+    private static int receive(SocketChannel client) throws IOException {
+        client.read(buffer);
+        buffer.flip();
+        int num = buffer.getInt();
+        buffer.clear();
+        return num;
     }
 }

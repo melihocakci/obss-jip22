@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="71666cbc-ac10-44af-bc17-bac27a323105" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/third/client/src/main/java/tr/com/obss/jip/Status.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/third/server/src/main/java/tr/com/obss/jip/Status.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/third/client/src/main/java/tr/com/obss/jip/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/third/client/src/main/java/tr/com/obss/jip/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/third/client/target/classes/tr/com/obss/jip/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/third/client/target/classes/tr/com/obss/jip/Client.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/third/server/src/main/java/tr/com/obss/jip/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/third/server/src/main/java/tr/com/obss/jip/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/third/server/target/classes/tr/com/obss/jip/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/third/server/target/classes/tr/com/obss/jip/Server.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +124,8 @@
       <workItem from="1660898204167" duration="11050000" />
       <workItem from="1661093367264" duration="35000" />
       <workItem from="1661098605374" duration="1125000" />
-      <workItem from="1661148479822" duration="20407000" />
+      <workItem from="1661148479822" duration="24827000" />
+      <workItem from="1661234891230" duration="2170000" />
     </task>
     <servers />
   </component>
