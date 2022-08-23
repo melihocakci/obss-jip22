@@ -1,4 +1,4 @@
-package tr.com.obss.jip;
+package tr.com.obss.jip.client;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -7,7 +7,7 @@ import java.nio.channels.SocketChannel;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Client {
+public class MainClass {
     public static void main(String[] args) {
         try (SocketChannel channel = SocketChannel.open()) {
             ByteBuffer buffer = ByteBuffer.allocate(4);

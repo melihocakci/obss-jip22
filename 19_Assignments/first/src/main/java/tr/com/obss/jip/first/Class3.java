@@ -1,11 +1,11 @@
-package tr.com.obss.jip;
+package tr.com.obss.jip.first;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Class3 {
 
-    public static void main(String[] args) {
+    public static void methodOne() {
         Logger logger = LoggerFactory.getLogger(Class3.class);
 
         try {

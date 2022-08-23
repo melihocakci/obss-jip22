@@ -1,4 +1,4 @@
-package tr.com.obss.jip;
+package tr.com.obss.jip.server;
 
 public class ClientContext {
     public int randNum;

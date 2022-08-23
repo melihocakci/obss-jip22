@@ -1,4 +1,4 @@
-package tr.com.obss.jip;
+package tr.com.obss.jip.first;
 
 public class Class2 {
 

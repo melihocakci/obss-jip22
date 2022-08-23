@@ -1,4 +1,4 @@
-package tr.com.obss.jip;
+package tr.com.obss.jip.client;
 
 public enum Status {
     CORRECT(0),
@@ -6,7 +6,7 @@ public enum Status {
     BIGGER(2),
     FAIL(3);
 
-    public final int value;
+    private final int value;
 
     Status(int value) {
         this.value = value;

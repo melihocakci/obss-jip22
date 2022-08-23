@@ -1,4 +1,4 @@
-package tr.com.obss.jip;
+package tr.com.obss.jip.server;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
-public class Server {
+public class MainClass {
     private static ByteBuffer buffer;
     private static Selector selector;
     private static ServerSocketChannel server;
