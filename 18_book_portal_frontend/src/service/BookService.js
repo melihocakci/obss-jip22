@@ -1,9 +1,11 @@
 import axios from "axios";
 
+const host = "http://localhost:8080";
+
 const _fetchBooks = async (params) => {
   let response;
   try {
-    response = await axios.get("http://localhost:8080/api/book", { params });
+    response = await axios.get(host + "/api/book", { params });
     console.log(response);
   } catch (error) {
     console.log(error);
@@ -16,7 +18,7 @@ const _fetchBooks = async (params) => {
 const _fetchBook = async (id) => {
   let response;
   try {
-    response = await axios.get("http://localhost:8080/api/book/" + id);
+    response = await axios.get(host + "/api/book/" + id);
     console.log(response);
   } catch (error) {
     console.log(error);
@@ -29,7 +31,7 @@ const _fetchBook = async (id) => {
 const _createBook = async (credentials) => {
   let response;
   try {
-    response = await axios.post("http://localhost:8080/api/book/", credentials);
+    response = await axios.post(host + "/api/book/", credentials);
     console.log(response);
   } catch (error) {
     console.log(error);
@@ -42,10 +44,7 @@ const _createBook = async (credentials) => {
 const _updateBook = async (bookId, credentials) => {
   let response;
   try {
-    response = await axios.put(
-      "http://localhost:8080/api/book/" + bookId,
-      credentials
-    );
+    response = await axios.put(host + "/api/book/" + bookId, credentials);
     console.log(response);
   } catch (error) {
     console.log(error);
@@ -58,7 +57,7 @@ const _updateBook = async (bookId, credentials) => {
 const _removeBook = async (bookId) => {
   let response;
   try {
-    response = await axios.delete("http://localhost:8080/api/book/" + bookId);
+    response = await axios.delete(host + "/api/book/" + bookId);
     console.log(response);
   } catch (error) {
     console.log(error);

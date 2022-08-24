@@ -25,11 +25,11 @@ public class BookController {
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "") String sortField,
             @RequestParam(defaultValue = "") String sortOrder,
-            @RequestParam(defaultValue = "") String name) {
+            @RequestParam(defaultValue = "") String searchParam) {
 
         PaginationRequest paginationRequest =
-                new PaginationRequest(size, page, sortField, sortOrder, name);
-        return new ResponseDto(true, null, bookService.getPaginated(paginationRequest));
+                new PaginationRequest(size, page, sortField, sortOrder, searchParam);
+        return new ResponseDto(true, null, bookService.getPage(paginationRequest));
     }
 
     @GetMapping("/{id}")

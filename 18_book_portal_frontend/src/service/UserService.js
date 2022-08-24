@@ -1,9 +1,11 @@
 import axios from "axios";
 
+const host = "http://localhost:8080";
+
 const _fetchUsers = async (params) => {
   let response;
   try {
-    response = await axios.get("http://localhost:8080/api/user", { params });
+    response = await axios.get(host + "/api/user", { params });
   } catch (error) {
     console.log(error);
     response = error.response;
@@ -15,7 +17,7 @@ const _fetchUsers = async (params) => {
 const _fetchThisUser = async () => {
   let response;
   try {
-    response = await axios.get("http://localhost:8080/api/user/profile");
+    response = await axios.get(host + "/api/user/profile");
   } catch (error) {
     console.log(error);
     response = error.response;
@@ -27,7 +29,7 @@ const _fetchThisUser = async () => {
 const _fetchUser = async (userId) => {
   let response;
   try {
-    response = await axios.get("http://localhost:8080/api/user/" + userId);
+    response = await axios.get(host + "/api/user/" + userId);
   } catch (error) {
     console.log(error);
     response = error.response;
@@ -39,9 +41,7 @@ const _fetchUser = async (userId) => {
 const _addRead = async (bookId) => {
   let response;
   try {
-    response = await axios.post(
-      "http://localhost:8080/api/user/read/" + bookId
-    );
+    response = await axios.post(host + "/api/user/read/" + bookId);
   } catch (error) {
     console.log(error);
     response = error.response;
@@ -53,9 +53,7 @@ const _addRead = async (bookId) => {
 const _addFavorite = async (bookId) => {
   let response;
   try {
-    response = await axios.post(
-      "http://localhost:8080/api/user/favorite/" + bookId
-    );
+    response = await axios.post(host + "/api/user/favorite/" + bookId);
   } catch (error) {
     console.log(error);
     response = error.response;
@@ -67,9 +65,7 @@ const _addFavorite = async (bookId) => {
 const _removeRead = async (bookId) => {
   let response;
   try {
-    response = await axios.delete(
-      "http://localhost:8080/api/user/read/" + bookId
-    );
+    response = await axios.delete(host + "/api/user/read/" + bookId);
   } catch (error) {
     console.log(error);
     response = error.response;
@@ -81,9 +77,7 @@ const _removeRead = async (bookId) => {
 const _removeFavorite = async (bookId) => {
   let response;
   try {
-    response = await axios.delete(
-      "http://localhost:8080/api/user/favorite/" + bookId
-    );
+    response = await axios.delete(host + "/api/user/favorite/" + bookId);
   } catch (error) {
     console.log(error);
     response = error.response;
@@ -95,7 +89,7 @@ const _removeFavorite = async (bookId) => {
 const _createUser = async (credentials) => {
   let response;
   try {
-    response = await axios.post("http://localhost:8080/api/user", credentials);
+    response = await axios.post(host + "/api/user", credentials);
   } catch (error) {
     console.log(error);
     response = error.response;
@@ -107,7 +101,7 @@ const _createUser = async (credentials) => {
 const _removeUser = async (userId) => {
   let response;
   try {
-    response = await axios.delete("http://localhost:8080/api/user/" + userId);
+    response = await axios.delete(host + "/api/user/" + userId);
   } catch (error) {
     console.log(error);
     response = error.response;
@@ -119,10 +113,7 @@ const _removeUser = async (userId) => {
 const _updateUser = async (userId, credentials) => {
   let response;
   try {
-    response = await axios.put(
-      "http://localhost:8080/api/user/" + userId,
-      credentials
-    );
+    response = await axios.put(host + "/api/user/" + userId, credentials);
   } catch (error) {
     console.log(error);
     response = error.response;

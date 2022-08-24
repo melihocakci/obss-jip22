@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     private final MyMapper mapper = new MyMapperImpl();
 
     @Override
-    public PaginationResponse getPaginated(PaginationRequest paginationRequest) {
+    public PaginationResponse getPage(PaginationRequest paginationRequest) {
         Pageable pageable;
         String sortField = paginationRequest.getSortField();
         String sortOrder = paginationRequest.getSortOrder();
@@ -54,10 +54,10 @@ public class UserServiceImpl implements UserService {
         }
 
         Page<User> userPage;
-        String username = paginationRequest.getSearchParam();
+        String searchParam = paginationRequest.getSearchParam();
 
-        if (!username.isEmpty()) {
-            userPage = userRepository.findAllByUsernameContaining(pageable, username);
+        if (!searchParam.isEmpty()) {
+            userPage = userRepository.search(pageable, searchParam);
         } else {
             userPage = userRepository.findAll(pageable);
         }

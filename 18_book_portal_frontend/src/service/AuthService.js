@@ -1,11 +1,13 @@
 import axios from "axios";
 import LocalStorageUtil from "../util/LocalStorageUtil";
 
+const host = "http://localhost:8080";
+
 const _signin = async (credentials) => {
   let response;
 
   try {
-    response = await axios.post("http://localhost:8080/api/auth", credentials);
+    response = await axios.post(host + "/api/auth", credentials);
     LocalStorageUtil.setToken(response.data.body);
   } catch (error) {
     console.log(error);

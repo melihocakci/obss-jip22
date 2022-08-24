@@ -66,7 +66,7 @@ class BookList extends React.Component {
       size: pagination.pageSize,
       sortField,
       sortOrder,
-      name,
+      searchParam: name,
     });
 
     if (!response.success) {

@@ -23,11 +23,11 @@ public class UserController {
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "") String sortField,
             @RequestParam(defaultValue = "") String sortOrder,
-            @RequestParam(defaultValue = "") String username) {
+            @RequestParam(defaultValue = "") String searchParam) {
 
         PaginationRequest paginationRequest =
-                new PaginationRequest(size, page, sortField, sortOrder, username);
-        return new ResponseDto(true, null, userService.getPaginated(paginationRequest));
+                new PaginationRequest(size, page, sortField, sortOrder, searchParam);
+        return new ResponseDto(true, null, userService.getPage(paginationRequest));
     }
 
     @GetMapping("/{id}")

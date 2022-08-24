@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService {
     private final MyMapper mapper = new MyMapperImpl();
 
     @Override
-    public PaginationResponse getPaginated(PaginationRequest paginationRequest) {
+    public PaginationResponse getPage(PaginationRequest paginationRequest) {
         Pageable pageable;
         String sortField = paginationRequest.getSortField();
         String sortOrder = paginationRequest.getSortOrder();
@@ -45,10 +45,10 @@ public class BookServiceImpl implements BookService {
         }
 
         Page<Book> bookPage;
-        String name = paginationRequest.getSearchParam();
+        String searchParam = paginationRequest.getSearchParam();
 
-        if (!name.isEmpty()) {
-            bookPage = bookRepository.findAllByNameContaining(pageable, name);
+        if (!searchParam.isEmpty()) {
+            bookPage = bookRepository.search(pageable, searchParam);
         } else {
             bookPage = bookRepository.findAll(pageable);
         }

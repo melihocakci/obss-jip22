@@ -71,7 +71,7 @@ class UserList extends React.Component {
       size: pagination.pageSize,
       sortField,
       sortOrder,
-      username,
+      searchParam: username,
     });
 
     if (!response.success) {

@@ -4,7 +4,7 @@ import tr.com.obss.jip.bookportal.dto.*;
 
 public interface BookService {
 
-    PaginationResponse getPaginated(PaginationRequest paginationRequest);
+    PaginationResponse getPage(PaginationRequest paginationRequest);
 
     BookDto getBookDto(Long id);
 

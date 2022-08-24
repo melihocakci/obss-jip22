@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    PaginationResponse getPaginated(PaginationRequest paginationRequest);
+    PaginationResponse getPage(PaginationRequest paginationRequest);
 
     Optional<User> getUser(String username);
 
