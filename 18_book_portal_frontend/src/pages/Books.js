@@ -9,19 +9,16 @@ const columns = [
     title: "Name",
     dataIndex: "name",
     sorter: true,
-    width: "20%",
   },
   {
     title: "Author",
     dataIndex: "author",
     sorter: true,
-    width: "20%",
   },
   {
     title: "Details",
     dataIndex: "id",
     render: (id) => <Link to={"/books/" + id}>See Details</Link>,
-    width: "20%",
   },
 ];
 

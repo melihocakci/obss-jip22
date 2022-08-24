@@ -6,9 +6,4 @@ import AxiosConfigurer from "./config/AxiosConfigurer";
 AxiosConfigurer.configure();
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-  rootElement
-);
+ReactDOM.render(<App />, rootElement);

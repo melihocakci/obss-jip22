@@ -9,25 +9,21 @@ const columns = [
     title: "Username",
     dataIndex: "username",
     sorter: true,
-    width: "20%",
   },
   {
     title: "Read Books",
     dataIndex: "readBooks",
     render: (list) => list.length,
-    width: "20%",
   },
   {
     title: "Favorited Books",
     dataIndex: "favoriteBooks",
     render: (list) => list.length,
-    width: "20%",
   },
   {
     title: "Profile",
     dataIndex: "id",
     render: (id) => <Link to={"/users/" + id}>See Profile</Link>,
-    width: "20%",
   },
 ];
 
