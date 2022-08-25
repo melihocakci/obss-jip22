@@ -1,4 +1,13 @@
-import { Form, Input, Button, Spin, message, Typography, Alert } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Spin,
+  message,
+  Typography,
+  Alert,
+  Popconfirm,
+} from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import UserService from "../service/UserService";
@@ -13,7 +22,7 @@ export default () => {
   const { id: userId } = useParams();
   const [currentCredentials, setCurrentCredentials] = useState();
   const [credentials, setCredentials] = useState({});
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [errorMessage, setErrorMessage] = useState();
 
   useEffect(() => {
@@ -81,14 +90,39 @@ export default () => {
     }
   };
 
+  const removeThisUser = async () => {
+    if (userId == user.id) {
+      var id = "";
+    } else if (user.role === "admin") {
+      var id = userId;
+    } else {
+      message.error("Unauthorized");
+      return;
+    }
+
+    var response = await UserService.removeUser(id);
+
+    if (!response.success) {
+      message.error(response.message);
+      return;
+    }
+
+    AuthService.signout();
+    setUser();
+    navigate("/");
+    message.success("Account deleted");
+  };
+
   if (!currentCredentials) {
     return <Spin />;
   }
 
   return (
-    <div>
+    <div style={{ margin: "0 auto", marginBottom: 20, width: 400 }}>
+      <Title level={3}>Account Settings</Title>
+
       <Form
-        name="basic"
+        name="username"
         labelCol={{
           span: 8,
         }}
@@ -99,10 +133,7 @@ export default () => {
           remember: true,
         }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        style={{ margin: "0 auto", width: 400 }}>
-        <Title level={3}>Update user</Title>
-
+        onFinishFailed={onFinishFailed}>
         {getAlert()}
 
         <Form.Item
@@ -131,7 +162,33 @@ export default () => {
         </Form.Item>
 
         <Form.Item
-          label="password"
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}>
+          <Button type="primary" htmlType="submit">
+            Change username
+          </Button>
+        </Form.Item>
+      </Form>
+
+      <Form
+        name="password"
+        labelCol={{
+          span: 8,
+        }}
+        wrapperCol={{
+          span: 16,
+        }}
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}>
+        {getAlert()}
+
+        <Form.Item
+          label="Password"
           name="password"
           rules={[
             {
@@ -160,10 +217,18 @@ export default () => {
             span: 16,
           }}>
           <Button type="primary" htmlType="submit">
-            Submit
+            Change password
           </Button>
         </Form.Item>
       </Form>
+
+      <Popconfirm
+        title="Are you sure?"
+        okText="Yes"
+        cancelText="No"
+        onConfirm={removeThisUser}>
+        <Button>Delete Account</Button>
+      </Popconfirm>
     </div>
   );
 };

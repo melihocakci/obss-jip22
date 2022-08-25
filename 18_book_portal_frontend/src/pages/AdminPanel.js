@@ -10,7 +10,7 @@ const AdminPanel = () => {
       <ul>
         <li>
           <h2>
-            <Link to="/admin/create">Create Book</Link>
+            <Link to="/admin/book">Create Book</Link>
           </h2>
         </li>
         <li>

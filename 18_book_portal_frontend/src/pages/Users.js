@@ -11,6 +11,15 @@ const columns = [
     sorter: true,
   },
   {
+    title: "Email",
+    dataIndex: "email",
+    sorter: true,
+  },
+  {
+    title: "Gender",
+    dataIndex: "gender",
+  },
+  {
     title: "Read Books",
     dataIndex: "readBooks",
     render: (list) => list.length,

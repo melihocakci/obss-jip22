@@ -22,13 +22,13 @@ export default () => {
   };
 
   const updateUser = () => {
-    navigate("/users/" + userId + "/update");
+    navigate("/users/" + userId + "/settings");
   };
 
   return (
     <div class="actions">
       <Divider orientation="left">
-        <Title level={5}>Actions</Title>
+        <Title level={5}>Admin Actions</Title>
       </Divider>
 
       <Popconfirm

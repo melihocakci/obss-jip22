@@ -14,9 +14,9 @@ public interface BookRepository extends PagingAndSortingRepository<Book, Long> {
     @Query(
             value =
                     "select * from books "
-                            + "where deleted = false and "
-                            + "(lower(name) like lower('%'||:searchParam||'%') or "
-                            + "lower(author) like lower('%'||:searchParam||'%'))",
+                            + "where deleted = false"
+                            + " and (lower(name) like lower('%'||:searchParam||'%')"
+                            + " or lower(author) like lower('%'||:searchParam||'%'))",
             nativeQuery = true)
     Page<Book> search(Pageable pageable, @Param("searchParam") String searchParam);
 }

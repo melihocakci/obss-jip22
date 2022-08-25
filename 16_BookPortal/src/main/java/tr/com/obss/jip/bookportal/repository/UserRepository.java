@@ -18,8 +18,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(
             value =
                     "select * from users "
-                            + "where deleted = false and "
-                            + "lower(username) like lower('%'||:searchParam||'%')",
+                            + "where deleted = false"
+                            + " and (lower(username) like lower('%'||:searchParam||'%') "
+                            + " or lower(email) like lower('%'||:searchParam||'%'))",
             nativeQuery = true)
     Page<User> search(Pageable pageable, @Param("searchParam") String searchParam);
 

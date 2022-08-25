@@ -10,7 +10,7 @@ import CreateBook from "../pages/CreateBook";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import UpdateBook from "../pages/UpdateBook";
-import UpdateUser from "../pages/UpdateUser";
+import AccountSettings from "../pages/AccountSettings";
 
 export default () => {
   return (
@@ -18,7 +18,7 @@ export default () => {
       className="site-layout-background"
       style={{ padding: 35, minHeight: 580, marginTop: 40, marginBottom: 50 }}>
       <Routes>
-        <Route path="/admin/create" element={<CreateBook />} />
+        <Route path="/admin/book" element={<CreateBook />} />
 
         <Route path="/admin" element={<AdminPanel />} />
 
@@ -30,7 +30,7 @@ export default () => {
 
         <Route path="/books" element={<Books />} />
 
-        <Route path="/users/:id/update" element={<UpdateUser />} />
+        <Route path="/users/:id/settings" element={<AccountSettings />} />
 
         <Route path="/users/:id" element={<Profile />} />
 

@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import UserService from "../service/UserService";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import UserProfileActions from "../components/ProfileActions/UserProfileActions";
 import AdminProfileActions from "../components/ProfileActions/AdminProfileActions";
 import { Typography, List, Spin, Divider, Card, message } from "antd";
 import UserContext from "../context/UserContext";
@@ -31,15 +30,7 @@ export default () => {
   };
 
   const profileActions = () => {
-    if (!user) {
-      return;
-    }
-
-    if (user.id === userDetails.id) {
-      return <UserProfileActions />;
-    }
-
-    if (user.role === "admin") {
+    if (user && user.role === "admin") {
       return <AdminProfileActions />;
     }
   };

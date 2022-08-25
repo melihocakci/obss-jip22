@@ -27,7 +27,7 @@ export default () => {
   return (
     <div class="actions">
       <Divider orientation="left">
-        <Title level={5}>Actions</Title>
+        <Title level={5}>Admin Actions</Title>
       </Divider>
 
       <Popconfirm
