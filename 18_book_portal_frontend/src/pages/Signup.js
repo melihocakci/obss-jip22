@@ -2,12 +2,13 @@ import { Form, Input, Button } from "antd";
 import { useNavigate, Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import UserService from "../service/UserService";
-import { Typography, Alert, message } from "antd";
+import { Typography, Alert, message, Select } from "antd";
 import UserContext from "../context/UserContext";
 import clean from "../util/clean";
 const { Title } = Typography;
+const { Option } = Select;
 
-export default () => {
+const Signup = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({});
   const [errorMessage, setErrorMessage] = useState();
@@ -91,11 +92,47 @@ export default () => {
               message: "too long",
             },
           ]}>
-          <Input
-            onChange={handleChange}
-            name="username"
-            value={credentials.username}
-          />
+          <Input onChange={handleChange} name="username" />
+        </Form.Item>
+
+        <Form.Item
+          name="email"
+          label="E-mail"
+          rules={[
+            {
+              type: "email",
+              message: "Invalid E-mail!",
+            },
+            {
+              required: true,
+              message: "Please input your E-mail!",
+            },
+          ]}>
+          <Input onChange={handleChange} name="email" />
+        </Form.Item>
+
+        <Form.Item
+          name="gender"
+          label="Gender"
+          rules={[
+            {
+              required: true,
+              message: "Please select gender!",
+            },
+          ]}>
+          <Select
+            placeholder="select your gender"
+            onChange={(value) => {
+              setCredentials({
+                ...credentials,
+                gender: value,
+              });
+            }}
+            name="gender">
+            <Option value="male">Male</Option>
+            <Option value="female">Female</Option>
+            <Option value="other">Other</Option>
+          </Select>
         </Form.Item>
 
         <Form.Item
@@ -115,11 +152,30 @@ export default () => {
               message: "too long",
             },
           ]}>
-          <Input.Password
-            onChange={handleChange}
-            name="password"
-            value={credentials.password}
-          />
+          <Input.Password onChange={handleChange} name="password" />
+        </Form.Item>
+
+        <Form.Item
+          name="confirm"
+          label="Confirm Password"
+          dependencies={["password"]}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: "Please confirm your password!",
+            },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue("password") === value) {
+                  return Promise.resolve();
+                }
+
+                return Promise.reject(new Error("The passwords do not match!"));
+              },
+            }),
+          ]}>
+          <Input.Password />
         </Form.Item>
 
         <Form.Item
@@ -128,7 +184,7 @@ export default () => {
             span: 16,
           }}>
           <Button type="primary" htmlType="submit">
-            Submit
+            Sign up
           </Button>
         </Form.Item>
         <Link to="/signin">Sign in</Link>
@@ -136,3 +192,5 @@ export default () => {
     </div>
   );
 };
+
+export default Signup;

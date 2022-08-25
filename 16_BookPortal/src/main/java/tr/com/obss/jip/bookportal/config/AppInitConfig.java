@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import tr.com.obss.jip.bookportal.dto.CreateUserDto;
 import tr.com.obss.jip.bookportal.model.Role;
 import tr.com.obss.jip.bookportal.model.User;
+import tr.com.obss.jip.bookportal.other.Gender;
 import tr.com.obss.jip.bookportal.other.RoleType;
 import tr.com.obss.jip.bookportal.service.RoleService;
 import tr.com.obss.jip.bookportal.service.UserService;
@@ -43,7 +44,8 @@ public class AppInitConfig {
                 return;
             }
 
-            CreateUserDto newAdmin = new CreateUserDto("admin", "admin123");
+            CreateUserDto newAdmin =
+                    new CreateUserDto("admin", "admin123", "admin@admin.com", Gender.OTHER);
             userService.createUser(newAdmin, RoleType.ROLE_ADMIN);
         };
     }

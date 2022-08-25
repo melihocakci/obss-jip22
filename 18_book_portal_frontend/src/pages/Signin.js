@@ -7,7 +7,7 @@ import UserContext from "../context/UserContext";
 import ThisUser from "../util/ThisUser";
 const { Title } = Typography;
 
-export default () => {
+const Signin = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({});
   const { setUser } = useContext(UserContext);
@@ -108,7 +108,7 @@ export default () => {
             span: 16,
           }}>
           <Button type="primary" htmlType="submit">
-            Submit
+            Sign in
           </Button>
         </Form.Item>
 
@@ -117,3 +117,5 @@ export default () => {
     </div>
   );
 };
+
+export default Signin;
