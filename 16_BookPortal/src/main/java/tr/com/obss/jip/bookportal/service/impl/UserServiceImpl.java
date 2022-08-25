@@ -14,6 +14,7 @@ import tr.com.obss.jip.bookportal.mapper.MyMapper;
 import tr.com.obss.jip.bookportal.mapper.MyMapperImpl;
 import tr.com.obss.jip.bookportal.model.Book;
 import tr.com.obss.jip.bookportal.model.User;
+import tr.com.obss.jip.bookportal.other.Gender;
 import tr.com.obss.jip.bookportal.other.RoleType;
 import tr.com.obss.jip.bookportal.repository.BookRepository;
 import tr.com.obss.jip.bookportal.repository.UserRepository;
@@ -90,40 +91,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserDto(String username) {
-        Optional<User> optionalUser = userRepository.findByUsername(username);
-
-        if (optionalUser.isEmpty()) {
-            throw new NotFoundException("User does not exist");
+    public void createUser(CreateUserDto createUserDto, RoleType roleType) {
+        if (userRepository.findByUsername(createUserDto.getUsername()).isPresent()) {
+            throw new ConflictException("Username is already in use");
         }
 
-        return mapper.toUserDto(optionalUser.get());
-    }
-
-    @Override
-    public void updateUser(String username, UpdateUserDto updateUserDto) {
-        Optional<User> optionalUser = userRepository.findByUsername(username);
-
-        if (optionalUser.isEmpty()) {
-            throw new NotFoundException("User does not exist");
+        if (userRepository.findByEmail(createUserDto.getEmail()).isPresent()) {
+            throw new ConflictException("Email is already in use");
         }
 
-        User user = optionalUser.get();
-
-        String newUsername = updateUserDto.getUsername();
-        String newPassword = updateUserDto.getPassword();
-
-        if (newUsername != null) {
-            if (userRepository.findAnyByUsername(newUsername) != null) {
-                throw new ConflictException("Username already in use");
-            }
-
-            user.setUsername(newUsername);
-        }
-
-        if (newPassword != null) {
-            user.setPassword(passwordEncoder.encode(newPassword));
-        }
+        User user = mapper.toUser(createUserDto);
+        user.setRole(roleService.getRole(roleType));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
     }
@@ -140,9 +119,11 @@ public class UserServiceImpl implements UserService {
 
         String newUsername = updateUserDto.getUsername();
         String newPassword = updateUserDto.getPassword();
+        String newEmail = updateUserDto.getEmail();
+        Gender newGender = updateUserDto.getGender();
 
         if (newUsername != null) {
-            if (userRepository.findAnyByUsername(newUsername) != null) {
+            if (userRepository.findByUsername(newUsername).isPresent()) {
                 throw new ConflictException("Username already in use");
             }
 
@@ -151,6 +132,18 @@ public class UserServiceImpl implements UserService {
 
         if (newPassword != null) {
             user.setPassword(passwordEncoder.encode(newPassword));
+        }
+
+        if (newEmail != null) {
+            if (userRepository.findByEmail(newEmail).isPresent()) {
+                throw new ConflictException("Email already in use");
+            }
+
+            user.setEmail(newEmail);
+        }
+
+        if (newGender != null) {
+            user.setGender(newGender);
         }
 
         userRepository.save(user);
@@ -168,19 +161,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(String username) {
-        Optional<User> optionalUser = userRepository.findByUsername(username);
-
-        if (optionalUser.isEmpty()) {
-            throw new NotFoundException("User does not exist");
-        }
-
-        userRepository.deleteById(optionalUser.get().getId());
-    }
-
-    @Override
-    public void removeFavoriteBook(String username, Long bookId) {
-        Optional<User> optionalUser = userRepository.findByUsername(username);
+    public void removeFavoriteBook(Long id, Long bookId) {
+        Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isEmpty()) {
             throw new NotFoundException("User does not exist");
@@ -201,8 +183,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void removeReadBook(String username, Long bookId) {
-        Optional<User> optionalUser = userRepository.findByUsername(username);
+    public void removeReadBook(Long id, Long bookId) {
+        Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isEmpty()) {
             throw new NotFoundException("User does not exist");
@@ -223,22 +205,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createUser(CreateUserDto createUserDto, RoleType roleType) {
-        if (userRepository.findByUsername(createUserDto.getUsername()).isPresent()) {
-            throw new ConflictException("Username is already in use");
-        }
-
-        User user = mapper.toUser(createUserDto);
-        user.setRole(roleService.getRole(roleType));
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setGender(createUserDto.getGender());
-
-        userRepository.save(user);
-    }
-
-    @Override
-    public void addFavoriteBook(String username, Long bookId) {
-        Optional<User> optionalUser = userRepository.findByUsername(username);
+    public void addFavoriteBook(Long id, Long bookId) {
+        Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isEmpty()) {
             throw new NotFoundException("User does not exist");
@@ -264,8 +232,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addReadBook(String username, Long bookId) {
-        Optional<User> optionalUser = userRepository.findByUsername(username);
+    public void addReadBook(Long id, Long bookId) {
+        Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isEmpty()) {
             throw new NotFoundException("User does not exist");

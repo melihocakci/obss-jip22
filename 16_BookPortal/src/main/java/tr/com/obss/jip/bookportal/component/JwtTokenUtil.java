@@ -3,6 +3,7 @@ package tr.com.obss.jip.bookportal.component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.impl.DefaultClaims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,6 +30,11 @@ public class JwtTokenUtil {
 
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
+    }
+
+    public Long getIdFromToken(String token) {
+        Claims claims = getAllClaimsFromToken(token);
+        return Long.parseLong((String) claims.get("id"));
     }
 
     public Date getExpirationDateFromToken(String token) {
@@ -58,8 +64,8 @@ public class JwtTokenUtil {
 
         User user = optionalUser.get();
 
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("id", user.getId());
+        Claims claims = new DefaultClaims();
+        claims.put("id", Long.toString(user.getId()));
         claims.put("role", user.getRole().getName().toString().split("_")[1].toLowerCase());
         return doGenerateToken(claims, userDetails.getUsername());
     }

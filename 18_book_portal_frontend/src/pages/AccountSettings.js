@@ -7,6 +7,8 @@ import {
   Typography,
   Alert,
   Popconfirm,
+  Divider,
+  Select,
 } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
@@ -15,7 +17,9 @@ import AuthService from "../service/AuthService";
 import ThisUser from "../util/ThisUser";
 import UserContext from "../context/UserContext";
 import clean from "../util/clean";
+import { render } from "@testing-library/react";
 const { Title } = Typography;
+const { Option } = Select;
 
 export default () => {
   const navigate = useNavigate();
@@ -41,7 +45,7 @@ export default () => {
   };
 
   const onFinish = async () => {
-    if (ThisUser.getId() == userId) {
+    if (user.id == userId) {
       const response = await UserService.updateUser("", clean(credentials));
 
       if (!response.success) {
@@ -52,8 +56,8 @@ export default () => {
       AuthService.signout();
       setUser();
       navigate("/signin");
-      message.success("Account updated");
-    } else {
+      message.success("Update successful");
+    } else if (user.role === "admin") {
       const response = await UserService.updateUser(userId, clean(credentials));
 
       if (!response.success) {
@@ -61,8 +65,7 @@ export default () => {
         return;
       }
 
-      navigate("/users/" + userId);
-      message.success("User updated");
+      message.success("Update successful");
     }
   };
 
@@ -90,27 +93,33 @@ export default () => {
     }
   };
 
-  const removeThisUser = async () => {
+  const removeUser = async () => {
     if (userId == user.id) {
-      var id = "";
+      const response = await UserService.removeUser("");
+
+      if (!response.success) {
+        message.error(response.message);
+        return;
+      }
+
+      AuthService.signout();
+      setUser();
+      navigate("/");
+      message.success("Account deleted");
     } else if (user.role === "admin") {
-      var id = userId;
+      const response = await UserService.removeUser(userId);
+
+      if (!response.success) {
+        message.error(response.message);
+        return;
+      }
+
+      navigate("/users");
+      message.success("User deleted");
     } else {
       message.error("Unauthorized");
       return;
     }
-
-    var response = await UserService.removeUser(id);
-
-    if (!response.success) {
-      message.error(response.message);
-      return;
-    }
-
-    AuthService.signout();
-    setUser();
-    navigate("/");
-    message.success("Account deleted");
   };
 
   if (!currentCredentials) {
@@ -120,6 +129,10 @@ export default () => {
   return (
     <div style={{ margin: "0 auto", marginBottom: 20, width: 400 }}>
       <Title level={3}>Account Settings</Title>
+
+      {getAlert()}
+
+      <Divider />
 
       <Form
         name="username"
@@ -134,16 +147,10 @@ export default () => {
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}>
-        {getAlert()}
-
         <Form.Item
           label="Username"
           name="username"
           rules={[
-            {
-              required: false,
-              message: "Please input username!",
-            },
             {
               min: 3,
               message: "too short",
@@ -161,31 +168,51 @@ export default () => {
           />
         </Form.Item>
 
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}>
-          <Button type="primary" htmlType="submit">
-            Change username
-          </Button>
-        </Form.Item>
-      </Form>
+        <Divider />
 
-      <Form
-        name="password"
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}>
-        {getAlert()}
+        <Form.Item
+          label="E-mail"
+          name="email"
+          rules={[
+            {
+              min: 3,
+              message: "too short",
+            },
+            {
+              max: 20,
+              message: "too long",
+            },
+          ]}>
+          <Input
+            onChange={handleChange}
+            name="email"
+            value={credentials.email}
+            placeholder={currentCredentials.email}
+          />
+        </Form.Item>
+
+        <Divider />
+
+        <Form.Item name="gender" label="Gender">
+          <Select
+            placeholder={
+              currentCredentials.gender.charAt(0).toUpperCase() +
+              currentCredentials.gender.slice(1)
+            }
+            onChange={(value) => {
+              setCredentials({
+                ...credentials,
+                gender: value,
+              });
+            }}
+            name="gender">
+            <Option value="male">Male</Option>
+            <Option value="female">Female</Option>
+            <Option value="other">Other</Option>
+          </Select>
+        </Form.Item>
+
+        <Divider />
 
         <Form.Item
           label="Password"
@@ -212,22 +239,45 @@ export default () => {
         </Form.Item>
 
         <Form.Item
+          name="confirm"
+          label="Confirm Password"
+          dependencies={["password"]}
+          hasFeedback
+          rules={[
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue("password") === value) {
+                  return Promise.resolve();
+                }
+
+                return Promise.reject(new Error("The passwords do not match!"));
+              },
+            }),
+          ]}>
+          <Input.Password />
+        </Form.Item>
+
+        <Form.Item
           wrapperCol={{
             offset: 8,
             span: 16,
           }}>
           <Button type="primary" htmlType="submit">
-            Change password
+            Update Account
           </Button>
         </Form.Item>
       </Form>
+
+      <Divider />
 
       <Popconfirm
         title="Are you sure?"
         okText="Yes"
         cancelText="No"
-        onConfirm={removeThisUser}>
-        <Button>Delete Account</Button>
+        onConfirm={removeUser}>
+        <Button type="primary" danger>
+          Delete Account
+        </Button>
       </Popconfirm>
     </div>
   );

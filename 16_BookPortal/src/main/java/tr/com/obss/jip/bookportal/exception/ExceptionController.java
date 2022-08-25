@@ -31,7 +31,7 @@ public class ExceptionController {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> ExceptionHandler(RuntimeException ex, HttpServletRequest request) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-
+        ex.printStackTrace();
         return ResponseEntity.status(status).body(responseBody(ex, request, status.value()));
     }
 

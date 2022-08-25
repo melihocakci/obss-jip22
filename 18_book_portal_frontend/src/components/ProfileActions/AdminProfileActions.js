@@ -31,15 +31,7 @@ export default () => {
         <Title level={5}>Admin Actions</Title>
       </Divider>
 
-      <Popconfirm
-        title="Are you sure?"
-        okText="Yes"
-        cancelText="No"
-        onConfirm={removeUser}>
-        <Button>Delete User</Button>
-      </Popconfirm>
-
-      <Button onClick={updateUser}>Update User</Button>
+      <Button onClick={updateUser}>Account Settings</Button>
     </div>
   );
 };

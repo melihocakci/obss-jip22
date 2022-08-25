@@ -12,25 +12,19 @@ public interface UserService {
 
     Optional<User> getUser(String username);
 
-    UserDto getUserDto(String username);
-
     UserDto getUserDto(Long userId);
 
     void createUser(CreateUserDto createUserDto, RoleType roleType);
 
-    void addFavoriteBook(String username, Long bookId);
+    void addFavoriteBook(Long id, Long bookId);
 
-    void addReadBook(String username, Long bookId);
-
-    void updateUser(String username, UpdateUserDto updateUserDto);
+    void addReadBook(Long id, Long bookId);
 
     void updateUser(Long id, UpdateUserDto updateUserDto);
 
     void deleteUser(Long userId);
 
-    void deleteUser(String username);
+    void removeFavoriteBook(Long id, Long bookId);
 
-    void removeFavoriteBook(String username, Long bookId);
-
-    void removeReadBook(String username, Long bookId);
+    void removeReadBook(Long id, Long bookId);
 }
