@@ -7,20 +7,25 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import tr.com.obss.jip.bookportal.dto.*;
 import tr.com.obss.jip.bookportal.exception.ConflictException;
 import tr.com.obss.jip.bookportal.exception.NotFoundException;
 import tr.com.obss.jip.bookportal.mapper.MyMapper;
 import tr.com.obss.jip.bookportal.mapper.MyMapperImpl;
 import tr.com.obss.jip.bookportal.model.Book;
+import tr.com.obss.jip.bookportal.model.Image;
 import tr.com.obss.jip.bookportal.model.User;
 import tr.com.obss.jip.bookportal.other.Gender;
 import tr.com.obss.jip.bookportal.other.RoleType;
 import tr.com.obss.jip.bookportal.repository.BookRepository;
 import tr.com.obss.jip.bookportal.repository.UserRepository;
+import tr.com.obss.jip.bookportal.service.ImageService;
 import tr.com.obss.jip.bookportal.service.RoleService;
 import tr.com.obss.jip.bookportal.service.UserService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +36,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
+    private final ImageService imageService;
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
     private final MyMapper mapper = new MyMapperImpl();
@@ -202,6 +208,43 @@ public class UserServiceImpl implements UserService {
         }
 
         throw new NotFoundException("Book not in read list");
+    }
+
+    @Override
+    public void addImage(Long userId, MultipartFile multipartImage) {
+        Image image = new Image();
+        image.setName(multipartImage.getName());
+
+        try {
+            image.setContent(multipartImage.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        imageService.save(image);
+
+        User user =
+                userRepository
+                        .findById(userId)
+                        .orElseThrow(() -> new NotFoundException("User does not exist"));
+
+        user.setImage(image);
+
+        userRepository.save(user);
+    }
+
+    @Transactional
+    @Override
+    public byte[] getImage(Long userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+
+        if(optionalUser.isEmpty()) {
+            throw new NotFoundException("User does not exist");
+        }
+
+        User user = optionalUser.get();
+
+        return user.getImage().getContent();
     }
 
     @Override

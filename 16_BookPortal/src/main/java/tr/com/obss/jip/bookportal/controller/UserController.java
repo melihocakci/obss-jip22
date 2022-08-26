@@ -1,12 +1,16 @@
 package tr.com.obss.jip.bookportal.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import tr.com.obss.jip.bookportal.component.JwtTokenUtil;
 import tr.com.obss.jip.bookportal.dto.*;
 import tr.com.obss.jip.bookportal.other.RoleType;
+import tr.com.obss.jip.bookportal.service.ImageService;
 import tr.com.obss.jip.bookportal.service.UserService;
 
 import javax.validation.Valid;
@@ -16,6 +20,7 @@ import javax.validation.Valid;
 @RequestMapping("/api/user")
 public class UserController {
     private final UserService userService;
+    private final ImageService imageService;
     private final JwtTokenUtil tokenUtil;
 
     @GetMapping
@@ -85,7 +90,8 @@ public class UserController {
 
     @PostMapping("/favorite/{bookId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseDto addFavoriteBook(@PathVariable Long bookId, @RequestHeader("Authorization") String token) {
+    public ResponseDto addFavoriteBook(
+            @PathVariable Long bookId, @RequestHeader("Authorization") String token) {
         Long id = tokenUtil.getIdFromToken(token.substring(7));
         userService.addFavoriteBook(id, bookId);
 
@@ -94,7 +100,8 @@ public class UserController {
 
     @PostMapping("/read/{bookId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseDto addReadBook(@PathVariable Long bookId, @RequestHeader("Authorization") String token) {
+    public ResponseDto addReadBook(
+            @PathVariable Long bookId, @RequestHeader("Authorization") String token) {
         Long id = tokenUtil.getIdFromToken(token.substring(7));
         userService.addReadBook(id, bookId);
 
@@ -103,7 +110,8 @@ public class UserController {
 
     @DeleteMapping("/favorite/{bookId}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseDto removeFavoriteBook(@PathVariable Long bookId, @RequestHeader("Authorization") String token) {
+    public ResponseDto removeFavoriteBook(
+            @PathVariable Long bookId, @RequestHeader("Authorization") String token) {
         Long id = tokenUtil.getIdFromToken(token.substring(7));
         userService.removeFavoriteBook(id, bookId);
 
@@ -112,7 +120,8 @@ public class UserController {
 
     @DeleteMapping("/read/{bookId}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseDto removeReadBook(@PathVariable Long bookId, @RequestHeader("Authorization") String token) {
+    public ResponseDto removeReadBook(
+            @PathVariable Long bookId, @RequestHeader("Authorization") String token) {
         Long id = tokenUtil.getIdFromToken(token.substring(7));
         userService.removeReadBook(id, bookId);
 
@@ -126,5 +135,33 @@ public class UserController {
         UserDto userDto = userService.getUserDto(id);
 
         return new ResponseDto(true, null, userDto);
+    }
+
+    @PostMapping("/{userId}/image")
+    @ResponseStatus(HttpStatus.CREATED)
+    ResponseDto uploadImageAdmin(
+            @RequestParam("image") MultipartFile multipartImage, @PathVariable Long userId) {
+        userService.addImage(userId, multipartImage);
+
+        return new ResponseDto(true, "Image saved successfully", null);
+    }
+
+    @PostMapping("/image")
+    @ResponseStatus(HttpStatus.CREATED)
+    ResponseDto uploadImageUser(
+            @RequestParam("image") MultipartFile multipartImage,
+            @RequestHeader("Authorization") String token) {
+
+        Long userId = tokenUtil.getIdFromToken(token.substring(7));
+        userService.addImage(userId, multipartImage);
+
+        return new ResponseDto(true, "Image saved successfully", null);
+    }
+
+    @GetMapping(value = "/{userId}/image", produces = MediaType.IMAGE_JPEG_VALUE)
+    Resource getProfileImage(@PathVariable Long userId) {
+        byte[] image = userService.getImage(userId);
+
+        return new ByteArrayResource(image);
     }
 }

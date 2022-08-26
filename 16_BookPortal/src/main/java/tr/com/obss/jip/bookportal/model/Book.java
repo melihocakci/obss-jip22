@@ -34,5 +34,10 @@ public class Book {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "favoriteBooks")
     private List<User> favoriteUsers = new ArrayList<>();
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
+    private Image image;
+
+    @Column(nullable = false)
     private Boolean deleted = Boolean.FALSE;
 }

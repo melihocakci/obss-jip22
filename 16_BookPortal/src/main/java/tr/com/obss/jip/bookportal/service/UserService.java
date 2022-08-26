@@ -1,5 +1,6 @@
 package tr.com.obss.jip.bookportal.service;
 
+import org.springframework.web.multipart.MultipartFile;
 import tr.com.obss.jip.bookportal.dto.*;
 import tr.com.obss.jip.bookportal.model.User;
 import tr.com.obss.jip.bookportal.other.RoleType;
@@ -27,4 +28,8 @@ public interface UserService {
     void removeFavoriteBook(Long id, Long bookId);
 
     void removeReadBook(Long id, Long bookId);
+
+    void addImage(Long userId, MultipartFile multipartImage);
+
+    byte[] getImage(Long userId);
 }

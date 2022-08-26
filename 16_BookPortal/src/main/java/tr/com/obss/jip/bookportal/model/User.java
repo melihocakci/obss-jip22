@@ -40,6 +40,10 @@ public class User {
     @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     private Role role;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
+    private Image image;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "read_list",
@@ -54,5 +58,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "book_id"))
     private List<Book> favoriteBooks = new ArrayList<>();
 
+    @Column(nullable = false)
     private Boolean deleted = Boolean.FALSE;
 }
