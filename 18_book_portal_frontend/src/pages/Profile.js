@@ -2,8 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import UserService from "../service/UserService";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import AdminProfileActions from "../components/ProfileActions/AdminProfileActions";
-import { Typography, List, Spin, Divider, Card, message } from "antd";
+import { Typography, List, Spin, Divider, Card, message, Button } from "antd";
 import UserContext from "../context/UserContext";
 const { Title } = Typography;
 
@@ -29,10 +28,18 @@ export default () => {
     setUserDetails(response.body);
   };
 
-  const profileActions = () => {
-    if (user && user.role === "admin") {
-      return <AdminProfileActions />;
-    }
+  const SettingsButton = () => {
+    if (user && user.role === "admin")
+      return (
+        <div className="actions">
+          <Button
+            onClick={() => {
+              navigate("/users/" + id + "/settings");
+            }}>
+            Account Settings
+          </Button>
+        </div>
+      );
   };
 
   if (!userDetails) {
@@ -45,7 +52,7 @@ export default () => {
         <Title>{userDetails.username}</Title>
       </div>
 
-      {profileActions()}
+      <SettingsButton />
 
       <Divider orientation="left">
         <Title level={5}>Read Books</Title>

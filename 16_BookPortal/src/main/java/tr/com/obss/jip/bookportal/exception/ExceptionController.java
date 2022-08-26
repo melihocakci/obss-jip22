@@ -29,9 +29,10 @@ public class ExceptionController {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> ExceptionHandler(RuntimeException ex, HttpServletRequest request) {
+    public ResponseEntity<?> ExceptionHandler(Exception ex, HttpServletRequest request) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         ex.printStackTrace();
+        ex = new Exception("There was an internal error. Please try again later.", ex);
         return ResponseEntity.status(status).body(responseBody(ex, request, status.value()));
     }
 

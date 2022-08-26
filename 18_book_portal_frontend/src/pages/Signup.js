@@ -129,9 +129,9 @@ const Signup = () => {
               });
             }}
             name="gender">
-            <Option value="male">Male</Option>
-            <Option value="female">Female</Option>
-            <Option value="other">Other</Option>
+            <Option value="male">male</Option>
+            <Option value="female">female</Option>
+            <Option value="other">other</Option>
           </Select>
         </Form.Item>
 

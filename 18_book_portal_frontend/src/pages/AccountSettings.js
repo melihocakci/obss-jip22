@@ -46,26 +46,26 @@ export default () => {
 
   const onFinish = async () => {
     if (user.id == userId) {
-      const response = await UserService.updateUser("", clean(credentials));
+      var response = await UserService.updateUser("", clean(credentials));
+    } else if (user.role === "admin") {
+      var response = await UserService.updateUser(userId, clean(credentials));
+    } else {
+      message.error("Unauhorized");
+      return;
+    }
 
-      if (!response.success) {
-        setErrorMessage(response.message);
-        return;
-      }
+    if (!response.success) {
+      setErrorMessage(response.message);
+      return;
+    }
 
+    message.success("Update successful");
+
+    if (user.id == userId && (credentials.username || credentials.password)) {
       AuthService.signout();
       setUser();
       navigate("/signin");
-      message.success("Update successful");
-    } else if (user.role === "admin") {
-      const response = await UserService.updateUser(userId, clean(credentials));
-
-      if (!response.success) {
-        setErrorMessage(response.message);
-        return;
-      }
-
-      message.success("Update successful");
+      message.info("Please sign in with your new credentials");
     }
   };
 
@@ -80,7 +80,7 @@ export default () => {
     });
   };
 
-  const getAlert = () => {
+  const GetAlert = () => {
     if (errorMessage) {
       return (
         <Alert
@@ -118,7 +118,6 @@ export default () => {
       message.success("User deleted");
     } else {
       message.error("Unauthorized");
-      return;
     }
   };
 
@@ -130,7 +129,7 @@ export default () => {
     <div style={{ margin: "0 auto", marginBottom: 20, width: 400 }}>
       <Title level={3}>Account Settings</Title>
 
-      {getAlert()}
+      <GetAlert />
 
       <Divider />
 
@@ -195,10 +194,7 @@ export default () => {
 
         <Form.Item name="gender" label="Gender">
           <Select
-            placeholder={
-              currentCredentials.gender.charAt(0).toUpperCase() +
-              currentCredentials.gender.slice(1)
-            }
+            placeholder={currentCredentials.gender}
             onChange={(value) => {
               setCredentials({
                 ...credentials,
@@ -206,9 +202,9 @@ export default () => {
               });
             }}
             name="gender">
-            <Option value="male">Male</Option>
-            <Option value="female">Female</Option>
-            <Option value="other">Other</Option>
+            <Option value="male">male</Option>
+            <Option value="female">female</Option>
+            <Option value="other">other</Option>
           </Select>
         </Form.Item>
 

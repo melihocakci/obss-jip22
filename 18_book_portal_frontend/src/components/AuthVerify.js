@@ -13,7 +13,7 @@ export default () => {
       AuthService.signout();
       setUser(null);
       navigate("/signin");
-      message.info("Authentication timed out");
+      message.info("Authentication timed out. Please sign in again.");
     }
   }
 };

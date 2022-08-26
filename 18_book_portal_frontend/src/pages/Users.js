@@ -130,7 +130,9 @@ class UserList extends React.Component {
           </Form.Item>
           <Form.Item
             style={{ marginLeft: "12px", width: 400, display: "inline-block" }}>
-            <Button onClick={this.fetch}>Search</Button>
+            <Button onClick={this.fetch} type="primary" htmlType="submit">
+              Search
+            </Button>
           </Form.Item>
         </Form>
 
