@@ -9,15 +9,15 @@ import {
   Popconfirm,
   Divider,
   Select,
+  Upload,
 } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import UserService from "../service/UserService";
 import AuthService from "../service/AuthService";
-import ThisUser from "../util/ThisUser";
 import UserContext from "../context/UserContext";
 import clean from "../util/clean";
-import { render } from "@testing-library/react";
 const { Title } = Typography;
 const { Option } = Select;
 
@@ -28,6 +28,7 @@ export default () => {
   const [credentials, setCredentials] = useState({});
   const { user, setUser } = useContext(UserContext);
   const [errorMessage, setErrorMessage] = useState();
+  const [image, setImage] = useState();
 
   useEffect(() => {
     fetch();
@@ -45,13 +46,31 @@ export default () => {
   };
 
   const onFinish = async () => {
+    let response;
+
     if (user.id == userId) {
-      var response = await UserService.updateUser("", clean(credentials));
+      response = await UserService.updateUser("", clean(credentials));
     } else if (user.role === "admin") {
-      var response = await UserService.updateUser(userId, clean(credentials));
+      response = await UserService.updateUser(userId, clean(credentials));
     } else {
       message.error("Unauhorized");
       return;
+    }
+
+    if (!response.success) {
+      setErrorMessage(response.message);
+      return;
+    }
+
+    if (image) {
+      if (user.id == userId) {
+        response = await UserService.postProfileImage(image);
+      } else if (user.role === "admin") {
+        response = await UserService.postProfileImageOf(userId, image);
+      } else {
+        message.error("Unauhorized");
+        return;
+      }
     }
 
     if (!response.success) {
@@ -165,6 +184,31 @@ export default () => {
             value={credentials.username}
             placeholder={currentCredentials.username}
           />
+        </Form.Item>
+
+        <Divider />
+
+        <Form.Item label="Profile Image" valuePropName="fileList">
+          <Upload
+            onRemove={() => {
+              setImage();
+            }}
+            beforeUpload={(image) => {
+              setImage(image);
+              return false;
+            }}
+            accept=".jpg,.jpeg"
+            listType="picture-card">
+            <div>
+              <PlusOutlined />
+              <div
+                style={{
+                  marginTop: 8,
+                }}>
+                Upload
+              </div>
+            </div>
+          </Upload>
         </Form.Item>
 
         <Divider />

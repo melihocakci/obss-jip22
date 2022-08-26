@@ -55,6 +55,39 @@ const _fetchProfileImage = async (userId) => {
   return response.data;
 };
 
+const _postProfileImage = async (image) => {
+  let response;
+  try {
+    var formData = new FormData();
+    formData.append("image", image);
+
+    response = await axios.post(host + "/api/user/image", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  } catch (error) {
+    console.log(error);
+    response = error.response;
+  }
+
+  return response.data;
+};
+
+const _postProfileImageOf = async (userId, image) => {
+  let response;
+  try {
+    response = await axios.get(host + "/api/user/" + userId + "/image", {
+      responseType: "arraybuffer",
+    });
+
+    response.data = Buffer.from(response.data, "binary").toString("base64");
+  } catch (error) {
+    console.log(error);
+    response = error.response;
+  }
+
+  return response.data;
+};
+
 const _addRead = async (bookId) => {
   let response;
   try {
@@ -151,4 +184,6 @@ export default {
   removeUser: _removeUser,
   updateUser: _updateUser,
   fetchProfileImage: _fetchProfileImage,
+  postProfileImage: _postProfileImage,
+  postProfileImageOf: _postProfileImageOf,
 };
