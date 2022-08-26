@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Buffer } from "buffer";
 
 const host = "http://localhost:8080";
 
@@ -30,6 +31,22 @@ const _fetchUser = async (userId) => {
   let response;
   try {
     response = await axios.get(host + "/api/user/" + userId);
+  } catch (error) {
+    console.log(error);
+    response = error.response;
+  }
+
+  return response.data;
+};
+
+const _fetchProfileImage = async (userId) => {
+  let response;
+  try {
+    response = await axios.get(host + "/api/user/" + userId + "/image", {
+      responseType: "arraybuffer",
+    });
+
+    response.data = Buffer.from(response.data, "binary").toString("base64");
   } catch (error) {
     console.log(error);
     response = error.response;
@@ -133,4 +150,5 @@ export default {
   removeFavorite: _removeFavorite,
   removeUser: _removeUser,
   updateUser: _updateUser,
+  fetchProfileImage: _fetchProfileImage,
 };

@@ -244,6 +244,10 @@ public class UserServiceImpl implements UserService {
 
         User user = optionalUser.get();
 
+        if(user.getImage() == null) {
+            throw new NotFoundException("Image does not exist");
+        }
+
         return user.getImage().getContent();
     }
 
