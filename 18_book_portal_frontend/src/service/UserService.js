@@ -75,11 +75,16 @@ const _postProfileImage = async (image) => {
 const _postProfileImageOf = async (userId, image) => {
   let response;
   try {
-    response = await axios.get(host + "/api/user/" + userId + "/image", {
-      responseType: "arraybuffer",
-    });
+    var formData = new FormData();
+    formData.append("image", image);
 
-    response.data = Buffer.from(response.data, "binary").toString("base64");
+    response = await axios.post(
+      host + "/api/user/" + userId + "/image",
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
   } catch (error) {
     console.log(error);
     response = error.response;
