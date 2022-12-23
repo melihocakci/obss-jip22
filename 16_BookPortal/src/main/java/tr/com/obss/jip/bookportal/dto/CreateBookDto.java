@@ -12,10 +12,10 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class CreateBookDto {
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = 1, max = 255)
     private String name;
 
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = 1, max = 255)
     private String author;
 }
