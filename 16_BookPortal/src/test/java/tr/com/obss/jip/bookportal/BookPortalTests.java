@@ -506,93 +506,204 @@ class BookPortalTests {
         .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
-    // @Test
-    // public void addBookToReadListByUser() throws Exception
-    // {
+    @Test
+    @Order(16)
+    public void addBookToReadListByUser() throws Exception
+    {
+        System.out.println("TEST CASE : addBookToReadListByUser");
 
-    // }
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                .post("/api/auth")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\": \"mellos\",\"password\": \"12345678\"}") 
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.body").exists())
+            .andReturn();
 
-    // @Test
-    // public void addBookToFavoriteList() throws Exception
-    // {
+        String tokenContent = result.getResponse().getContentAsString();
+        JSONObject obj = new JSONObject(tokenContent);
+        String token = obj.getString("body");
 
-    // }
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/api/user/read/7")
+                .header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+        .andDo(MockMvcResultHandlers.print())
+        .andExpect(MockMvcResultMatchers.status().isCreated());
 
-    // @Test
-    // public void addBookToReadListTwice() throws Exception
-    // {
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/api/user/read/8")
+                .header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+        .andDo(MockMvcResultHandlers.print())
+        .andExpect(MockMvcResultMatchers.status().isCreated());
 
-    // }
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/api/user/read/99") 
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+        .andDo(MockMvcResultHandlers.print())
+        .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
 
-    // @Test
-    // public void addBookToFavouriteListTwice() throws Exception
-    // {
+    @Test
+    @Order(17)
+    public void addBookToFavoriteListByUser() throws Exception
+    {
+        System.out.println("TEST CASE : addBookToFavouriteListByUser");
 
-    // }
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                .post("/api/auth")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\": \"mellos\",\"password\": \"12345678\"}") 
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.body").exists())
+            .andReturn();
 
-    // @Test
-    // public void deleteUserItselfByUser() throws Exception
-    // {
+        String tokenContent = result.getResponse().getContentAsString();
+        JSONObject obj = new JSONObject(tokenContent);
+        String token = obj.getString("body");
 
-    // }
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/api/user/favorite/16")
+                .header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+        .andDo(MockMvcResultHandlers.print())
+        .andExpect(MockMvcResultMatchers.status().isCreated());
 
-    // @Test
-    // public void updateBookByAdmin() throws Exception
-    // {
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/api/user/favorite/3")
+                .header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+        .andDo(MockMvcResultHandlers.print())
+        .andExpect(MockMvcResultMatchers.status().isCreated());
 
-    // }
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/api/user/favorite/99") 
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+        .andDo(MockMvcResultHandlers.print())
+        .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
 
-    // @Test
-    // public void removeUserByAdmin() throws Exception
-    // {
+    @Test
+    @Order(18)
+    public void addBookToReadListTwice() throws Exception
+    {
 
-    // }
+    }
 
-    // @Test
-    // public void takeUserProfilInformation() throws Exception
-    // {
+    @Test
+    @Order(19)
+    public void addBookToFavouriteListTwice() throws Exception
+    {
 
-    // }
+    }
 
-    // @Test
-    // public void addProfileImageByUser() throws Exception
-    // {
+    @Test
+    @Order(20)
+    public void deleteUserItselfByUser() throws Exception
+    {
 
-    // }
+    }
+
+    @Test
+    @Order(21)
+    public void updateBookByAdmin() throws Exception
+    {
+
+    }
+
+    @Test
+    @Order(22)
+    public void removeUserByAdmin() throws Exception
+    {
+
+    }
+
+    @Test
+    @Order(23)
+    public void takeUserProfilInformation() throws Exception
+    {
+
+    }
+
+    @Test
+    @Order(24)
+    public void addProfileImageByUser() throws Exception
+    {
+
+    }
 
    
-    // @Test
-    // public void removeBookByAdmin() throws Exception
-    // {
+    @Test
+    @Order(25)
+    public void removeBookByAdmin() throws Exception
+    {
+        System.out.println("TEST CASE : deleteAllBookFlagCheck");
+        
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+            .post("/api/auth")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("{\"username\": \"admin\",\"password\": \"admin123\"}") 
+            .accept(MediaType.APPLICATION_JSON))
+            .andDo(MockMvcResultHandlers.print())
+        .andExpect(MockMvcResultMatchers.status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.body").exists())
+        .andReturn();
 
-    // }
+        String tokenContent = result.getResponse().getContentAsString();
+        JSONObject obj = new JSONObject(tokenContent);
+        String token = obj.getString("body");
+
+       
+        mockMvc.perform(MockMvcRequestBuilders
+            .delete("/api/book/5")
+            .header("Authorization", "Bearer " + token));
+
+        mockMvc.perform(MockMvcRequestBuilders
+                    .get("/api/book/5")
+                    .accept(MediaType.APPLICATION_JSON))
+            .andDo(MockMvcResultHandlers.print())
+            .andExpect(MockMvcResultMatchers.status().isNotFound());
+
+    }
 
 
 
-    // @Test
-    // public void createNewBookUser() throws Exception
-    // {
-    //     //admin olarak giriş yapılır
-    //     MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-    //             .post("/api/auth")
-    //             .contentType(MediaType.APPLICATION_JSON)
-    //             .content("{\"username\": \"admin\",\"password\": \"admin123\"}") 
-    //             .accept(MediaType.APPLICATION_JSON))
-    //             .andDo(MockMvcResultHandlers.print())
-    //             .andExpect(MockMvcResultMatchers.status().isOk())
-    //             .andReturn();
+    @Test
+    @Order(26)
+    public void createNewBookUser() throws Exception
+    {
+        // //admin olarak giriş yapılır
+        // MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+        //         .post("/api/auth")
+        //         .contentType(MediaType.APPLICATION_JSON)
+        //         .content("{\"username\": \"admin\",\"password\": \"admin123\"}") 
+        //         .accept(MediaType.APPLICATION_JSON))
+        //         .andDo(MockMvcResultHandlers.print())
+        //         .andExpect(MockMvcResultMatchers.status().isOk())
+        //         .andReturn();
 
-    //     String content = result.getResponse().getContentAsString();
-    //     System.out.println(content);
-    //     // yeni kitabın bilgilerini bulunduran json stringi oluşturulur.
-    //     // olulturulan json stringi /api/book adresine gönderilir.
-    // }
+        // String content = result.getResponse().getContentAsString();
+        // System.out.println(content);
+        // // yeni kitabın bilgilerini bulunduran json stringi oluşturulur.
+        // // olulturulan json stringi /api/book adresine gönderilir.
+    }
     
 
 
     // TEST CASE 22 Integrity of JWT token
     @Test
-    @Order(16)
+    @Order(27)
     public void getAuthToken() throws Exception{
 
         System.out.println("TEST CASE : getAuthToken");
@@ -631,7 +742,7 @@ class BookPortalTests {
 
 
     @Test
-    @Order(17)
+    @Order(28)
     public void getBooksAPI() throws Exception 
     {
         System.out.println("TEST CASE : getBooksAPI");
@@ -648,7 +759,7 @@ class BookPortalTests {
     
    
     @Test
-    @Order(18)
+    @Order(29)
     public void deleteAllBookFlagCheck() throws Exception {
         System.out.println("TEST CASE : deleteAllBookFlagCheck");
         
@@ -694,7 +805,7 @@ class BookPortalTests {
     }
 
     @Test
-    @Order(19)
+    @Order(30)
     public void deleteReadList() throws Exception
     {
         System.out.println("TEST CASE : deleteReadList");
@@ -719,11 +830,43 @@ class BookPortalTests {
         } finally {
             conn.close();
         }
+
+        
     
     }
 
     @Test
-    @Order(20)
+    @Order(31)
+    public void deleteFavouriteList() throws Exception
+    {
+        System.out.println("TEST CASE : deleteFavouriteList");
+
+        Connection conn = null;
+        try {
+            Class.forName("org.postgresql.Driver");
+            conn = DriverManager
+            .getConnection("jdbc:postgresql://localhost:5432/book_portal",
+            "postgres", "727");
+            conn.setAutoCommit(false);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("DELETE from favorite_list");
+            conn.commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            conn.rollback();
+            System.exit(0);
+
+        } finally {
+            conn.close();
+        }
+    
+    }
+
+
+    @Test
+    @Order(32)
     public void deleteAllBookDatabase() throws Exception {
 
         System.out.println("TEST CASE : deleteAllBookDatabase");
@@ -752,7 +895,7 @@ class BookPortalTests {
     }
 
     @Test
-    @Order(21)
+    @Order(33)
     public void resetDatabaseSequenceBooksId() throws Exception
     {
         System.out.println("TEST CASE : resetDatabaseSequenceBooksId");
@@ -779,7 +922,7 @@ class BookPortalTests {
 
 
     @Test
-    @Order(22)
+    @Order(34)
     public void deleteAllUserFlag() throws Exception
     {
         System.out.println("TEST CASE : deleteAllUserFlag");
@@ -826,7 +969,7 @@ class BookPortalTests {
     }
 
     @Test
-    @Order(23)
+    @Order(35)
     public void deleteAllUserDatabase() throws Exception {
         
         Connection conn = null;
@@ -852,7 +995,7 @@ class BookPortalTests {
     }
 
     @Test
-    @Order(24)
+    @Order(36)
     public void deleteMockUserFromDatabase() throws Exception {
         
         Connection conn = null;
@@ -878,7 +1021,7 @@ class BookPortalTests {
     }
 
     @Test
-    @Order(25)
+    @Order(37)
     public void resetDatabaseSequenceUsersId() throws Exception
     {
         Connection conn = null;
